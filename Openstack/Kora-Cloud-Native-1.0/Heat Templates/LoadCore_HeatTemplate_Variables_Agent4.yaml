@@ -1,0 +1,12 @@
+parameters:
+
+    LoadCore_Agent_Name:            LC_agent2
+    LoadCore_Agent_Image_Name:      LoadCore254
+    LoadCore_Agent_Flavor:          LoadCoreFlavor
+
+    Internal_Management_Network:    Internal
+    External_Management_Network:    provider
+
+    Test_Network:                   LC Test Network
+
+

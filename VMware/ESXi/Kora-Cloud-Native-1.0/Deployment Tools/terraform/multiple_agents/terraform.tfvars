@@ -1,0 +1,13 @@
+esxi_hostname="<hostname>"
+esxi_username="root"
+esxi_password="<password>"
+esxi_datastore="datastore2"
+loadcore_agent_image_path="C:\\Users\\Downloads\\LoadCore-Agent-3.4.0.9.ova"
+management_network="VM Network"
+test_network="Port2"
+loadcore_mdw_ip="10.38.149.164"
+loadcore_agent_management_interface_name="ens32"
+vm_prefix="TF_LoadCore_Agent"
+number_of_agents=2
+ram=8192
+vcpus=2

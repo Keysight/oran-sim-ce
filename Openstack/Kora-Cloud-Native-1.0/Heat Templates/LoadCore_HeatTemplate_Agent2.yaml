@@ -1,0 +1,62 @@
+heat_template_version: 2016-10-14
+
+
+description: >
+    This is the HEAT template used for LoadCore Agents deployment in OpenStack-based environments. 
+    The template will create one LoadCore Agent with one management interface and one test interface (dhcp).
+    The LoadCore_HeatTemplate_Variables_Agent1.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+
+
+parameters:
+
+    Internal_Management_Network:
+      type:        string
+      label:       Internal Management Network
+      description: The name of the INTERNAL MANAGEMENT NETWORK that is already configured in OpenStack
+
+    LoadCore_Agent_Name:
+      type:        string
+      label:       Agent VM Name
+      description: The name of the LOADCORE AGENT VM to be created
+
+    LoadCore_Agent_Image_Name:
+      type:        string
+      label:       Agent Image Name
+      description: The QCOW2 image to be used for the LOADCORE AGENT
+
+    LoadCore_Agent_Flavor:
+      type:        string
+      label:       Agent Flavor
+      description: The resources required for each LOADCORE AGENT
+
+    Test_Network:
+      type:        string
+      label:       LoadCore Test Network  
+      description: The name of the TEST NETWORK that is already configured in OpenStack
+
+resources:
+
+  Test-Port:
+       type:                 OS::Neutron::Port
+       properties:
+         network_id:         {get_param: Test_Network}
+         allowed_address_pairs:
+          - ip_address:       "0.0.0.0/0"
+          - ip_address:       "::/0"
+
+  Public_Port:
+      type:                   OS::Neutron::Port
+      properties:
+         network:             {get_param: Internal_Management_Network}
+
+  loadcoreAgent:
+    type:                     OS::Nova::Server
+    properties:
+      name:                   {get_param:    LoadCore_Agent_Name}
+      image:                  {get_param:    LoadCore_Agent_Image_Name}
+      flavor:                 {get_param:    LoadCore_Agent_Flavor}
+      networks:
+        - port:               {get_resource: Public_Port}
+        - port:               {get_resource: Test-Port}
+
+# outputs:
