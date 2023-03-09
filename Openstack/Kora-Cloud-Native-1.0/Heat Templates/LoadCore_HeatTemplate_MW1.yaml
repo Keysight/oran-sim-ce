@@ -1,0 +1,44 @@
+heat_template_version: 2016-10-14
+
+
+description: >
+    This is the HEAT template used for LoadCore Middleware deployment in OpenStack-based environments. 
+    The template will create one LoadCore Middleware VM. The recommended flavor is 4 CPUs, 12G RAM and 256G HDD.  
+    The LoadCore_HeatTemplate_Variables_MW.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+
+
+parameters:
+
+    Internal_Management_Network:
+      type:        string
+      label:       Internal Management Network
+      description: The name of the INTERNAL MANAGEMENT NETWORK that is already configured in OpenStack
+
+    LoadCore_MW_Name:
+      type:        string
+      label:       LoadCore MW VM Name
+      description: The name of the LOADCORE MW VM to be created
+
+    LoadCore_MW_Image_Name:
+      type:        string
+      label:       LoadCore MW Image Name
+      description: The QCOW2 image to be used for the LOADCORE MW
+
+    LoadCore_MW_Flavor:
+      type:        string
+      label:       LoadCore MW Flavor
+      description: The resources required for each LOADCORE MW
+
+resources:
+
+  LoadCoreMW:
+    type:                     OS::Nova::Server
+    properties:
+      name:                   {get_param:    LoadCore_MW_Name}
+      image:                  {get_param:    LoadCore_MW_Image_Name}
+      flavor:                 {get_param:    LoadCore_MW_Flavor}
+      networks:
+        - network:            {get_param:    Internal_Management_Network}
+
+
+# outputs:

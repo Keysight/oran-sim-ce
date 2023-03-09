@@ -1,0 +1,45 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: <PRIVATE-DOCKER-REGISTRY>
+
+imagePullSecrets:
+  - name: <PULL-SECRET-NAME>
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+resources: {}
+env: []
+capabilities:
+  - "NET_ADMIN"
+privileged: false
+
+app:
+  name: load-core-agent
+  release: load-core-agent
+  namespace: keysight-loadcore-agent
+  replicas: <NUMBER-OF-REPLICAS>
+  args:
+    middlewareAddr: <MIDDLEWARE-IP-ADDR>
+    adminInterface: eth0
+    testInterfaces: net1,net2
+  agentNetworks: load-core-agent-network,load-core-agent-network
+  testNetwork:
+    create: true
+    name: load-core-agent-network
+    config: '{
+      "cniVersion": "0.3.1",
+      "type": "macvlan",
+      "master": "<MASTER-ETH-INTERFACE>",
+      "mode": "bridge",
+      "ipam": {
+        "type": "host-local",
+        "subnet": "192.168.1.0/24",
+        "rangeStart": "192.168.1.1",
+        "rangeEnd": "192.168.1.254",
+        "routes": [
+          { "dst": "0.0.0.0/0" }
+        ],
+        "gateway": "192.168.1.1"
+      }
+    }'
