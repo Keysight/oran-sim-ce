@@ -1,8 +1,8 @@
 {
-	"id": "wireless-4180",
-	"displayName": "FullCore-1000UEs-80G-HTTP-GET-PDNv4",
-	"lastModified": 1647969828,
-	"lastAccessed": 1608196882,
+	"id": "wireless-3785",
+	"displayName": "SMS_basic (copy from Mar 15 10:36:53)",
+	"lastModified": 1647340613,
+	"lastAccessed": 1612885521,
 	"tags": {
 		"category": "Full Core"
 	},
@@ -10,7 +10,7 @@
 	"ownerId": "68d50bbf-1c39-4ad0-a1cb-c957710b2794",
 	"owner": "admin@example.org",
 	"readonly": false,
-	"configUrl": "http://wireless-data-model.keysight-wap.svc.cluster.local./api/v2/configs/wireless-4180",
+	"configUrl": "http://wireless-data-model.keysight-wap.svc.cluster.local./api/v2/configs/wireless-3785",
 	"configData": {
 		"Config": {
 			"globalSettings": {
@@ -51,7 +51,7 @@
 						"coreNetworkInstance": "dnn.keysight.com",
 						"defaultSSCMode": "ssc-mode-1",
 						"defaultSessionType": "IPV4",
-						"dnn": "dnn.keysight.com",
+						"dnn": "dnn1.keysight.com",
 						"epco": {
 							"requestDNSServerIPAddress": false,
 							"requestIPv4LinkMTU": false
@@ -69,7 +69,7 @@
 						"mpsPrioritylevel": 0,
 						"offline": true,
 						"online": true,
-						"pduType": "IPv4",
+						"pduType": "IPv6",
 						"pgwID": "-1",
 						"qosFlowsIds": [
 							"1"
@@ -109,7 +109,7 @@
 						"appId": "",
 						"averagingWindow": 2000,
 						"dualConnectivityFlow": false,
-						"fiveQi": 6,
+						"fiveQi": 15,
 						"gbr": {
 							"downlinkBitrateUnit": "u1Kbps",
 							"downlinkBitrateValue": 1,
@@ -153,12 +153,12 @@
 						"preEmptionVulnerability": false,
 						"priorityLevel": 60,
 						"priorityLevelARP": 15,
-						"qfi": 5,
+						"qfi": 1,
 						"qosRulePrecedence": 255,
 						"resourceType": "NON_GBR",
 						"segregation": false,
 						"type": "data",
-						"useMatchAllPacketFilter": true,
+						"useMatchAllPacketFilter": false,
 						"usePrecedenceForAppId": true
 					}
 				],
@@ -199,9 +199,31 @@
 					"trafficCtrlPort": 44556
 				}
 			},
-			"name": "FullCore-1000UEs-80G-HTTP-GET-PDNv4",
+			"name": "SMS_basic",
 			"networkSettings": {
-				"agentsInfos": []
+				"agentsInfos": [
+					{
+						"agentId": "0af87087-6b15-4cbb-baaf-bab75197f7e4",
+						"id": "",
+						"impairmentId": "-1",
+						"interfacesSettings": [
+							{
+								"capture": true,
+								"interfaceMac": "",
+								"interfaceName": "ens160",
+								"networkStack": "linuxStack",
+								"sriov": false
+							},
+							{
+								"capture": false,
+								"interfaceMac": "",
+								"interfaceName": "ens192",
+								"networkStack": "linuxStack",
+								"sriov": false
+							}
+						]
+					}
+				]
 			},
 			"nodes": {
 				"amf": {
@@ -221,7 +243,7 @@
 										"gwIncrement": "0.0.0.0",
 										"gwStart": "0.0.0.0",
 										"ipPrefix": 16,
-										"localIPAddress": "20.0.20.10",
+										"localIPAddress": "20.0.0.3",
 										"macIncrement": "000000000001",
 										"macStart": "0011DD000001",
 										"secondVLAN": {
@@ -273,14 +295,14 @@
 									}
 								}
 							},
-							"isDut": false,
+							"isDut": true,
 							"nodeSettings": {
 								"cipheringAlgorithm": "NEA0",
 								"httpConnections": 1,
 								"instanceId": "7ea3abc7-f0f6-435b-9154-175deddd101f",
 								"integrityAlgorithm": "NIA0",
 								"mcc": "226",
-								"mnc": "04",
+								"mnc": "10",
 								"name": "AMF-1",
 								"pointer": 3,
 								"preferHandoverAMFChange": false,
@@ -379,7 +401,7 @@
 						}
 					],
 					"settings": {
-						"enable": true,
+						"enable": false,
 						"mappedAgents": []
 					}
 				},
@@ -424,10 +446,9 @@
 							],
 							"userPlane": {
 								"objectives": {
-									"generatorType": "tiger",
+									"generatorType": "statelessUDP",
 									"tigerObjective": [
 										{
-											"address": "20.0.6.10",
 											"data": {
 												"flows": [
 													{
@@ -442,7 +463,7 @@
 													}
 												],
 												"objectiveType": "throughput",
-												"throughput": 0
+												"throughput": 1000
 											},
 											"delay": 0,
 											"dnsserver": {
@@ -525,7 +546,7 @@
 														"enableRTCP": false,
 														"enableSRTP": false,
 														"localPort": 10000,
-														"localPortIncrement": 0
+														"localPortIncrement": 2
 													},
 													"sipSettings": {
 														"authentication": {
@@ -537,14 +558,14 @@
 															"opcIncrement": "0",
 															"password": "",
 															"type": "proxy-defined",
-															"useUeRangeSecurity": false,
+															"useUeRangeSecurity": true,
 															"username": "22604000000042@keysight"
 														},
 														"callType": "basic-call",
 														"customHeaders": [],
 														"customParameters": [],
 														"domainName": "keysight.com",
-														"dstIP": "22.22.22.22",
+														"dstIP": "20.0.6.10",
 														"dstIPIncrement": "0.0.0.0",
 														"dstPhoneIncrement": 1,
 														"dstPhoneURI": "11100000",
@@ -555,7 +576,7 @@
 														"srcPhoneIncrement": 1,
 														"srcPhoneURI": "44400000",
 														"transportProtocol": "tcp",
-														"useUeRangeIdentification": false
+														"useUeRangeIdentification": true
 													},
 													"type": "voip"
 												}
@@ -819,7 +840,7 @@
 										"ipPrefix": 16,
 										"localIPAddress": "20.100.90.10",
 										"macIncrement": "000000000001",
-										"macStart": "0051FF000001",
+										"macStart": "0031FF000001",
 										"peerId": "1",
 										"secondVLAN": {
 											"enable": false,
@@ -844,7 +865,7 @@
 								"groupID": 0,
 								"integrityAlgorithm": "EIA0",
 								"mcc": "226",
-								"mnc": "04",
+								"mnc": "10",
 								"name": "MME-1"
 							}
 						}
@@ -1095,7 +1116,7 @@
 						}
 					],
 					"settings": {
-						"enable": true,
+						"enable": false,
 						"mappedAgents": []
 					}
 				},
@@ -1103,7 +1124,7 @@
 					"ranges": [
 						{
 							"connectedRanges": [],
-							"count": 72,
+							"count": 1,
 							"enable": true,
 							"id": "1",
 							"interfaces": {
@@ -1119,7 +1140,7 @@
 										"gwIncrement": "0.0.0.0",
 										"gwStart": "0.0.0.0",
 										"ipPrefix": 16,
-										"localIPAddress": "20.0.2.10",
+										"localIPAddress": "20.0.0.10",
 										"macIncrement": "000000000001",
 										"macStart": "0011BB000001",
 										"mss": 1460,
@@ -1148,7 +1169,7 @@
 										"gwIncrement": "0.0.0.0",
 										"gwStart": "0.0.0.0",
 										"ipPrefix": 16,
-										"localIPAddress": "172.195.140.10",
+										"localIPAddress": "20.0.3.10",
 										"macIncrement": "000000000001",
 										"macStart": "0031BB000001",
 										"mss": 1460,
@@ -1188,7 +1209,7 @@
 								"gnbIDIncrement": 1,
 								"gnbIDLength": 22,
 								"mcc": "226",
-								"mnc": "04",
+								"mnc": "10",
 								"name": "gNodeB-1",
 								"nssai": [
 									{
@@ -1260,7 +1281,7 @@
 											"tpid": "h8100"
 										}
 									},
-									"enabled": true
+									"enabled": false
 								}
 							},
 							"nodeSettings": {
@@ -1279,7 +1300,64 @@
 					"settings": {
 						"device": "",
 						"enable": true,
-						"mappedAgents": []
+						"mappedAgents": [
+							{
+								"agentId": "0af87087-6b15-4cbb-baaf-bab75197f7e4",
+								"id": "",
+								"interfaceMappings": [
+									{
+										"agentInterface": "ens160",
+										"agentInterfaceMac": "00:0c:29:31:f6:63",
+										"nodeInterface": "n2"
+									},
+									{
+										"agentInterface": "ens160",
+										"agentInterfaceMac": "00:0c:29:31:f6:63",
+										"nodeInterface": "n3"
+									},
+									{
+										"agentInterface": "none",
+										"agentInterfaceMac": "none",
+										"nodeInterface": "passthroughDevice"
+									},
+									{
+										"agentInterface": "ens160",
+										"agentInterfaceMac": "00:0c:29:31:f6:63",
+										"nodeInterface": "s1"
+									},
+									{
+										"agentInterface": "ens160",
+										"agentInterfaceMac": "00:0c:29:31:f6:63",
+										"nodeInterface": "s1u"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:31:f6:6d",
+										"nodeInterface": "n26"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:31:f6:6d",
+										"nodeInterface": "s6a"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:31:f6:6d",
+										"nodeInterface": "s5c"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:31:f6:6d",
+										"nodeInterface": "s5u"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:31:f6:6d",
+										"nodeInterface": "s11"
+									}
+								]
+							}
+						]
 					}
 				},
 				"sgw": {
@@ -1485,7 +1563,7 @@
 						}
 					],
 					"settings": {
-						"enable": true,
+						"enable": false,
 						"mappedAgents": []
 					}
 				},
@@ -1568,7 +1646,7 @@
 										"gwIncrement": "0.0.0.0",
 										"gwStart": "0.0.0.0",
 										"ipPrefix": 16,
-										"localIPAddress": "20.100.30.10",
+										"localIPAddress": "20.100.31.10",
 										"macIncrement": "000000000001",
 										"macStart": "0088EE000001",
 										"port": 3868,
@@ -1619,7 +1697,7 @@
 						}
 					],
 					"settings": {
-						"enable": true,
+						"enable": false,
 						"mappedAgents": []
 					}
 				},
@@ -1663,7 +1741,7 @@
 						}
 					],
 					"settings": {
-						"enable": true,
+						"enable": false,
 						"mappedAgents": []
 					}
 				},
@@ -1678,8 +1756,8 @@
 											"1"
 										],
 										"maxOutstanding": 100,
-										"rampUpRate": 50,
-										"sustain": 120,
+										"rampUpRate": 2,
+										"sustain": 10,
 										"type": "activeSubscribers"
 									},
 									"subscribersPerSecond": {
@@ -1687,10 +1765,10 @@
 										"dnnIdsToActivate": [
 											"1"
 										],
-										"holdTime": 1,
+										"holdTime": 2,
 										"maxOutstanding": 100,
-										"rate": 1,
-										"sustain": 1,
+										"rate": 100,
+										"sustain": 12,
 										"type": "subscribersPerSecond"
 									},
 									"type": "activeSubscribers"
@@ -1761,18 +1839,18 @@
 										"type": "enterIdle"
 									},
 									"sms": {
-										"delay": 0,
+										"delay": 1,
 										"destinationMSISDN": "40700000000",
 										"destinationMSISDNIncrement": 1,
-										"enable": false,
+										"enable": true,
 										"maxOutstanding": 100,
-										"onlyOnce": false,
+										"onlyOnce": true,
 										"rate": 1,
 										"type": "sms"
 									}
 								}
 							},
-							"count": 1000,
+							"count": 2,
 							"enable": true,
 							"equipmentStatus": {
 								"blockedSubscribers": [
@@ -1805,7 +1883,7 @@
 									"value": "8670000000000001"
 								},
 								"mcc": "226",
-								"mnc": "04",
+								"mnc": "10",
 								"msin": {
 									"increment": "1",
 									"type": "",
@@ -1814,7 +1892,7 @@
 								"msisdn": {
 									"increment": "1",
 									"type": "string",
-									"value": "10000000000"
+									"value": "40700000000"
 								}
 							},
 							"parentRan": {
@@ -1995,7 +2073,7 @@
 									"uplink": 2000,
 									"uplinkUnit": "bps"
 								},
-								"supportSMS": false,
+								"supportSMS": true,
 								"udrNotifications": {
 									"applicationData": {
 										"body": "[{\"afAppId\":\"Keysight\",\"ethTrafficFilters\":[{\"destMacAddr\":\"12-34-56-78-9A-BC\",\"ethType\":\"0800\",\"fDesc\":\"permit in IP from 10.0.0.1 to 10.0.0.2\",\"fDir\":\"BIDIRECTIONAL\",\"sourceMacAddr\":\"12-34-56-78-9A-BC\",\"vlanTags\":[\"vlan1\",\"vlan2\"]}],\"trafficRoutes\":[{\"dnai\":\"dnai\",\"routeInfo\":{\"ipv4Addr\":\"192.168.0.1\",\"ipv6Addr\":\"::1\",\"portNumber\":5060},\"routeProfId\":\"routeProfId\"}],\"trafficFilters\":[{\"flowId\":1,\"flowDescriptions\":[\"flow description1\",\"flow description2\"]}],\"interGroupId\":\"group Id\"}]",
@@ -2014,7 +2092,7 @@
 									"mtSMSDelay": 2,
 									"numberingPlanIdentification": "unknown",
 									"serviceCenterAddress": "07800000000",
-									"textMessage": "Test Mobile Terminated SMS Procedure From SMSF",
+									"textMessage": "Is there anybody out there?",
 									"typeOfNumber": "unknown"
 								},
 								"smsfConfiguration": {
@@ -2022,10 +2100,10 @@
 								}
 							},
 							"userPlane": {
-								"generatorType": "tiger",
+								"generatorType": "noTraffic",
 								"tigerObjective": [
 									{
-										"address": "20.0.6.10",
+										"address": "22.22.22.22",
 										"data": {
 											"flows": [
 												{
@@ -2048,7 +2126,7 @@
 											],
 											"objectiveType": "throughput",
 											"simulatedUsers": 1,
-											"throughput": 80000000
+											"throughput": 1000
 										},
 										"delay": 0,
 										"dnsclient": {
@@ -2197,6 +2275,20 @@
 										"payloadSize": 128,
 										"rate": 6,
 										"srcPort": 1234
+									},
+									{
+										"delay": 0,
+										"direction": "downlink",
+										"dnnId": "1",
+										"dstPort": 5432,
+										"dstPortCount": 1,
+										"fallbackToDefaultFlow": true,
+										"flowId": "1",
+										"id": "2",
+										"ipAddress": "20.0.60.10",
+										"payloadSize": 128,
+										"rate": 4,
+										"srcPort": 2345
 									}
 								]
 							}
@@ -2220,7 +2312,7 @@
 										"gwIncrement": "0.0.0.0",
 										"gwStart": "0.0.0.0",
 										"ipPrefix": 16,
-										"localIPAddress": "172.195.1.1",
+										"localIPAddress": "20.0.30.10",
 										"macIncrement": "000000000001",
 										"macStart": "0031AA000001",
 										"mss": 1460,
@@ -2317,7 +2409,7 @@
 					],
 					"settings": {
 						"device": "",
-						"enable": true,
+						"enable": false,
 						"mappedAgents": []
 					}
 				}
@@ -2325,16 +2417,16 @@
 			"version": "2.3.0-3272-252"
 		},
 		"ConfigType": "Full Core",
-		"Created": 1647969829,
+		"Created": 1647340614,
 		"IRATConfig": null,
-		"LastAccessed": 1647969829,
+		"LastAccessed": 1647340614,
 		"LicenseType": "",
-		"Name": "FullCore-1000UEs-80G-HTTP-GET-PDNv4",
+		"Name": "SMS_basic (copy from Mar 15 10:36:53)",
 		"OwnerID": "68d50bbf-1c39-4ad0-a1cb-c957710b2794",
 		"RICConfig": null,
 		"SBAConfig": null,
 		"UpfIsolationConfig": null,
-		"id": "wireless-4180",
+		"id": "wireless-3785",
 		"owner": "admin@example.org"
 	},
 	"application": "",
