@@ -1,2 +1,2 @@
-# kora-cloud-native
-Kora Cloud Native resources
+# oran-sim-ce
+Keysight Open-RAN Simulators, Cloud Edition resources
