@@ -25,9 +25,8 @@ spec:
           args: ["<MIDDLEWARE-IP>", "eth0", "net1"]
           securityContext:
             capabilities:
-              add: ["NET_ADMIN"]
+              add: ["NET_ADMIN", "NET_BIND_SERVICE", "NET_RAW", "IPC_LOCK", "SYS_RAWIO", "SYS_NICE", "DAC_READ_SEARCH", "SYS_PTRACE"]
           ports:
             - containerPort: 38412
               name: sctpserver
               protocol: SCTP
-

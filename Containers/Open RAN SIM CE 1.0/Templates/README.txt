@@ -2,7 +2,8 @@
 Introduction
 ============
 
-The loadcore agent container needs to be run using root privileges and requires NET_ADMIN capabilities.
+The loadcore agent container needs to be run using root privileges and requires the following capabilities:
+"NET_ADMIN", "NET_BIND_SERVICE", "NET_RAW", "IPC_LOCK", "SYS_RAWIO", "SYS_NICE", "DAC_READ_SEARCH" and "SYS_PTRACE".
 It also requires SCTP to be enabled.
 There are several options to use the loadcore agent container: to use directly the container, to install it in Kubernetes or to install it in OpenShift.
 
@@ -12,13 +13,13 @@ Using the loadcore agent docker container directly
 In order to use the loadcore agent directly from the Docker container, please follow the below steps:
 
 1. Load the container:
-%> docker load -i LoadCore-Agent-Docker-4.0.0.5.tar.gz
+%> docker load -i LoadCore-Agent-Docker-4.2.0.5-79460f6382-20230508T121851Z.tar.gz
 
 1. Create a new docker network:
 %> docker network create loadcore-network
 
 2. Create a new container from the loadcore agent image, specifying the middleware IP, the admin interface (eth0) and the test interface (eth1):
-%> docker create --name loadcore-agent --cap-add=NET_ADMIN loadcore-agent:4.0.0.5-9b5afda2b1 MIDDLEWARE-IP eth0 eth1
+%> docker create --name loadcore-agent --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE --cap-add=NET_RAW --cap-add=IPC_LOCK --cap-add=SYS_RAWIO --cap-add=SYS_NICE --cap-add=DAC_READ_SEARCH --cap-add=SYS_PTRACE loadcore-agent:4.2.0.5-79460f6382 MIDDLEWARE-IP eth0 eth1
 
 3. Connect the container to the network created above:
 %> docker network connect loadcore-network loadcore-agent
@@ -42,13 +43,12 @@ The configuration files referred in the steps below can be found in the 'kuberne
 In order to install the agent in Kubernetes, please follow the below steps:
 
 1. Load the container:
-%> docker load -i LoadCore-Agent-Docker-4.0.0.5.tar.gz
-
+%> docker load -i LoadCore-Agent-Docker-4.2.0.5-79460f6382-20230508T121851Z.tar.gz
 2. Tag the container in order to be pushed in your private docker registry:
-%> docker tag loadcore-agent:4.0.0.5-9b5afda2b1 <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:4.0.0.5-9b5afda2b1
+%> docker tag loadcore-agent:4.2.0.5-79460f6382 <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:4.2.0.5-79460f6382
 
 3. Push the container in the private docker registry:
-%> docker push <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:4.0.0.5-9b5afda2b1
+%> docker push <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:4.2.0.5-79460f6382
 
 4. Create the keysight-loadcore-agent namespace:
 %> kubectl create namespace keysight-loadcore-agent
@@ -63,7 +63,7 @@ In order to install the agent in Kubernetes, please follow the below steps:
 You can also further tweak the multus agent settings, such as subnet range, gateway, etc.
 
 6. Install the helm chart:
-%> helm install -f my_values.yaml loadcore-agent ./load-core-agent-4.0.0-5+9b5afda2b1.20221219.tgz
+%> helm install -f my_values.yaml loadcore-agent ./load-core-agent-4.2.0-5+79460f6382.20230508.tgz
 
 7. Confirm that the agent is running:
 %> kubectl get pods -n keysight-loadcore-agent
@@ -72,7 +72,7 @@ You can also further tweak the multus agent settings, such as subnet range, gate
 Installing the loadcore agent on OpenShift
 ==========================================
 Make sure that SCTP is enabled on the cluster. See more documentation about SCTP on OpenShift here:
-https://docs.openshift.com/container-platform/4.5/networking/using-sctp.html
+https://docs.openshift.com/container-platform/4.11/networking/using-sctp.html
 
 The configuration file referred in the steps below can be found in the 'openshift' directory.
 
@@ -83,16 +83,16 @@ In order to install the agent in OpenShift, please follow the below steps:
 $> podman login --tls-verify=false -u unused -p $(oc whoami -t) ${REGISTRY}
 
 2. Load the loadcore agent image:
-%> podman load -i LoadCore-Agent-Docker-4.0.0.5.tar.gz
+%> podman load -i LoadCore-Agent-Docker-4.2.0.5-79460f6382-20230508T121851Z.tar.gz
 
 3. See the loaded image details:
 %> podman images
 
 4. Tag the loadcore image using the same image ID returned by 'podman images', for example:
-%> podman tag b6c0239d09 $REGISTRY/loadcore/loadcore-agent:4.0.0.5-9b5afda2b1
+%> podman tag 79460f6382 $REGISTRY/loadcore/loadcore-agent:4.2.0.5-79460f6382
 
 5. Push the loadcore image to the internal image registry:
-%> podman push --tls-verify=false $REGISTRY/loadcore/loadcore-agent:4.0.0.5-9b5afda2b1
+%> podman push --tls-verify=false $REGISTRY/loadcore/loadcore-agent:4.2.0.5-79460f6382
 
 6. We need to configure an extra interface to be used as test interface. Multus is already configured on OpenShift.
 Here, is an example of how to add an additional network using Multus:
