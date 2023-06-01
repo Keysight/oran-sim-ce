@@ -1,0 +1,35 @@
+Please ensure the following information is provided when submitting a support request
+ 
+1.	Subscription Information
+ 
+AWS account ID:
+ 
+2.	Product Information
+ 
+Name/Number/Description: 
+ 
+3.	Customer Information
+ 
+Customer Company Name:
+ 
+First and Last Name:
+ 
+Full Address, including country:
+ 
+Email address:
+ 
+Phone number:
+ 
+4.	Issue Details:
+ 
+EC2 Instance type:
+ 
+Number of Agents:
+ 
+Test Topology (What is LoadCore emulating): 
+ 
+DUT (Which node is being tested):
+ 
+Issue description:
+ 
+Configuration/Capture/Log files attached
