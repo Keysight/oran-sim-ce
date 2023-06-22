@@ -1,0 +1,802 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "LoadCore CloudFormation",
+    "Mappings": {
+        "RegionMap": {
+            "eu-north-1": {
+                "AMIAgent": "ami-015a438d6150e8fc4",
+                "AMILoadCore": "ami-0c7567178e8b1efca",
+                "AMILicensing": "ami-09362f18512661cdd"
+            },
+            "ap-south-1": {
+                "AMIAgent": "ami-0e8050f2671c4b664",
+                "AMILoadCore": "ami-0c682f7df0a2c9830",
+                "AMILicensing": "ami-0f687a2ca6faef435"
+            },
+            "eu-west-3": {
+                "AMIAgent": "ami-02473a0997093c6ab",
+                "AMILoadCore": "ami-07c8bc081222a8953",
+                "AMILicensing": "ami-06b72224a8b280acb"
+            },
+            "eu-west-2": {
+                "AMIAgent": "ami-02eedf3323cbf6570",
+                "AMILoadCore": "ami-0bdb13865a752e589",
+                "AMILicensing": "ami-0c6c288fe2704e5f3"
+            },
+            "eu-west-1": {
+                "AMIAgent": "ami-0b9dd553513f841d2",
+                "AMILoadCore": "ami-0d6ac35ee963598a9",
+                "AMILicensing": "ami-0b8d79282f66952fe"
+            },
+            "ap-northeast-2": {
+                "AMIAgent": "ami-02566656c1dd02bcf",
+                "AMILoadCore": "ami-0e897ffb6b5ea1466",
+                "AMILicensing": "ami-0e78ff29e5a21f8dd"
+            },
+            "ap-northeast-1": {
+                "AMIAgent": "ami-0123875a8fa8d7252",
+                "AMILoadCore": "ami-01b61969fcda45ce6",
+                "AMILicensing": "ami-0435c32860e8c4914"
+            },
+            "sa-east-1": {
+                "AMIAgent": "ami-08f4d176ffc9bc7e1",
+                "AMILoadCore": "ami-0f6b1d4c7c2c03b1b",
+                "AMILicensing": "ami-0d4e463f8e3c19e98"
+            },
+            "ca-central-1": {
+                "AMIAgent": "ami-01c1f1fd8a4f6ef09",
+                "AMILoadCore": "ami-04dacac79dc8b0d74",
+                "AMILicensing": "ami-03703f5618ff6a468"
+            },
+            "ap-southeast-1": {
+                "AMIAgent": "ami-08ef07709b172cf3a",
+                "AMILoadCore": "ami-030378ac7d1e920ad",
+                "AMILicensing": "ami-0b6658d78c8c6a172"
+            },
+            "ap-southeast-2": {
+                "AMIAgent": "ami-0a64d748a5dd2cb14",
+                "AMILoadCore": "ami-0c1c890c0dc3c12a4",
+                "AMILicensing": "ami-0442b05e7585a518f"
+            },
+            "eu-central-1": {
+                "AMIAgent": "ami-0783ce53cb1d6e0aa",
+                "AMILoadCore": "ami-020f18ed1c9c3999d",
+                "AMILicensing": "ami-049a1b592b318d117"
+            },
+            "us-east-1": {
+                "AMIAgent": "ami-0fcece01c53cc2d15",
+                "AMILoadCore": "ami-0020b049feba7b88c",
+                "AMILicensing": "ami-085eeea3586464492"
+            },
+            "us-east-2": {
+                "AMIAgent": "ami-00a458db8c35461c7",
+                "AMILoadCore": "ami-0e691ab53cf5e407a",
+                "AMILicensing": "ami-0f162818f933ace0d"
+            },
+            "us-west-1": {
+                "AMIAgent": "ami-0467f0f6c48b012e8",
+                "AMILoadCore": "ami-0c1a78ccc89e1f37e",
+                "AMILicensing": "ami-0396b209d4cea70d7"
+            },
+            "us-west-2": {
+                "AMIAgent": "ami-038be05f064255302",
+                "AMILoadCore": "ami-02ed2f6e2a76a53ff",
+                "AMILicensing": "ami-0a142d89558c522f9"
+            }
+        },
+        "VariableMap": {
+            "global": {
+                "MgmtAgentInterfaceName": "eth0",
+                "TestAgentInterfaceName": "eth1",
+                "InstanceShutdownBehavior": "stop",
+                "InstanceBlockDeviceName": "/dev/sda1",
+                "InstanceEbsDeleteOnTermination": "true",
+                "InstanceEbsVolumeType": "gp2",
+                "LoadCoreVersion": "ORAN-SIM-CE-1.0"
+            }
+        }
+    },
+    "Resources": {
+        "ClusterMgmtNet": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "MgmtSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "SecurityGroupForMgmt"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ]
+            }
+        },
+        "Agent1MgmtNet": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "MgmtSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "SecurityGroupForMgmt"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ]
+            }
+        },
+        "Agent2MgmtNet": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "MgmtSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "SecurityGroupForMgmt"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ]
+            }
+        },
+        "LicensingMgmtNet": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "MgmtSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "SecurityGroupForMgmt"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ]
+            }
+        },
+        "Agent1TestNet": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "TestSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "SecurityGroupForTest"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ],
+                "SecondaryPrivateIpAddressCount": 10
+            }
+        },
+        "Agent2TestNet": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "TestSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "SecurityGroupForTest"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ],
+                "SecondaryPrivateIpAddressCount": 10
+            }
+        },
+        "ClusterDeployment": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": {
+                    "Ref": "KeyPair"
+                },
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMILoadCore"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "ClusterInstanceType"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "ClusterMgmtNet"
+                        },
+                        "DeviceIndex": "0"
+                    }
+                ],
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "InstanceBlockDeviceName"
+                            ]
+                        },
+                        "Ebs": {
+                            "DeleteOnTermination": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsDeleteOnTermination"
+                                ]
+                            },
+                            "VolumeType": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsVolumeType"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "global",
+                                            "LoadCoreVersion"
+                                        ]
+                                    },
+                                    "MW"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ]
+            }
+        },
+        "ClusterMgmtElasticIp": {
+            "Type": "AWS::EC2::EIP",
+            "Properties": {
+                "Domain": "vpc"
+            }
+        },
+        "ClusterMgmtElasticIpAssociation": {
+            "Type": "AWS::EC2::EIPAssociation",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "ClusterMgmtElasticIp",
+                        "AllocationId"
+                    ]
+                },
+                "NetworkInterfaceId": {
+                    "Ref": "ClusterMgmtNet"
+                }
+            },
+            "DependsOn": "ClusterDeployment"
+        },
+        "Agent1Deployment": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": {
+                    "Ref": "KeyPair"
+                },
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMIAgent"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "AgentsInstanceType"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "Agent1MgmtNet"
+                        },
+                        "DeviceIndex": "0"
+                    },
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "Agent1TestNet"
+                        },
+                        "DeviceIndex": "1"
+                    }
+                ],
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "InstanceBlockDeviceName"
+                            ]
+                        },
+                        "Ebs": {
+                            "DeleteOnTermination": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsDeleteOnTermination"
+                                ]
+                            },
+                            "VolumeType": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsVolumeType"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "global",
+                                            "LoadCoreVersion"
+                                        ]
+                                    },
+                                    "Agent1"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                {
+                                    "Fn::Sub": [
+                                        "/bin/bash /opt/5gc-test-engine/agent-setup.sh ${ClusterDeployment.PrivateIp} ${MgmtAgentInterfaceName} \"\" y",
+                                        {
+                                            "MgmtAgentInterfaceName": {
+                                                "Fn::FindInMap": [
+                                                    "VariableMap",
+                                                    "global",
+                                                    "MgmtAgentInterfaceName"
+                                                ]
+                                            },
+                                            "TestAgentInterfaceName": {
+                                                "Fn::FindInMap": [
+                                                    "VariableMap",
+                                                    "global",
+                                                    "TestAgentInterfaceName"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "\n"
+                            ]
+                        ]
+                    }
+                }
+            }
+        },
+        "Agent2Deployment": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": {
+                    "Ref": "KeyPair"
+                },
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMIAgent"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "AgentsInstanceType"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "Agent2MgmtNet"
+                        },
+                        "DeviceIndex": "0"
+                    },
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "Agent2TestNet"
+                        },
+                        "DeviceIndex": "1"
+                    }
+                ],
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "InstanceBlockDeviceName"
+                            ]
+                        },
+                        "Ebs": {
+                            "DeleteOnTermination": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsDeleteOnTermination"
+                                ]
+                            },
+                            "VolumeType": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsVolumeType"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "global",
+                                            "LoadCoreVersion"
+                                        ]
+                                    },
+                                    "Agent2"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                {
+                                    "Fn::Sub": [
+                                        "/bin/bash /opt/5gc-test-engine/agent-setup.sh ${ClusterDeployment.PrivateIp} ${MgmtAgentInterfaceName} \"\" y",
+                                        {
+                                            "MgmtAgentInterfaceName": {
+                                                "Fn::FindInMap": [
+                                                    "VariableMap",
+                                                    "global",
+                                                    "MgmtAgentInterfaceName"
+                                                ]
+                                            },
+                                            "TestAgentInterfaceName": {
+                                                "Fn::FindInMap": [
+                                                    "VariableMap",
+                                                    "global",
+                                                    "TestAgentInterfaceName"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "\n"
+                            ]
+                        ]
+                    }
+                }
+            }
+        },
+        "LicensingDeployment": {
+            "Type": "AWS::EC2::Instance",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "KeyName": {
+                    "Ref": "KeyPair"
+                },
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMILicensing"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "LicensingInstanceType"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "LicensingMgmtNet"
+                        },
+                        "DeviceIndex": "0"
+                    }
+                ],
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "InstanceBlockDeviceName"
+                            ]
+                        },
+                        "Ebs": {
+                            "DeleteOnTermination": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsDeleteOnTermination"
+                                ]
+                            },
+                            "VolumeType": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "global",
+                                    "InstanceEbsVolumeType"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "global",
+                                            "LoadCoreVersion"
+                                        ]
+                                    },
+                                    "Licensing"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmail"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "Metadata": {
+        "AWS::CloudFormation::Interface": {
+            "ParameterGroups": [
+                {
+                    "Label": {
+                        "default": "User Configuration"
+                    },
+                    "Parameters": [
+                        "UserEmail"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "EC2 Configuration"
+                    },
+                    "Parameters": [
+                        "ClusterInstanceType",
+                        "AgentsInstanceType",
+                        "LicensingInstanceType",
+                        "KeyPair"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Network Configuration"
+                    },
+                    "Parameters": [
+                        "MgmtSubnet",
+                        "TestSubnet",
+                        "SecurityGroupForMgmt",
+                        "SecurityGroupForTest"
+                    ]
+                }
+            ],
+            "ParameterLabels": {
+                "UserEmail": {
+                    "default": "User email"
+                },
+                "ClusterInstanceType": {
+                    "default": "Instance type of LoadCore"
+                },
+                "AgentsInstanceType": {
+                    "default": "Instance type of LoadCore Agents"
+                },
+                "LicensingInstanceType": {
+                    "default": "Instance type of LoadCore Licensing"
+                },
+                "KeyPair": {
+                    "default": "Key Name"
+                },
+                "MgmtSubnet": {
+                    "default": "Management Subnet"
+                },
+                "TestSubnet": {
+                    "default": "Test Subnet"
+                },
+                "SecurityGroupForMgmt": {
+                    "default": "Security group for management subnet"
+                },
+                "SecurityGroupForTest": {
+                    "default": "Security group for test subnet"
+                }
+            }
+        }
+    },
+    "Parameters": {
+        "UserEmail": {
+            "Description": "Email address of user creating the stack",
+            "Type": "String"
+        },
+        "ClusterInstanceType": {
+            "Description": "Supported instance types",
+            "Type": "String",
+            "AllowedValues": [
+                "c5.9xlarge",
+                "c5.4xlarge",
+                "c5.2xlarge",
+                "c4.8xlarge",
+                "c4.4xlarge",
+                "c4.2xlarge",
+                "m5.xlarge",
+                "t2.2xlarge"
+            ],
+            "Default": "c4.2xlarge"
+        },
+        "AgentsInstanceType": {
+            "Description": "Supported instance types",
+            "Type": "String",
+            "AllowedValues": [
+                "c5.9xlarge",
+                "c5.4xlarge",
+                "c5.2xlarge",
+                "c5.xlarge",
+                "c4.8xlarge",
+                "c4.4xlarge",
+                "c4.2xlarge",
+                "c4.xlarge",
+                "m5.xlarge",
+                "t2.xlarge"
+            ],
+            "Default": "c5.2xlarge"
+        },
+        "LicensingInstanceType": {
+            "Description": "Supported instance types",
+            "Type": "String",
+            "AllowedValues": [
+                "t2.medium"
+            ],
+            "Default": "t2.medium"
+        },
+        "MgmtSubnet": {
+            "Description": "Subnet IDs",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "TestSubnet": {
+            "Description": "Subnet IDs",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "SecurityGroupForMgmt": {
+            "Description": "SG IDs",
+            "Type": "AWS::EC2::SecurityGroup::Id"
+        },
+        "SecurityGroupForTest": {
+            "Description": "SG IDs",
+            "Type": "AWS::EC2::SecurityGroup::Id"
+        },
+        "KeyPair": {
+            "Description": "Name of the existing EC2 Key Pair",
+            "Type": "AWS::EC2::KeyPair::KeyName"
+        }
+    },
+    "Outputs": {
+        "LoadCore": {
+            "Description": "The LoadCore UI IP address",
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        "https://",
+                        {
+                            "Fn::GetAtt": [
+                                "ClusterDeployment",
+                                "PublicIp"
+                            ]
+                        }
+                    ]
+                ]
+            }
+        }
+    }
+}
