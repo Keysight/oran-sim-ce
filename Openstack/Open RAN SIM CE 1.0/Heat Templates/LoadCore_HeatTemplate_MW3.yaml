@@ -3,7 +3,7 @@ heat_template_version: 2016-10-14
 
 description: >
     This is the HEAT template used for LoadCore Middleware deployment in OpenStack-based environments. 
-    The template will create one LoadCore Middleware VM and allocate a static IP. The recommended flavor is 4 CPUs, 12G RAM and 256G HDD.  
+    The template will create one LoadCore Middleware VM and allocate a static IP. The recommended flavor is 8 CPUs, 24G RAM and 256G HDD.  
     The LoadCore_HeatTemplate_Variables_MW.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
 
 
