@@ -6,8 +6,6 @@ terraform {
       version = "~> 3.0.2"
     }
   }
-
-  required_version = ">= 1.1.0"
 }
 
 provider "azurerm" {
@@ -57,6 +55,13 @@ resource "azurerm_subnet" "test_subnet" {
   virtual_network_name = azurerm_virtual_network.virtual_network.name
   resource_group_name  = azurerm_resource_group.rg.name
   address_prefixes     = ["${var.virtual_network_test_subnet}"]
+}
+
+resource "azurerm_subnet" "test_subnet2" {
+  name                 = "test_subnet2"
+  virtual_network_name = azurerm_virtual_network.virtual_network.name
+  resource_group_name  = azurerm_resource_group.rg.name
+  address_prefixes     = ["${var.virtual_network_test_subnet2}"]
 }
 
 resource "azurerm_public_ip" "pip" {
@@ -148,43 +153,43 @@ resource "azurerm_network_interface" "loadcore_agent_test_interface_2" {
 
   ip_configuration {
     name                          = "testconfiguration1"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
     primary = true
   }
   ip_configuration {
     name                          = "testconfiguration2"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
   ip_configuration {
     name                          = "testconfiguration3"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration4"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration5"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration6"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration7"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration8"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -259,43 +264,43 @@ resource "azurerm_network_interface" "loadcore_agent2_test_interface_2" {
 
   ip_configuration {
     name                          = "testconfiguration1"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
     primary = true
   }
   ip_configuration {
     name                          = "testconfiguration2"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
   ip_configuration {
     name                          = "testconfiguration3"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration4"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration5"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration6"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration7"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
     ip_configuration {
     name                          = "testconfiguration8"
-    subnet_id                     = "${azurerm_subnet.test_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.test_subnet2.id}"
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -384,7 +389,7 @@ resource "azurerm_linux_virtual_machine" "loadcore_agent2" {
 
 data "azurerm_ssh_public_key" "ssh_key" {
   name                = "${var.ssh_key_name}"
-  resource_group_name = "load-core-mdw-images"
+  resource_group_name = "${var.ssh_key_resource_group}"
 }
 
 resource "azurerm_network_security_group" "sg_mgmt" {
@@ -439,12 +444,12 @@ output "Agent1_mgmt_interface" {
 
 output "Agent1_first_test_interface" {
   description = "Agent1_first_test_interface"
-  value       = "${azurerm_network_interface.loadcore_agent_test_interface_1.private_ip_addresses}"
+  value       = ["${azurerm_network_interface.loadcore_agent_test_interface_1.mac_address}", "${azurerm_network_interface.loadcore_agent_test_interface_1.private_ip_addresses}"]
 }
 
 output "Agent1_second_test_interface" {
-  description = "Agent1_first_test_interface"
-  value       = "${azurerm_network_interface.loadcore_agent_test_interface_2.private_ip_addresses}"
+  description = "Agent1_second_test_interface"
+  value       = ["${azurerm_network_interface.loadcore_agent_test_interface_2.mac_address}","${azurerm_network_interface.loadcore_agent_test_interface_2.private_ip_addresses}"]
 }
 
 output "Agent2_mgmt_interface" {
@@ -454,11 +459,11 @@ output "Agent2_mgmt_interface" {
 
 output "Agent2_first_test_interface" {
   description = "Agent2_first_test_interface"
-  value       = "${azurerm_network_interface.loadcore_agent2_test_interface_1.private_ip_addresses}"
+  value       = ["${azurerm_network_interface.loadcore_agent2_test_interface_1.mac_address}", "${azurerm_network_interface.loadcore_agent2_test_interface_1.private_ip_addresses}"]
 }
 
 output "Agent2_second_test_interface" {
-  description = "Agent2_first_test_interface"
-  value       = "${azurerm_network_interface.loadcore_agent2_test_interface_2.private_ip_addresses}"
+  description = "Agent2_second_test_interface"
+  value       = ["${azurerm_network_interface.loadcore_agent2_test_interface_2.mac_address}", "${azurerm_network_interface.loadcore_agent2_test_interface_2.private_ip_addresses}"]
 }
 

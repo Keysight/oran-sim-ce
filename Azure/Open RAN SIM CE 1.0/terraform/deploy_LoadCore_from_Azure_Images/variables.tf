@@ -52,3 +52,12 @@ variable "virtual_network_test_subnet" {
   default = "10.0.1.0/24"
 }
 
+variable "virtual_network_test_subnet2" {
+  description = "virtual_network_test_subnet"
+  default = "10.0.3.0/24"
+}
+
+variable "ssh_key_resource_group" {
+  description = "resource group name where the ssh key exists"
+  default = "rg"
+}
