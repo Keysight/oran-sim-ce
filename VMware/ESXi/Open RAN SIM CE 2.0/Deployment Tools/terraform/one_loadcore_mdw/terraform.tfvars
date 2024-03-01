@@ -1,0 +1,7 @@
+esxi_hostname="<hostname>"
+esxi_username="root"
+esxi_password="<password>"
+esxi_datastore="datastore2"
+loadcore_mdw_image_path="C:\\Users\\Downloads\\LoadCore-MDW-3.4.0-3490-268.ova"
+management_network="VM Network"
+vm_prefix="TF_LoadCore"
