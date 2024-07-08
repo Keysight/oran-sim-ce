@@ -1,0 +1,8 @@
+parameters:
+
+    LoadCore_MW_Name:               LoadCore
+    LoadCore_MW_Image_Name:         LoadCoreMW
+    LoadCore_MW_Flavor:             LoadCoreMWFlavor
+
+    Internal_Management_Network:    Internal
+
