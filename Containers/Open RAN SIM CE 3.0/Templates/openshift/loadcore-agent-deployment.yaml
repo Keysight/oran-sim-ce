@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadcore-agent
+  namespace: loadcore
+  labels:
+    app: loadcore-agent
+spec:
+    replicas: 1 
+    selector:
+      matchLabels:
+        app: loadcore-agent
+    template:
+      metadata:
+        labels:
+          app: loadcore-agent
+        namespace: loadcore
+        annotations:
+          k8s.v1.cni.cncf.io/networks: loadcore-network
+      spec:
+        containers:
+        - name: loadcore-agent
+          image: <LOADCORE-AGENT-IMAGE>
+          imagePullPolicy: IfNotPresent
+          args: ["<MIDDLEWARE-IP>", "eth0", "net1"]
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN", "NET_BIND_SERVICE", "NET_RAW", "IPC_LOCK", "SYS_RAWIO", "SYS_NICE", "DAC_READ_SEARCH", "SYS_PTRACE"]
+          ports:
+            - containerPort: 38412
+              name: sctpserver
+              protocol: SCTP
