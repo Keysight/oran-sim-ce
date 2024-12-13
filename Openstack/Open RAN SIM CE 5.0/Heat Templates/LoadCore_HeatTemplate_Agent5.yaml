@@ -1,0 +1,98 @@
+heat_template_version: 2016-10-14
+
+
+description: >
+    This is the HEAT template used for LoadCore Agents deployment in OpenStack-based environments. 
+    The template will create one LoadCore Agent with one management interface, one test interface and associate one floating IP address (static).
+    The LoadCore_HeatTemplate_Variables_Agent1.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+
+
+parameters:
+
+    Internal_Management_Network:
+      type:        string
+      label:       Internal Management Network
+      description: The name of the INTERNAL MANAGEMENT NETWORK that is already configured in OpenStack
+
+    Internal_Management_IP:
+      type:        string
+      label:       Management Network
+      description: The IP Address to be allocated by OpenStack for this agent; IP Address needs to be from the subnet defined in Internal Management Network and should not overlap with existing IP addresses
+
+    External_Management_Network:
+      type:        string
+      label:       External Management Network
+      description: The name of the EXTERNAL MANAGEMENT NETWORK that is already configured in OpenStack 
+    
+    Floating_IpAddress:
+      type:        string
+      label:       Floating IP Address
+      description: The IP Address to be allocated by OpenStack as Floating IP; IP Address needs to be from the local subnet(outside OpenStack) and should not overlap with existing IP addresses
+
+    LoadCore_Agent_Name:
+      type:        string
+      label:       Agent VM Name
+      description: The name of the LOADCORE AGENT VM to be created
+
+    LoadCore_Agent_Image_Name:
+      type:        string
+      label:       Agent Image Name
+      description: The QCOW2 image to be used for the LOADCORE AGENT
+
+    LoadCore_Agent_Flavor:
+      type:        string
+      label:       Agent Flavor
+      description: The resources required for each LOADCORE AGENT
+
+    Test_Network:
+      type:        string
+      label:       LoadCore Test Network  
+      description: The name of the TEST NETWORK that is already configured in OpenStack
+
+    Test_Fixed_IP:
+      type:        string
+      label:       Test Fixed IP
+      description: IP ADDRESS to be allocated by OpenStack for this agent; IP Address needs to be from the subnet defined in Test Network and should not overlap with existing IP addresses
+      
+resources:
+
+  Test-Port:
+       type:                 OS::Neutron::Port
+       properties:
+         network_id:         {get_param: Test_Network}
+         allowed_address_pairs:
+          - ip_address:       "0.0.0.0/0"
+          - ip_address:       "::/0"
+         fixed_ips:          [{"ip_address": { get_param: Test_Fixed_IP}}]
+
+  Public_Port:
+      type:                   OS::Neutron::Port
+      properties:
+         network:             {get_param: Internal_Management_Network}
+         fixed_ips:
+          - ip_address:       {get_param: Internal_Management_IP}
+
+  agent_floating_ip:
+       type:                  OS::Neutron::FloatingIP
+       properties:
+         floating_network:    { get_param: External_Management_Network }
+         port_id:             { get_resource: Public_Port}
+         floating_ip_address: { get_param: Floating_IpAddress }
+
+  floating_ip_assoc:
+    type:                     OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id:          { get_resource: agent_floating_ip }
+      port_id:                { get_resource: Public_Port }
+
+  loadcoreAgent:
+    type:                     OS::Nova::Server
+    properties:
+      name:                   {get_param:    LoadCore_Agent_Name}
+      image:                  {get_param:    LoadCore_Agent_Image_Name}
+      flavor:                 {get_param:    LoadCore_Agent_Flavor}
+      networks:
+        - port:               {get_resource: Public_Port}
+        - port:               {get_resource: Test-Port}
+
+# outputs:
