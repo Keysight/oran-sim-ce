@@ -1,0 +1,9 @@
+parameters:
+
+    LoadCore_MW_Name:               LoadCore
+    LoadCore_MW_Image_Name:         LoadCoreMWImage
+    LoadCore_MW_Flavor:             LoadCoreFlavor
+
+    Internal_Management_Network:    internal
+    Internal_Management_IP:         "192.168.0.10"
+
