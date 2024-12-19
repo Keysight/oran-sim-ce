@@ -13,13 +13,13 @@ Using the loadcore agent docker container directly
 In order to use the loadcore agent directly from the Docker container, please follow the below steps:
 
 1. Load the container:
-%> docker load -i LoadCore-Agent-Docker-4.4.0.32-1d68ec7237-20240726T121911Z.tar.gz
+%> docker load -i LoadCore-Agent-Docker-5.0.0.5-46d96cc313-20241217T165212Z.tar.gz
 
 1. Create a new docker network:
 %> docker network create loadcore-network
 
 2. Create a new container from the loadcore agent image, specifying the middleware IP, the admin interface (eth0) and the test interface (eth1):
-%> docker create --name loadcore-agent --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE --cap-add=NET_RAW --cap-add=IPC_LOCK --cap-add=SYS_RAWIO --cap-add=SYS_NICE --cap-add=DAC_READ_SEARCH --cap-add=SYS_PTRACE loadcore-agent:4.4.0.32-1d68ec7237 MIDDLEWARE-IP eth0 eth1
+%> docker create --name loadcore-agent --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE --cap-add=NET_RAW --cap-add=IPC_LOCK --cap-add=SYS_RAWIO --cap-add=SYS_NICE --cap-add=DAC_READ_SEARCH --cap-add=SYS_PTRACE loadcore-agent:5.0.0.5-46d96cc313 MIDDLEWARE-IP eth0 eth1
 
 3. Connect the container to the network created above:
 %> docker network connect loadcore-network loadcore-agent
@@ -43,12 +43,12 @@ The configuration files referred in the steps below can be found in the 'kuberne
 In order to install the agent in Kubernetes, please follow the below steps:
 
 1. Load the container:
-%> docker load -i LoadCore-Agent-Docker-4.4.0.32-1d68ec7237-20240726T121911Z.tar.gz
+%> docker load -i LoadCore-Agent-Docker-5.0.0.5-46d96cc313-20241217T165212Z.tar.gz
 2. Tag the container in order to be pushed in your private docker registry:
-%> docker tag loadcore-agent:4.4.0.32-1d68ec7237 <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:4.4.0.32-1d68ec7237
+%> docker tag loadcore-agent:5.0.0.5-46d96cc313 <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:5.0.0.5-46d96cc313
 
 3. Push the container in the private docker registry:
-%> docker push <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:4.4.0.32-1d68ec7237
+%> docker push <PRIVATE-DOCKER-REGISTRY>/loadcore-agent:5.0.0.5-46d96cc313
 
 4. Create the keysight-loadcore-agent namespace:
 %> kubectl create namespace keysight-loadcore-agent
@@ -63,7 +63,7 @@ In order to install the agent in Kubernetes, please follow the below steps:
 You can also further tweak the multus agent settings, such as subnet range, gateway, etc.
 
 6. Install the helm chart:
-%> helm install -f my_values.yaml loadcore-agent ./load-core-agent-4.4.0-32+1d68ec7237.20240726.tgz
+%> helm install -f my_values.yaml loadcore-agent ./load-core-agent-5.0.0-5+46d96cc313.20241217.tgz
 
 7. Confirm that the agent is running:
 %> kubectl get pods -n keysight-loadcore-agent
@@ -83,16 +83,16 @@ In order to install the agent in OpenShift, please follow the below steps:
 $> podman login --tls-verify=false -u unused -p $(oc whoami -t) ${REGISTRY}
 
 2. Load the loadcore agent image:
-%> podman load -i LoadCore-Agent-Docker-4.4.0.32-1d68ec7237-20240726T121911Z.tar.gz
+%> podman load -i LoadCore-Agent-Docker-5.0.0.5-46d96cc313-20241217T165212Z.tar.gz
 
 3. See the loaded image details:
 %> podman images
 
 4. Tag the loadcore image using the same image ID returned by 'podman images', for example:
-%> podman tag bc99e14756 $REGISTRY/loadcore/loadcore-agent:4.4.0.32-1d68ec7237
+%> podman tag bc99e14756 $REGISTRY/loadcore/loadcore-agent:5.0.0.5-46d96cc313
 
 5. Push the loadcore image to the internal image registry:
-%> podman push --tls-verify=false $REGISTRY/loadcore/loadcore-agent:4.4.0.32-1d68ec7237
+%> podman push --tls-verify=false $REGISTRY/loadcore/loadcore-agent:5.0.0.5-46d96cc313
 
 6. We need to configure an extra interface to be used as test interface. Multus is already configured on OpenShift.
 Here, is an example of how to add an additional network using Multus:
