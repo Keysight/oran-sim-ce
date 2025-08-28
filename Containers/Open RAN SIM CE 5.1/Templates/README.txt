@@ -63,7 +63,7 @@ In order to install the agent in Kubernetes, please follow the below steps:
 You can also further tweak the multus agent settings, such as subnet range, gateway, etc.
 
 6. Install the helm chart:
-%> helm install -f my_values.yaml loadcore-agent ./load-core-agent-5.0.0-5+46d96cc313.20241217.tgz
+%> helm install -f my_values.yaml loadcore-agent ./load-core-agent-5.1.0-6+45220fc6ba.20250821.tgz
 
 7. Confirm that the agent is running:
 %> kubectl get pods -n keysight-loadcore-agent
