@@ -1,0 +1,13 @@
+parameters:
+
+    LoadCore_Agent_Name:            LC_agent2
+    LoadCore_Agent_Image_Name:      LoadCore254
+    LoadCore_Agent_Flavor:          LoadCoreFlavor
+
+    Internal_Management_Network:    Internal
+    Internal_Management_IP:         "192.168.0.175"
+
+    Test_Network:                   LC Test Network
+    Test_Fixed_IP:                  "20.0.1.193"
+
+
