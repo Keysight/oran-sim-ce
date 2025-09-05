@@ -23,12 +23,12 @@ variable "esxi_datastore" {
   type    = string
 }
 variable "loadcore_mdw_image_path" {
-  default = "G:\\terraform_scripts\\backup agents with MW IP\\LoadCore-Agent-3.0.0.640-dd679b121-20211215T114149Z.ova"
+  default = "G:\\terraform_scripts\\backup agents with MW IP\\LoadCore-Agent-5.1.0.6-45220fc6ba-20250821T141500Z.ova"
   type    = string
   description = "The image path for LoadCore MDW. Make sure to put double \\"
 }
 variable "loadcore_agent_image_path" {
-  default = "G:\\terraform_scripts\\backup agents with MW IP\\LoadCore-Agent-3.0.0.640-dd679b121-20211215T114149Z.ova"
+  default = "G:\\terraform_scripts\\backup agents with MW IP\\LoadCore-Agent-5.1.0.6-45220fc6ba-20250821T141500Z.ova"
   type    = string
   description = "The image path for LoadCore Agents. Make sure to put double \\"
 }
