@@ -1,0 +1,1654 @@
+{
+	"id": "wireless-4204",
+	"displayName": "SBATester-10100UEs-CHFNode-SpendingLimitService",
+	"lastModified": 1648027637,
+	"lastAccessed": 1608279477,
+	"tags": {
+		"category": "SBA"
+	},
+	"type": "wireless",
+	"ownerId": "68d50bbf-1c39-4ad0-a1cb-c957710b2794",
+	"owner": "admin@example.org",
+	"readonly": false,
+	"configUrl": "http://wireless-data-model.keysight-wap.svc.cluster.local./api/v2/configs/wireless-4204",
+	"configData": {
+		"Config": null,
+		"ConfigType": "SBA",
+		"Created": 1648027638,
+		"IRATConfig": null,
+		"LastAccessed": 1648027638,
+		"LicenseType": "",
+		"Name": "SBATester-10100UEs-CHFNode-SpendingLimitService",
+		"OwnerID": "68d50bbf-1c39-4ad0-a1cb-c957710b2794",
+		"RICConfig": null,
+		"SBAConfig": {
+			"globalSettings": {
+				"advancedStats": {
+					"automatedPollingInterval": true,
+					"controlplane": false,
+					"customCaptureSizeForIxStack": 500000,
+					"customPollingInterval": 3,
+					"enableLoCapture": false,
+					"overwriteCaptureSizeForIxStack": true
+				},
+				"connectionStartRate": 100,
+				"connectionStopRate": 100,
+				"dnns": [
+					{
+						"adcSupport": true,
+						"address": "20.0.0.1",
+						"allowedSSCModes": [
+							"ssc-mode-2",
+							"ssc-mode-3"
+						],
+						"allowedServices": [
+							"service1",
+							"service2"
+						],
+						"allowedSessionTypes": null,
+						"defaultSSCMode": "ssc-mode-1",
+						"dnn": "dnn.keysight.com",
+						"gbrDl": "100 bps",
+						"gbrUl": "100 bps",
+						"id": "1",
+						"ipv4Index": 5,
+						"ipv6Index": 5,
+						"iwkEpsIndicator": true,
+						"ladnIndicator": true,
+						"offline": true,
+						"online": true,
+						"qosFlowsIds": [
+							"1"
+						],
+						"sessionAmbr": {
+							"downlink": 19999,
+							"downlinkUnit": "bps",
+							"uplink": 1999,
+							"uplinkUnit": "bps"
+						},
+						"subscCats": [
+							"bronze",
+							"silver",
+							"gold"
+						],
+						"subscSpendinglimits": true
+					}
+				],
+				"flows": [
+					{
+						"averagingWindow": 2000,
+						"fiveQi": 6,
+						"gbr": {
+							"downlinkBitrateUnit": "u1Kbps",
+							"downlinkBitrateValue": 1,
+							"uplinkBitrateUnit": "u1Kbps",
+							"uplinkBitrateValue": 1
+						},
+						"id": "1",
+						"isDefault": true,
+						"maxDataBurstVolume": 2000,
+						"maxPacketLossRate": {
+							"downlink": 0,
+							"uplink": 0
+						},
+						"mbr": {
+							"downlinkBitrateUnit": "u1Kbps",
+							"downlinkBitrateValue": 1,
+							"uplinkBitrateUnit": "u1Kbps",
+							"uplinkBitrateValue": 1
+						},
+						"notificationControl": false,
+						"packetDelayBudget": 300,
+						"packetErrorRate": "1E-6",
+						"packetFilterList": [
+							{
+								"direction": "bidirectional",
+								"flowLabel": 0,
+								"id": "1",
+								"ipv4RemoteAddress": "192.168.0.22/255.255.0.0",
+								"ipv6RemoteAddressAndPrefixLength": "2001::1:11d2:8f92:64bc:dff0/64",
+								"localPortRange": "",
+								"protocolIdentifierOrNextHeader": 1,
+								"remotePortRange": "",
+								"securityParameterIndex": 1,
+								"singleLocalPort": 1234,
+								"singleRemotePort": 1234,
+								"typeOfServiceOrTrafficClass": ""
+							}
+						],
+						"preEmptionCapability": false,
+						"preEmptionVulnerability": false,
+						"priorityLevel": 60,
+						"priorityLevelARP": 15,
+						"qfi": 5,
+						"qosRulePrecedence": 255,
+						"resourceType": "NON_GBR",
+						"segregation": false,
+						"useMatchAllPacketFilter": true
+					}
+				],
+				"impairments": [
+					{
+						"customScript": {
+							"FileValue": {
+								"fileName": "",
+								"payload": ""
+							},
+							"IsDeprecated": false,
+							"IsModified": false,
+							"Readonly": false,
+							"Value": "",
+							"id": ""
+						},
+						"id": "1",
+						"name": "profile-1",
+						"type": "custom"
+					}
+				],
+				"logLevel": "info",
+				"maxRequestsPerConnection": 1073741822,
+				"techSpecVersion": "r15-v2019-09"
+			},
+			"name": "SBATester-10100UEs-CHFNode-SpendingLimitService",
+			"networkSettings": {
+				"agentsInfos": [
+					{
+						"agentId": "df75f08d-b51a-4822-8dd2-ae9f2cdd9657",
+						"id": "",
+						"interfacesSettings": [
+							{
+								"capture": true,
+								"interfaceMac": "",
+								"interfaceName": "ens192",
+								"networkStack": "",
+								"sriov": false
+							}
+						]
+					},
+					{
+						"agentId": "893eb8d4-6315-4d8f-9f45-9ce4b3f21ba3",
+						"id": "",
+						"interfacesSettings": [
+							{
+								"capture": true,
+								"interfaceMac": "",
+								"interfaceName": "ens192",
+								"networkStack": "",
+								"sriov": false
+							}
+						]
+					}
+				]
+			},
+			"nodes": {
+				"ausf": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"nausf": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "10.0.1.10",
+										"port": 80,
+										"protocol": "http",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"instanceId": "7ea3abc7-f0f6-435b-9154-9e5deddd101c",
+								"mcc": "226",
+								"mnc": "04",
+								"routingIndicators": [
+									1111,
+									2222
+								]
+							},
+							"remoteNodes": {
+								"nrf": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "-1"
+								},
+								"udm": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "1"
+								}
+							}
+						}
+					],
+					"settings": {
+						"enable": false,
+						"mappedAgents": []
+					}
+				},
+				"chf": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"nchf": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.1",
+										"gwStart": "10.0.0.1",
+										"ipPrefix": 16,
+										"localIPAddress": "10.0.7.10",
+										"port": 80,
+										"protocol": "http",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"instanceId": "7ea3abc7-f0f6-435b-9154-9e5defff101a"
+							},
+							"remoteNodes": {
+								"nrf": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "-1"
+								}
+							}
+						}
+					],
+					"settings": {
+						"enable": true,
+						"mappedAgents": [
+							{
+								"agentId": "df75f08d-b51a-4822-8dd2-ae9f2cdd9657",
+								"id": "1",
+								"interfaceMappings": [
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:5d:39:e8",
+										"nodeInterface": "nchf"
+									}
+								]
+							}
+						]
+					}
+				},
+				"nrf": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"nnrf": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "10.0.8.10",
+										"port": 80,
+										"protocol": "http",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"heartbeatSeconds": 10,
+								"instanceId": "7ea3abc7-f0f6-435b-9154-9e5deddd101a",
+								"mcc": "226",
+								"mnc": "04"
+							}
+						}
+					],
+					"settings": {
+						"enable": false,
+						"mappedAgents": []
+					}
+				},
+				"nssf": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"nnssf": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "10.0.9.10",
+										"port": 80,
+										"protocol": "http",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"configuredNssai": [
+									{
+										"id": "1",
+										"slices": [
+											"1"
+										],
+										"snssai": {
+											"id": "1",
+											"mappedSD": 100,
+											"mappedSST": 10,
+											"sd": 4,
+											"sst": 1
+										}
+									}
+								],
+								"hplmn": {
+									"mcc": "226",
+									"mnc": "04"
+								},
+								"instanceId": "7ea3abc7-f0f6-435b-9154-9e5deddd1082",
+								"networkSlices": [
+									{
+										"id": "1",
+										"name": "slice-1",
+										"nrf": {
+											"host": "127.0.0.1",
+											"port": 80,
+											"protocol": "http"
+										},
+										"tais": [
+											{
+												"id": "1",
+												"plmnId": {
+													"mcc": "226",
+													"mnc": "04"
+												},
+												"tac": "0004D2"
+											}
+										]
+									}
+								],
+								"restrictedNssai": [
+									{
+										"id": "1",
+										"nssais": [
+											{
+												"id": "1",
+												"mappedSD": 101,
+												"mappedSST": 11,
+												"sd": 5,
+												"sst": 2
+											}
+										],
+										"tai": {
+											"id": "",
+											"plmnId": {
+												"mcc": "226",
+												"mnc": "04"
+											},
+											"tac": "0004D2"
+										}
+									}
+								]
+							},
+							"remoteNodes": {
+								"nrf": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "-1"
+								}
+							}
+						}
+					],
+					"settings": {
+						"enable": false,
+						"mappedAgents": []
+					}
+				},
+				"pcf": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"npcf": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "172.16.0.100",
+										"port": 80,
+										"protocol": "http",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"defaultChargingMethods": {
+									"offline": false,
+									"online": false
+								},
+								"includeRequest": true,
+								"instanceId": "7ea3abc7-f0f6-435b-9154-9e5deddd101d",
+								"mcc": "226",
+								"mnc": "04",
+								"rfsp": 4,
+								"servAreaRes": {
+									"areas": [
+										{
+											"areaCode": "Code123",
+											"id": "1",
+											"tacs": [
+												"abcd"
+											]
+										}
+									],
+									"maxNumOfTAs": 10,
+									"restrictionType": "ALLOWED_AREAS"
+								},
+								"triggers": [
+									"LOC_CH",
+									"PRA_CH"
+								]
+							},
+							"remoteNodes": {
+								"nrf": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "1"
+								},
+								"udr": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "1"
+								}
+							}
+						}
+					],
+					"settings": {
+						"enable": false,
+						"mappedAgents": []
+					}
+				},
+				"sbaTester": {
+					"remoteNodes": {
+						"nrf": {
+							"port": 80,
+							"protocol": "http",
+							"remoteSBAPeerId": "-1"
+						}
+					},
+					"settings": {
+						"enable": true,
+						"mappedAgents": [
+							{
+								"agentId": "893eb8d4-6315-4d8f-9f45-9ce4b3f21ba3",
+								"id": "1",
+								"interfaceMappings": [
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:ef:c8:4c",
+										"nodeInterface": "namf"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:ef:c8:4c",
+										"nodeInterface": "nsmf"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:ef:c8:4c",
+										"nodeInterface": "npcf"
+									}
+								]
+							}
+						]
+					},
+					"simulated": {
+						"amfNodes": [],
+						"pcfNodes": [
+							{
+								"count": 1,
+								"enable": true,
+								"id": "1",
+								"interfaces": {
+									"npcf": {
+										"connectivitySettings": {
+											"clientCount": 1,
+											"firstVLAN": {
+												"enable": false,
+												"idStart": 0
+											},
+											"gwIncrement": "0.0.0.1",
+											"gwStart": "11.0.0.1",
+											"ipPrefix": 16,
+											"localIPAddress": "10.0.1.2",
+											"protocol": "http",
+											"secondVLAN": {
+												"enable": false,
+												"idStart": 0
+											}
+										}
+									}
+								},
+								"nodeSettings": {
+									"instanceId": "5e1a36bd-a699-4d1c-b3cc-3d200c1b8545",
+									"mcc": "226",
+									"mnc": "04"
+								}
+							},
+							{
+								"count": 1,
+								"enable": true,
+								"id": "2",
+								"interfaces": {
+									"npcf": {
+										"connectivitySettings": {
+											"clientCount": 1,
+											"firstVLAN": {
+												"enable": false,
+												"idStart": 0
+											},
+											"gwIncrement": "0.0.0.0",
+											"gwStart": "0.0.0.0",
+											"ipPrefix": 16,
+											"localIPAddress": "10.0.1.3",
+											"protocol": "http",
+											"secondVLAN": {
+												"enable": false,
+												"idStart": 0
+											}
+										}
+									}
+								},
+								"nodeSettings": {
+									"instanceId": "5e1a36bd-a699-4d1c-b3cc-3d200c1b8546",
+									"mcc": "226",
+									"mnc": "04"
+								}
+							},
+							{
+								"count": 1,
+								"enable": true,
+								"id": "3",
+								"interfaces": {
+									"npcf": {
+										"connectivitySettings": {
+											"clientCount": 1,
+											"firstVLAN": {
+												"enable": false,
+												"idStart": 0
+											},
+											"gwIncrement": "0.0.0.1",
+											"gwStart": "100.0.0.1",
+											"ipPrefix": 16,
+											"localIPAddress": "10.0.1.4",
+											"protocol": "http",
+											"secondVLAN": {
+												"enable": false,
+												"idStart": 0
+											}
+										}
+									}
+								},
+								"nodeSettings": {
+									"instanceId": "5e1a36bd-a699-4d1c-b3cc-3d200c1b8547",
+									"mcc": "226",
+									"mnc": "04"
+								}
+							},
+							{
+								"count": 1,
+								"enable": true,
+								"id": "4",
+								"interfaces": {
+									"npcf": {
+										"connectivitySettings": {
+											"clientCount": 1,
+											"firstVLAN": {
+												"enable": false,
+												"idStart": 0
+											},
+											"gwIncrement": "0.0.0.1",
+											"gwStart": "100.0.0.1",
+											"ipPrefix": 16,
+											"localIPAddress": "10.0.1.5",
+											"protocol": "http",
+											"secondVLAN": {
+												"enable": false,
+												"idStart": 0
+											}
+										}
+									}
+								},
+								"nodeSettings": {
+									"instanceId": "5e1a36bd-a699-4d1c-b3cc-3d200c1b8548",
+									"mcc": "226",
+									"mnc": "04"
+								}
+							}
+						],
+						"smfNodes": []
+					}
+				},
+				"udm": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"nudm": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "10.0.2.10",
+										"port": 80,
+										"protocol": "http",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"homeNetworkPrivateKey": "E0D8C5181F3732F2E60097EDC92DA0F3CACA3A04B613FA1DC5E59B4ED9AA53DC",
+								"hplmn": {
+									"mcc": "226",
+									"mnc": "04"
+								},
+								"instanceId": "7ea3abc7-f0f6-435b-9154-9e5deddd101b",
+								"routingIndicators": [
+									1111,
+									2222
+								],
+								"sdmNotifications": []
+							},
+							"remoteNodes": {
+								"nrf": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "-1"
+								}
+							}
+						}
+					],
+					"settings": {
+						"enable": false,
+						"mappedAgents": []
+					}
+				},
+				"udr": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"nudr": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "10.0.4.10",
+										"port": 80,
+										"protocol": "http",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"instanceId": "7ea3abc7-f0f6-435b-9154-9e5deddd101a"
+							},
+							"remoteNodes": {
+								"nrf": {
+									"port": 80,
+									"protocol": "http",
+									"remoteSBAPeerId": "-1"
+								}
+							}
+						}
+					],
+					"settings": {
+						"enable": false,
+						"mappedAgents": []
+					}
+				},
+				"ue": {
+					"ranges": [
+						{
+							"count": 10000,
+							"enable": true,
+							"id": "1",
+							"identification": {
+								"imei": {
+									"increment": "1",
+									"type": "string",
+									"value": "60000000000000"
+								},
+								"imeisv": {
+									"increment": "1",
+									"type": "string",
+									"value": "8670000000000000"
+								},
+								"ipAddress": {
+									"increment": "1",
+									"type": "ip",
+									"value": "20.0.0.1"
+								},
+								"mcc": "226",
+								"mnc": "04",
+								"msin": {
+									"increment": "1",
+									"type": "string",
+									"value": "000000000"
+								},
+								"msisdn": {
+									"increment": "1",
+									"type": "string",
+									"value": "10000000000"
+								},
+								"ueIpv6AddressPrefix": {
+									"increment": "0:0:0:1::",
+									"type": "ip",
+									"value": "2000::0"
+								},
+								"ueIpv6AddressPrefixMask": 64
+							},
+							"policy": {
+								"am": {
+									"subscCats": [
+										"gold"
+									]
+								},
+								"sm": {
+									"snssaiSettings": [
+										{
+											"dnns": [
+												"1"
+											],
+											"id": "1",
+											"snssai": {
+												"id": "1",
+												"mappedSD": 100,
+												"mappedSST": 10,
+												"sd": 4,
+												"sst": 1
+											}
+										}
+									]
+								}
+							},
+							"primaryObjective": {
+								"activeSubscribers": {
+									"delay": 0,
+									"maxOutstanding": 10000,
+									"rampUpRate": 500,
+									"sustain": 50,
+									"type": "activeSubscribers"
+								},
+								"createPolicyAMF2PCFProcedure": {
+									"createPolicyAssocReq": {
+										"accessType": "3GPP_ACCESS",
+										"ratType": "NR",
+										"suppFeat": "22",
+										"userLoc": {
+											"nrLocation": {
+												"ageOfLocationInformation": 10,
+												"geodeticInformation": "01234567890123456789",
+												"geographicalInformation": "0123456789123456",
+												"ncgi": {
+													"id": "",
+													"nrCellId": "000001122",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													}
+												},
+												"tai": {
+													"id": "1",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													},
+													"tac": "0004D2"
+												}
+											}
+										}
+									},
+									"type": "CreatePolicyAMF2PCF"
+								},
+								"createPolicySMF2PCFProcedure": {
+									"createSmPolicy": {
+										"accessType": "3GPP_ACCESS",
+										"dnn": "dnn.keysight.com",
+										"offline": true,
+										"online": false,
+										"pduSessionId": 0,
+										"pduSessionType": "IPV4",
+										"ratType": "NR",
+										"servingNetwork": {
+											"mcc": "226",
+											"mnc": "04"
+										},
+										"sliceInfo": {
+											"sd": "00001a",
+											"sst": 0
+										},
+										"subsDefQos": {
+											"arp": {
+												"preemptCap": "NOT_PREEMPT",
+												"preemptVuln": "NOT_PREEMPTABLE",
+												"priorityLevel": 1
+											},
+											"fiveQi": 5
+										},
+										"subsSessAmbr": {
+											"downlink": "10 Kbps",
+											"uplink": "10 Kbps"
+										},
+										"suppFeat": "f0",
+										"ueTimeZone": "GMT+2",
+										"userLocationInfo": {
+											"nrLocation": {
+												"ageOfLocationInformation": 0,
+												"geodeticInformation": "01234567890123456789",
+												"geographicalInformation": "0123456789123456",
+												"ncgi": {
+													"id": "",
+													"nrCellId": "000001122",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													}
+												},
+												"tai": {
+													"id": "",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													},
+													"tac": "0004D2"
+												}
+											}
+										}
+									},
+									"type": "CreatePolicySMF2PCF"
+								},
+								"procedureType": "SpendingLimitControlInitialPCF2CHF",
+								"spendingLimitControlInitialPCF2CHFProcedure": {
+									"policyCounterInfosAppend": [],
+									"policyCounterInfosInitial": [
+										"1",
+										"2",
+										"3",
+										"6"
+									],
+									"supportedFeatures": "FF",
+									"type": "SpendingLimitControlInitialPCF2CHF"
+								},
+								"subscribersPerSecond": {
+									"delay": 0,
+									"holdTime": 20,
+									"maxOutstanding": 10000,
+									"rate": 100,
+									"sustain": 500,
+									"type": "subscribersPerSecond"
+								},
+								"type": "activeSubscribers",
+								"ueAuthenticationRequestAMF2AUSFProcedure": {
+									"startingAMF": "StartFromFirst",
+									"type": "UEAuthenticationRequestAMF2AUSF"
+								}
+							},
+							"secondaryObjectives": [
+								{
+									"deregistrationAMF2UDMProcedure": {
+										"minHoldTime": 0,
+										"type": "DeregistrationAMF2UDM"
+									},
+									"getPolicyAMF2PCFProcedure": {
+										"type": "GetPolicyAMF2PCF"
+									},
+									"getPolicySMF2PCFProcedure": {
+										"type": "GetPolicySMF2PCF"
+									},
+									"id": "1",
+									"intermediateSpendingLimitPCF2CHFProcedure": {
+										"policyCounterInfosAppend": [],
+										"policyCounterInfosIntermediate": [
+											"1",
+											"2"
+										],
+										"supportedFeatures": "F",
+										"type": "IntermediateSpendingLimitPCF2CHF"
+									},
+									"procedure": "IntermediateSpendingLimitPCF2CHF",
+									"registrationAMF2UDMProcedure": {
+										"params": {
+											"nextAMF": "NextRoundRobin",
+											"role": "InitialRegistration"
+										},
+										"type": "RegistrationAMF2UDM"
+									},
+									"smfDeregistrationProcedureSMF2UDM": {
+										"minHoldTime": 0,
+										"type": "DeregistrationSMF2UDM"
+									},
+									"smfRegistrationProcedureSMF2UDM": {
+										"smfParams": {
+											"dnn": "dnn.keysight.com",
+											"smfId": 1,
+											"snssai": {
+												"sd": "0003E8",
+												"sst": 2
+											}
+										},
+										"type": "RegistrationSMF2UDM"
+									},
+									"ueGetNSSAIAMF2UDMProcedure": {
+										"includePlmnId": false,
+										"includeSupportedFeatures": false,
+										"type": "UEGetNSSAIAMF2UDM"
+									},
+									"updatePolicyAMF2PCFProcedure": {
+										"polAssocUpReqMessage": {
+											"userLoc": {
+												"nrLocation": {
+													"ageOfLocationInformation": 0,
+													"geodeticInformation": "01234567890123456789",
+													"geographicalInformation": "0123456789123456",
+													"ncgi": {
+														"id": "",
+														"nrCellId": "000001122",
+														"plmnId": {
+															"mcc": "226",
+															"mnc": "04"
+														}
+													},
+													"tai": {
+														"id": "",
+														"plmnId": {
+															"mcc": "226",
+															"mnc": "04"
+														},
+														"tac": "0004D2"
+													}
+												}
+											}
+										},
+										"type": "UpdatePolicyAMF2PCF"
+									},
+									"updatePolicySMF2PCFProcedure": {
+										"message": {
+											"numOfPackFilter": 1,
+											"qosFlowUsage": "GENERAL",
+											"repPolicyCtrlReqTriggers": [
+												"PLMN_CH"
+											],
+											"threeGppPsDataOffStatus": false,
+											"ueInitResReqData": "{\"pccRuleId\":\"1\",\"ruleOp\":\"CREATE_PCC_RULE\",\"precedence\":5,\"packFiltInfo\":[{\"packFiltId\":\"1\",\"precedence\":5}],\"reqQos\":{\"5qi\":5,\"gbrUl\":\"9876 bps\",\"gbrDl\":\"123123 bps\"}}",
+											"userLocationInfo": {
+												"nrLocation": {
+													"ageOfLocationInformation": 0,
+													"geodeticInformation": "01234567890123456789",
+													"geographicalInformation": "0123456789123456",
+													"ncgi": {
+														"id": "",
+														"nrCellId": "000001122",
+														"plmnId": {
+															"mcc": "226",
+															"mnc": "04"
+														}
+													},
+													"tai": {
+														"id": "",
+														"plmnId": {
+															"mcc": "226",
+															"mnc": "04"
+														},
+														"tac": "0004D2"
+													}
+												}
+											}
+										},
+										"type": "UpdatePolicySMF2PCF"
+									},
+									"value": {
+										"delay": 0,
+										"maxOutstanding": 10000,
+										"onlyOnce": false,
+										"rate": 100
+									}
+								}
+							],
+							"security": {
+								"authenticationType": "5g-aka",
+								"autn": "FFFFFFFFFFFF8000FFFFFFFFFFFFFFFF",
+								"ephemeralPrivateKey": "83AD56730D5224A66EA42B2461D4B52ACE4591869B96911ED940D34ABE73A30E",
+								"ephemeralPublicKey": "02AFBFAFE4DA5A47AC956A6826F63A12D5762CC2E478C4CB997BC2E102851DB047",
+								"homeNetworkPublicKey": "031994C95277F5F4F49C7BD92F50FCE40143A3AF48E5DD307AC97B7FF85D21D474",
+								"homeNetworkPublicKeyId": 0,
+								"k": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+								"kIncrement": "0",
+								"op": "112233445566778899AABBCCDDEEFF00",
+								"opOrOPc": "op",
+								"opc": "112233445566778899AABBCCDDEEFF00",
+								"opcIncrement": "0",
+								"protectionScheme": "null-scheme",
+								"rand": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+								"randIncrement": "0",
+								"routingIndicator": 1111
+							},
+							"settings": {
+								"activeTime": 5,
+								"defaultNssai": [
+									{
+										"id": "1",
+										"mappedSD": 100,
+										"mappedSST": 10,
+										"sd": 4,
+										"sst": 1
+									}
+								],
+								"forbiddenAreas": [
+									{
+										"areaCode": "Code125",
+										"id": "1",
+										"tacs": [
+											"abcf"
+										]
+									}
+								],
+								"micoAllowed": false,
+								"ratRestrictions": [
+									"WLAN"
+								],
+								"sdf": {
+									"l7ServerIp": {
+										"increment": "0",
+										"type": "ip",
+										"value": "10.0.0.1"
+									},
+									"l7ServerUdpPort": {
+										"increment": "0",
+										"type": "number",
+										"value": "6665"
+									},
+									"ueUdpPort": {
+										"increment": "0",
+										"type": "number",
+										"value": "6666"
+									}
+								},
+								"serviceAreaRestriction": {
+									"areas": [
+										{
+											"areaCode": "code1",
+											"id": "1",
+											"tacs": [
+												"ABCD",
+												"ABCDEF"
+											]
+										}
+									],
+									"maxNumOfTAs": 10,
+									"restrictionType": "NOT_ALLOWED_AREAS"
+								},
+								"sharedDataIds": [
+									"12345-id",
+									"123456-id"
+								],
+								"snssaiMapping": [
+									{
+										"dnns": [
+											"1"
+										],
+										"id": "1",
+										"snssai": {
+											"id": "1",
+											"mappedSD": 100,
+											"mappedSST": 10,
+											"sd": 4,
+											"sst": 1
+										}
+									}
+								],
+								"spendingLimitControl": {
+									"enableNotifyTimer": true,
+									"enableSubscriptionTerminationTimer": false,
+									"notifyPolicyCounterInfos": [
+										{
+											"currentStatus": "100Mbps",
+											"id": "1",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "S5G"
+										},
+										{
+											"currentStatus": "100Mbps",
+											"id": "2",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "B5G"
+										}
+									],
+									"policyCounterInfos": [
+										{
+											"currentStatus": "100Mbps",
+											"id": "1",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "S5G"
+										},
+										{
+											"currentStatus": "120Mbps",
+											"id": "2",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "A5G"
+										},
+										{
+											"currentStatus": "100Mbps",
+											"id": "3",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "B5G"
+										},
+										{
+											"currentStatus": "100Mbps",
+											"id": "4",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "E5G"
+										},
+										{
+											"currentStatus": "200Mbps",
+											"id": "5",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "W5G"
+										},
+										{
+											"currentStatus": "100Mbps",
+											"id": "6",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "C5G"
+										},
+										{
+											"currentStatus": "100Mbps",
+											"id": "7",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "05G"
+										}
+									],
+									"supportedFeatures": "FF",
+									"triggerNotifyTimer": 1000,
+									"triggerSubscriptionTerminationTimer": 30000
+								},
+								"subsRegTimer": 5,
+								"subscribedAMBR": {
+									"downlink": 1000,
+									"downlinkUnit": "bps",
+									"uplink": 2000,
+									"uplinkUnit": "bps"
+								},
+								"udrNotifications": {
+									"applicationData": {
+										"body": "[{\"afAppId\":\"Keysight\",\"ethTrafficFilters\":[{\"destMacAddr\":\"12-34-56-78-9A-BC\",\"ethType\":\"0800\",\"fDesc\":\"permit in IP from 10.0.0.1 to 10.0.0.2\",\"fDir\":\"BIDIRECTIONAL\",\"sourceMacAddr\":\"12-34-56-78-9A-BC\",\"vlanTags\":[\"vlan1\",\"vlan2\"]}],\"trafficRoutes\":[{\"dnai\":\"dnai\",\"routeInfo\":{\"ipv4Addr\":\"192.168.0.1\",\"ipv6Addr\":\"::1\",\"portNumber\":5060},\"routeProfId\":\"routeProfId\"}],\"trafficFilters\":[{\"flowId\":1,\"flowDescriptions\":[\"flow description1\",\"flow description2\"]}],\"interGroupId\":\"group Id\"}]",
+										"enable": false
+									},
+									"delay": 2000,
+									"smPolicyData": {
+										"body": "{\"snssaiSettings\":[{\"snssai\":{\"sst\":2,\"sd\":5},\"dnns\":[{\"dnn\":\"keysight.com\",\"subscCats\":[\"bronze\",\"gold\",\"silver\"],\"allowedServices\":[\"service1\",\"service2\"],\"gbrUl\":\"9876 bps\",\"gbrDl\":\"123123 bps\",\"adcSupport\":false,\"subscSpendinglimits\":false,\"ipv4Index\":6,\"ipv6Index\":7,\"offline\":false,\"online\":false}]}],\"usageSettings\":{\"usageMonData\":{\"key1\":{\"allowedUsage\":{\"downlinkVolume\":33333,\"duration\":33333,\"totalVolume\":33333,\"uplinkVolume\":3333},\"monKey\":\"key1\",\"scopes\":{\"11-abc123\":{\"dnn\":[\"dnn2\"],\"snssai\":{\"sd\":123,\"sst\":100,\"mappedSD\":22,\"mappedSST\":11}},\"22-abc123\":{\"dnn\":[\"dnn2\"],\"snssai\":{\"sd\":222,\"sst\":200,\"mappedSD\":22,\"mappedSST\":11}},\"33-abc123\":{\"dnn\":[\"dnn1\",\"dnn2\"],\"snssai\":{\"sd\":99,\"sst\":33,\"mappedSD\":11,\"mappedSST\":11}}}}},\"usageMonDataLimits\":{\"key1\":{\"endDate\":\"2018-09-05T08:17:14.09Z\",\"monKey\":\"key1\",\"resetPeriod\":\"2018-09-05T08:17:14.09Z\",\"startDate\":\"2018-09-05T08:17:14.09Z\",\"scopes\":{\"11-abc123\":{\"dnn\":[\"dnn1\"],\"snssai\":{\"sd\":22,\"sst\":11,\"mappedSD\":22,\"mappedSST\":100}},\"22-abc123\":{\"dnn\":[\"dnn2\"],\"snssai\":{\"sd\":33,\"sst\":22,\"mappedSD\":22,\"mappedSST\":11}},\"33-abc123\":{\"dnn\":[\"dnn1\",\"dnn2\"],\"snssai\":{\"sd\":13,\"sst\":33,\"mappedSD\":22,\"mappedSST\":100}}},\"usageLimit\":{\"downlinkVolume\":500000,\"duration\":86400,\"totalVolume\":123123,\"uplinkVolume\":123123}}}}}",
+										"enable": false
+									}
+								},
+								"wakeUpTimer5GTo4G": 60
+							}
+						},
+						{
+							"count": 100,
+							"enable": true,
+							"id": "2",
+							"identification": {
+								"imei": {
+									"increment": "1",
+									"type": "string",
+									"value": "60000000010000"
+								},
+								"imeisv": {
+									"increment": "1",
+									"type": "string",
+									"value": "8670000000010001"
+								},
+								"ipAddress": {
+									"increment": "1",
+									"type": "ip",
+									"value": "20.0.39.17"
+								},
+								"mcc": "226",
+								"mnc": "04",
+								"msin": {
+									"increment": "1",
+									"type": "string",
+									"value": "000010000"
+								},
+								"msisdn": {
+									"increment": "1",
+									"type": "string",
+									"value": "10000010000"
+								},
+								"ueIpv6AddressPrefix": {
+									"increment": "0:0:0:1::",
+									"type": "ip",
+									"value": "2000::0"
+								},
+								"ueIpv6AddressPrefixMask": 64
+							},
+							"policy": {
+								"am": {
+									"subscCats": [
+										"gold"
+									]
+								},
+								"sm": {
+									"snssaiSettings": [
+										{
+											"dnns": [
+												"1"
+											],
+											"id": "1",
+											"snssai": {
+												"id": "1",
+												"mappedSD": 100,
+												"mappedSST": 10,
+												"sd": 1000,
+												"sst": 1
+											}
+										}
+									]
+								}
+							},
+							"primaryObjective": {
+								"activeSubscribers": {
+									"delay": 0,
+									"dnnIdsToActivate": [
+										"1"
+									],
+									"flowIdsToActivate": [
+										"1"
+									],
+									"maxOutstanding": 1000,
+									"rampUpRate": 20,
+									"sustain": 40,
+									"type": "activeSubscribers"
+								},
+								"createPolicyAMF2PCFProcedure": {
+									"createPolicyAssocReq": {
+										"accessType": "3GPP_ACCESS",
+										"ratType": "NR",
+										"suppFeat": "22",
+										"userLoc": {
+											"nrLocation": {
+												"ageOfLocationInformation": 0,
+												"geodeticInformation": "01234567890123456789",
+												"geographicalInformation": "0123456789123456",
+												"ncgi": {
+													"id": "",
+													"nrCellId": "000001122",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													}
+												},
+												"tai": {
+													"id": "1",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													},
+													"tac": "0004D2"
+												}
+											}
+										}
+									},
+									"type": "CreatePolicyAMF2PCF"
+								},
+								"createPolicySMF2PCFProcedure": {
+									"createSmPolicy": {
+										"accessType": "3GPP_ACCESS",
+										"dnn": "dnn.keysight.com",
+										"offline": true,
+										"online": false,
+										"pduSessionId": 0,
+										"pduSessionType": "IPV4",
+										"ratType": "NR",
+										"servingNetwork": {
+											"mcc": "226",
+											"mnc": "04"
+										},
+										"sliceInfo": {
+											"sd": "0003E8",
+											"sst": 2
+										},
+										"subsDefQos": {
+											"arp": {
+												"preemptCap": "NOT_PREEMPT",
+												"preemptVuln": "NOT_PREEMPTABLE",
+												"priorityLevel": 1
+											},
+											"fiveQi": 5
+										},
+										"subsSessAmbr": {
+											"downlink": "10 Kbps",
+											"uplink": "10 Kbps"
+										},
+										"suppFeat": "f0",
+										"ueTimeZone": "GMT+2",
+										"userLocationInfo": {
+											"nrLocation": {
+												"ageOfLocationInformation": 0,
+												"geodeticInformation": "01234567890123456789",
+												"geographicalInformation": "0123456789123456",
+												"ncgi": {
+													"id": "",
+													"nrCellId": "000001122",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													}
+												},
+												"tai": {
+													"id": "",
+													"plmnId": {
+														"mcc": "226",
+														"mnc": "04"
+													},
+													"tac": "0004D2"
+												}
+											}
+										}
+									},
+									"type": "CreatePolicySMF2PCF"
+								},
+								"procedureType": "SpendingLimitControlInitialPCF2CHF",
+								"spendingLimitControlInitialPCF2CHFProcedure": {
+									"policyCounterInfosAppend": [],
+									"policyCounterInfosInitial": [
+										"1"
+									],
+									"supportedFeatures": "F",
+									"type": "SpendingLimitControlInitialPCF2CHF"
+								},
+								"subscribersPerSecond": {
+									"delay": 0,
+									"dnnIdsToActivate": [
+										"1"
+									],
+									"flowIdsToActivate": [
+										"1"
+									],
+									"holdTime": 1,
+									"maxOutstanding": 100,
+									"rate": 1,
+									"sustain": 1,
+									"type": "subscribersPerSecond"
+								},
+								"type": "activeSubscribers",
+								"ueAuthenticationRequestAMF2AUSFProcedure": {
+									"startingAMF": "StartFromFirst",
+									"type": "UEAuthenticationRequestAMF2AUSF"
+								}
+							},
+							"secondaryObjectives": [],
+							"security": {
+								"authenticationType": "5g-aka",
+								"autn": "FFFFFFFFFFFF8000FFFFFFFFFFFFFFFF",
+								"ephemeralPrivateKey": "83AD56730D5224A66EA42B2461D4B52ACE4591869B96911ED940D34ABE73A30E",
+								"ephemeralPublicKey": "02AFBFAFE4DA5A47AC956A6826F63A12D5762CC2E478C4CB997BC2E102851DB047",
+								"homeNetworkPublicKey": "031994C95277F5F4F49C7BD92F50FCE40143A3AF48E5DD307AC97B7FF85D21D474",
+								"homeNetworkPublicKeyId": 0,
+								"k": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+								"kIncrement": "0",
+								"op": "112233445566778899AABBCCDDEEFF00",
+								"opOrOPc": "op",
+								"opc": "112233445566778899AABBCCDDEEFF00",
+								"opcIncrement": "0",
+								"protectionScheme": "null-scheme",
+								"rand": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+								"randIncrement": "0",
+								"routingIndicator": 1111
+							},
+							"settings": {
+								"activeTime": 5,
+								"defaultNssai": [
+									{
+										"id": "1",
+										"mappedSD": 100,
+										"mappedSST": 10,
+										"sd": 1000,
+										"sst": 1
+									}
+								],
+								"forbiddenAreas": [
+									{
+										"areaCode": "Code125",
+										"id": "1",
+										"tacs": [
+											"abcf"
+										]
+									}
+								],
+								"micoAllowed": true,
+								"ratRestrictions": [
+									"WLAN"
+								],
+								"sdf": {
+									"l7ServerIp": {
+										"increment": "0",
+										"type": "ip",
+										"value": "10.0.0.1"
+									},
+									"l7ServerUdpPort": {
+										"increment": "0",
+										"type": "number",
+										"value": "6665"
+									},
+									"ueUdpPort": {
+										"increment": "0",
+										"type": "number",
+										"value": "6666"
+									}
+								},
+								"serviceAreaRestriction": {
+									"areas": [
+										{
+											"areaCode": "Code125",
+											"id": "1",
+											"tacs": [
+												"abcf"
+											]
+										}
+									],
+									"maxNumOfTAs": 10,
+									"restrictionType": "NOT_ALLOWED_AREAS"
+								},
+								"sharedDataIds": [
+									"12345-0"
+								],
+								"snssaiMapping": [
+									{
+										"dnns": [
+											"1"
+										],
+										"id": "1",
+										"snssai": {
+											"id": "1",
+											"mappedSD": 100,
+											"mappedSST": 10,
+											"sd": 1000,
+											"sst": 1
+										}
+									}
+								],
+								"spendingLimitControl": {
+									"enableNotifyTimer": false,
+									"enableSubscriptionTerminationTimer": true,
+									"notifyPolicyCounterInfos": [],
+									"policyCounterInfos": [
+										{
+											"currentStatus": "100Mbps",
+											"id": "1",
+											"penPolCounterStatuses": [
+												{
+													"activationTime": "0001-01-01T00:00:00Z",
+													"id": "1",
+													"policyCounterStatus": "10Mbps"
+												}
+											],
+											"policyCounterId": "S5G"
+										}
+									],
+									"supportedFeatures": "F",
+									"triggerNotifyTimer": 1000,
+									"triggerSubscriptionTerminationTimer": 30000
+								},
+								"subsRegTimer": 5,
+								"subscribedAMBR": {
+									"downlink": 1000,
+									"downlinkUnit": "bps",
+									"uplink": 2000,
+									"uplinkUnit": "bps"
+								},
+								"udrNotifications": {
+									"applicationData": {
+										"body": "Add a JSON string for an array of Traffic Influence Data.",
+										"enable": false
+									},
+									"delay": 2000,
+									"smPolicyData": {
+										"body": "Add a JSON string for SM Policy Data.",
+										"enable": false
+									}
+								},
+								"wakeUpTimer5GTo4G": 60
+							}
+						}
+					]
+				}
+			},
+			"version": "2.3.0-3272-252"
+		},
+		"UpfIsolationConfig": null,
+		"id": "wireless-4204",
+		"owner": "admin@example.org"
+	},
+	"application": "",
+	"encodedFiles": false,
+	"linkedResources": null
+}
