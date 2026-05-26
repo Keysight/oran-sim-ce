@@ -1,0 +1,1469 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+    "metadata": {
+        "comments": "This template was developed for deployment of mw and agents"
+    },
+	"parameters": {
+		"Mw Name": {
+			"type": "string",
+			"defaultValue": "loadcore-mw",
+            "metadata": {
+                "description": "The name for the mw virtual machine"
+            }
+		},
+		"Mw Os Disk Type": {
+			"type": "string",
+			"defaultValue": "Premium_LRS",
+			"allowedValues": [
+				"Standard_LRS", "Premium_LRS", "StandardSSD_LRS", "UltraSSD_LRS"
+			],
+            "metadata": {
+                "description": "The disk type for mw virtual machine"
+            }
+		},
+		"Mw Size": {
+			"type": "string",
+			"defaultValue": "Standard_F8s - 8 vcpus, 16.0 GiB memory",
+			"allowedValues": [
+                "Standard_B1ls - 1 vcpus, 0.5 GiB memory",
+                "Standard_B1ms - 1 vcpus, 2.0 GiB memory",
+                "Standard_B1s - 1 vcpus, 1.0 GiB memory",
+                "Standard_B2ms - 2 vcpus, 8.0 GiB memory",
+                "Standard_B2s - 2 vcpus, 4.0 GiB memory",
+                "Standard_B4ms - 4 vcpus, 16.0 GiB memory",
+                "Standard_B8ms - 8 vcpus, 32.0 GiB memory",
+                "Standard_B12ms - 12 vcpus, 48.0 GiB memory",
+                "Standard_B16ms - 16 vcpus, 64.0 GiB memory",
+                "Standard_B20ms - 20 vcpus, 80.0 GiB memory",
+                "Standard_D1_v2 - 1 vcpus, 3.5 GiB memory",
+                "Standard_D2_v2 - 2 vcpus, 7.0 GiB memory",
+                "Standard_D3_v2 - 4 vcpus, 14.0 GiB memory",
+                "Standard_D4_v2 - 8 vcpus, 28.0 GiB memory",
+                "Standard_D5_v2 - 16 vcpus, 56.0 GiB memory",
+                "Standard_D11_v2 - 2 vcpus, 14.0 GiB memory",
+                "Standard_D12_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_D13_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_D14_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_D2_v2_Promo - 2 vcpus, 7.0 GiB memory",
+                "Standard_D3_v2_Promo - 4 vcpus, 14.0 GiB memory",
+                "Standard_D4_v2_Promo - 8 vcpus, 28.0 GiB memory",
+                "Standard_D5_v2_Promo - 16 vcpus, 56.0 GiB memory",
+                "Standard_D11_v2_Promo - 2 vcpus, 14.0 GiB memory",
+                "Standard_D12_v2_Promo - 4 vcpus, 28.0 GiB memory",
+                "Standard_D13_v2_Promo - 8 vcpus, 56.0 GiB memory",
+                "Standard_D14_v2_Promo - 16 vcpus, 112.0 GiB memory",
+                "Standard_F1 - 1 vcpus, 2.0 GiB memory",
+                "Standard_F2 - 2 vcpus, 4.0 GiB memory",
+                "Standard_F4 - 4 vcpus, 8.0 GiB memory",
+                "Standard_F8 - 8 vcpus, 16.0 GiB memory",
+                "Standard_F16 - 16 vcpus, 32.0 GiB memory",
+                "Standard_DS1_v2 - 1 vcpus, 3.5 GiB memory",
+                "Standard_DS2_v2 - 2 vcpus, 7.0 GiB memory",
+                "Standard_DS3_v2 - 4 vcpus, 14.0 GiB memory",
+                "Standard_DS4_v2 - 8 vcpus, 28.0 GiB memory",
+                "Standard_DS5_v2 - 16 vcpus, 56.0 GiB memory",
+                "Standard_DS11-1_v2 - 2 vcpus, 14.0 GiB memory",
+                "Standard_DS11_v2 - 2 vcpus, 14.0 GiB memory",
+                "Standard_DS12-1_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS12-2_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS12_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS13-2_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS13-4_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS13_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS14-4_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_DS14-8_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_DS14_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_DS2_v2_Promo - 2 vcpus, 7.0 GiB memory",
+                "Standard_DS3_v2_Promo - 4 vcpus, 14.0 GiB memory",
+                "Standard_DS4_v2_Promo - 8 vcpus, 28.0 GiB memory",
+                "Standard_DS5_v2_Promo - 16 vcpus, 56.0 GiB memory",
+                "Standard_DS11_v2_Promo - 2 vcpus, 14.0 GiB memory",
+                "Standard_DS12_v2_Promo - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS13_v2_Promo - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS14_v2_Promo - 16 vcpus, 112.0 GiB memory",
+                "Standard_F1s - 1 vcpus, 2.0 GiB memory",
+                "Standard_F2s - 2 vcpus, 4.0 GiB memory",
+                "Standard_F4s - 4 vcpus, 8.0 GiB memory",
+                "Standard_F8s - 8 vcpus, 16.0 GiB memory",
+                "Standard_F16s - 16 vcpus, 32.0 GiB memory",
+                "Standard_A1_v2 - 1 vcpus, 2.0 GiB memory",
+                "Standard_A2m_v2 - 2 vcpus, 16.0 GiB memory",
+                "Standard_A2_v2 - 2 vcpus, 4.0 GiB memory",
+                "Standard_A4m_v2 - 4 vcpus, 32.0 GiB memory",
+                "Standard_A4_v2 - 4 vcpus, 8.0 GiB memory",
+                "Standard_A8m_v2 - 8 vcpus, 64.0 GiB memory",
+                "Standard_A8_v2 - 8 vcpus, 16.0 GiB memory",
+                "Standard_D2_v3 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4_v3 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8_v3 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16_v3 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32_v3 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48_v3 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64_v3 - 64 vcpus, 256.0 GiB memory",
+                "Standard_D2s_v3 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4s_v3 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8s_v3 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16s_v3 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32s_v3 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48s_v3 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64s_v3 - 64 vcpus, 256.0 GiB memory",
+                "Standard_E2_v3 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4_v3 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20_v3 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48_v3 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E2s_v3 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4-2s_v3 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E4s_v3 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8-2s_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8-4s_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8s_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16-4s_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16-8s_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16s_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20s_v3 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32-8s_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32-16s_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32s_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48s_v3 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64-16s_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64-32s_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64s_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64i_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64is_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_M8-2ms - 8 vcpus, 218.75 GiB memory",
+                "Standard_M8-4ms - 8 vcpus, 218.75 GiB memory",
+                "Standard_M8ms - 8 vcpus, 218.75 GiB memory",
+                "Standard_M16-4ms - 16 vcpus, 437.5 GiB memory",
+                "Standard_M16-8ms - 16 vcpus, 437.5 GiB memory",
+                "Standard_M16ms - 16 vcpus, 437.5 GiB memory",
+                "Standard_M32-8ms - 32 vcpus, 875.0 GiB memory",
+                "Standard_M32-16ms - 32 vcpus, 875.0 GiB memory",
+                "Standard_M32ls - 32 vcpus, 256.0 GiB memory",
+                "Standard_M32ms - 32 vcpus, 875.0 GiB memory",
+                "Standard_M32ts - 32 vcpus, 192.0 GiB memory",
+                "Standard_M64-16ms - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M64-32ms - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M64ls - 64 vcpus, 512.0 GiB memory",
+                "Standard_M64ms - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M64s - 64 vcpus, 1000.0 GiB memory",
+                "Standard_M128-32ms - 128 vcpus, 3800.0 GiB memory",
+                "Standard_M128-64ms - 128 vcpus, 3800.0 GiB memory",
+                "Standard_M128ms - 128 vcpus, 3800.0 GiB memory",
+                "Standard_M128s - 128 vcpus, 2000.0 GiB memory",
+                "Standard_M64 - 64 vcpus, 1000.0 GiB memory",
+                "Standard_M64m - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M128 - 128 vcpus, 2000.0 GiB memory",
+                "Standard_M128m - 128 vcpus, 3800.0 GiB memory",
+                "Standard_E2d_v4 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4d_v4 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8d_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16d_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20d_v4 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32d_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48d_v4 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64d_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_E2ds_v4 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4-2ds_v4 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E4ds_v4 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8-2ds_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8-4ds_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8ds_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16-4ds_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16-8ds_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16ds_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20ds_v4 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32-8ds_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32-16ds_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32ds_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48ds_v4 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64-16ds_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_E64-32ds_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_E64ds_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_D2d_v4 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4d_v4 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8d_v4 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16d_v4 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32d_v4 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48d_v4 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64d_v4 - 64 vcpus, 256.0 GiB memory",
+                "Standard_D2ds_v4 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4ds_v4 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8ds_v4 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16ds_v4 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32ds_v4 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48ds_v4 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64ds_v4 - 64 vcpus, 256.0 GiB memory",
+                "Standard_D15_v2 - 20 vcpus, 140.0 GiB memory",
+                "Standard_DS15_v2 - 20 vcpus, 140.0 GiB memory",
+                "Standard_F2s_v2 - 2 vcpus, 4.0 GiB memory",
+                "Standard_F4s_v2 - 4 vcpus, 8.0 GiB memory",
+                "Standard_F8s_v2 - 8 vcpus, 16.0 GiB memory",
+                "Standard_F16s_v2 - 16 vcpus, 32.0 GiB memory",
+                "Standard_F32s_v2 - 32 vcpus, 64.0 GiB memory",
+                "Standard_F48s_v2 - 48 vcpus, 96.0 GiB memory",
+                "Standard_F64s_v2 - 64 vcpus, 128.0 GiB memory",
+                "Standard_F72s_v2 - 72 vcpus, 144.0 GiB memory"
+			],
+            "metadata": {
+                "description": "Select MW VM size"
+            }
+		},
+        "Agent Name Prefix": {
+            "type": "string",
+            "defaultValue": "loadcore-agent",
+            "metadata": {
+                "description": "Choose the prefix of agent VM name"
+            }
+        },
+        "Number Of Agents": {
+            "type": "int",
+            "defaultValue": 2,
+            "metadata": {
+                "description": "Choose how many agents will be deployed"
+            }
+        },
+        "Agent Os Disk Type": {
+			"type": "string",
+			"defaultValue": "Premium_LRS",
+			"allowedValues": [
+				"Standard_LRS", "Premium_LRS", "StandardSSD_LRS", "UltraSSD_LRS"
+			],
+            "metadata": {
+                "description": "The disk type for the agent virtual machine"
+            }
+		},
+		"Agent Size": {
+			"type": "string",
+			"defaultValue": "Standard_F8s - 8 vcpus, 16.0 GiB memory",
+			"allowedValues": [
+                "Standard_B1ls - 1 vcpus, 0.5 GiB memory",
+                "Standard_B1ms - 1 vcpus, 2.0 GiB memory",
+                "Standard_B1s - 1 vcpus, 1.0 GiB memory",
+                "Standard_B2ms - 2 vcpus, 8.0 GiB memory",
+                "Standard_B2s - 2 vcpus, 4.0 GiB memory",
+                "Standard_B4ms - 4 vcpus, 16.0 GiB memory",
+                "Standard_B8ms - 8 vcpus, 32.0 GiB memory",
+                "Standard_B12ms - 12 vcpus, 48.0 GiB memory",
+                "Standard_B16ms - 16 vcpus, 64.0 GiB memory",
+                "Standard_B20ms - 20 vcpus, 80.0 GiB memory",
+                "Standard_D1_v2 - 1 vcpus, 3.5 GiB memory",
+                "Standard_D2_v2 - 2 vcpus, 7.0 GiB memory",
+                "Standard_D3_v2 - 4 vcpus, 14.0 GiB memory",
+                "Standard_D4_v2 - 8 vcpus, 28.0 GiB memory",
+                "Standard_D5_v2 - 16 vcpus, 56.0 GiB memory",
+                "Standard_D11_v2 - 2 vcpus, 14.0 GiB memory",
+                "Standard_D12_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_D13_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_D14_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_D2_v2_Promo - 2 vcpus, 7.0 GiB memory",
+                "Standard_D3_v2_Promo - 4 vcpus, 14.0 GiB memory",
+                "Standard_D4_v2_Promo - 8 vcpus, 28.0 GiB memory",
+                "Standard_D5_v2_Promo - 16 vcpus, 56.0 GiB memory",
+                "Standard_D11_v2_Promo - 2 vcpus, 14.0 GiB memory",
+                "Standard_D12_v2_Promo - 4 vcpus, 28.0 GiB memory",
+                "Standard_D13_v2_Promo - 8 vcpus, 56.0 GiB memory",
+                "Standard_D14_v2_Promo - 16 vcpus, 112.0 GiB memory",
+                "Standard_F1 - 1 vcpus, 2.0 GiB memory",
+                "Standard_F2 - 2 vcpus, 4.0 GiB memory",
+                "Standard_F4 - 4 vcpus, 8.0 GiB memory",
+                "Standard_F8 - 8 vcpus, 16.0 GiB memory",
+                "Standard_F16 - 16 vcpus, 32.0 GiB memory",
+                "Standard_DS1_v2 - 1 vcpus, 3.5 GiB memory",
+                "Standard_DS2_v2 - 2 vcpus, 7.0 GiB memory",
+                "Standard_DS3_v2 - 4 vcpus, 14.0 GiB memory",
+                "Standard_DS4_v2 - 8 vcpus, 28.0 GiB memory",
+                "Standard_DS5_v2 - 16 vcpus, 56.0 GiB memory",
+                "Standard_DS11-1_v2 - 2 vcpus, 14.0 GiB memory",
+                "Standard_DS11_v2 - 2 vcpus, 14.0 GiB memory",
+                "Standard_DS12-1_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS12-2_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS12_v2 - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS13-2_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS13-4_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS13_v2 - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS14-4_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_DS14-8_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_DS14_v2 - 16 vcpus, 112.0 GiB memory",
+                "Standard_DS2_v2_Promo - 2 vcpus, 7.0 GiB memory",
+                "Standard_DS3_v2_Promo - 4 vcpus, 14.0 GiB memory",
+                "Standard_DS4_v2_Promo - 8 vcpus, 28.0 GiB memory",
+                "Standard_DS5_v2_Promo - 16 vcpus, 56.0 GiB memory",
+                "Standard_DS11_v2_Promo - 2 vcpus, 14.0 GiB memory",
+                "Standard_DS12_v2_Promo - 4 vcpus, 28.0 GiB memory",
+                "Standard_DS13_v2_Promo - 8 vcpus, 56.0 GiB memory",
+                "Standard_DS14_v2_Promo - 16 vcpus, 112.0 GiB memory",
+                "Standard_F1s - 1 vcpus, 2.0 GiB memory",
+                "Standard_F2s - 2 vcpus, 4.0 GiB memory",
+                "Standard_F4s - 4 vcpus, 8.0 GiB memory",
+                "Standard_F8s - 8 vcpus, 16.0 GiB memory",
+                "Standard_F16s - 16 vcpus, 32.0 GiB memory",
+                "Standard_A1_v2 - 1 vcpus, 2.0 GiB memory",
+                "Standard_A2m_v2 - 2 vcpus, 16.0 GiB memory",
+                "Standard_A2_v2 - 2 vcpus, 4.0 GiB memory",
+                "Standard_A4m_v2 - 4 vcpus, 32.0 GiB memory",
+                "Standard_A4_v2 - 4 vcpus, 8.0 GiB memory",
+                "Standard_A8m_v2 - 8 vcpus, 64.0 GiB memory",
+                "Standard_A8_v2 - 8 vcpus, 16.0 GiB memory",
+                "Standard_D2_v3 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4_v3 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8_v3 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16_v3 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32_v3 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48_v3 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64_v3 - 64 vcpus, 256.0 GiB memory",
+                "Standard_D2s_v3 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4s_v3 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8s_v3 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16s_v3 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32s_v3 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48s_v3 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64s_v3 - 64 vcpus, 256.0 GiB memory",
+                "Standard_E2_v3 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4_v3 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20_v3 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48_v3 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E2s_v3 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4-2s_v3 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E4s_v3 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8-2s_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8-4s_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8s_v3 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16-4s_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16-8s_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16s_v3 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20s_v3 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32-8s_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32-16s_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32s_v3 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48s_v3 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64-16s_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64-32s_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64s_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64i_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_E64is_v3 - 64 vcpus, 432.0 GiB memory",
+                "Standard_M8-2ms - 8 vcpus, 218.75 GiB memory",
+                "Standard_M8-4ms - 8 vcpus, 218.75 GiB memory",
+                "Standard_M8ms - 8 vcpus, 218.75 GiB memory",
+                "Standard_M16-4ms - 16 vcpus, 437.5 GiB memory",
+                "Standard_M16-8ms - 16 vcpus, 437.5 GiB memory",
+                "Standard_M16ms - 16 vcpus, 437.5 GiB memory",
+                "Standard_M32-8ms - 32 vcpus, 875.0 GiB memory",
+                "Standard_M32-16ms - 32 vcpus, 875.0 GiB memory",
+                "Standard_M32ls - 32 vcpus, 256.0 GiB memory",
+                "Standard_M32ms - 32 vcpus, 875.0 GiB memory",
+                "Standard_M32ts - 32 vcpus, 192.0 GiB memory",
+                "Standard_M64-16ms - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M64-32ms - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M64ls - 64 vcpus, 512.0 GiB memory",
+                "Standard_M64ms - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M64s - 64 vcpus, 1000.0 GiB memory",
+                "Standard_M128-32ms - 128 vcpus, 3800.0 GiB memory",
+                "Standard_M128-64ms - 128 vcpus, 3800.0 GiB memory",
+                "Standard_M128ms - 128 vcpus, 3800.0 GiB memory",
+                "Standard_M128s - 128 vcpus, 2000.0 GiB memory",
+                "Standard_M64 - 64 vcpus, 1000.0 GiB memory",
+                "Standard_M64m - 64 vcpus, 1750.0 GiB memory",
+                "Standard_M128 - 128 vcpus, 2000.0 GiB memory",
+                "Standard_M128m - 128 vcpus, 3800.0 GiB memory",
+                "Standard_E2d_v4 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4d_v4 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8d_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16d_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20d_v4 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32d_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48d_v4 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64d_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_E2ds_v4 - 2 vcpus, 16.0 GiB memory",
+                "Standard_E4-2ds_v4 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E4ds_v4 - 4 vcpus, 32.0 GiB memory",
+                "Standard_E8-2ds_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8-4ds_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E8ds_v4 - 8 vcpus, 64.0 GiB memory",
+                "Standard_E16-4ds_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16-8ds_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E16ds_v4 - 16 vcpus, 128.0 GiB memory",
+                "Standard_E20ds_v4 - 20 vcpus, 160.0 GiB memory",
+                "Standard_E32-8ds_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32-16ds_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E32ds_v4 - 32 vcpus, 256.0 GiB memory",
+                "Standard_E48ds_v4 - 48 vcpus, 384.0 GiB memory",
+                "Standard_E64-16ds_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_E64-32ds_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_E64ds_v4 - 64 vcpus, 504.0 GiB memory",
+                "Standard_D2d_v4 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4d_v4 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8d_v4 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16d_v4 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32d_v4 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48d_v4 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64d_v4 - 64 vcpus, 256.0 GiB memory",
+                "Standard_D2ds_v4 - 2 vcpus, 8.0 GiB memory",
+                "Standard_D4ds_v4 - 4 vcpus, 16.0 GiB memory",
+                "Standard_D8ds_v4 - 8 vcpus, 32.0 GiB memory",
+                "Standard_D16ds_v4 - 16 vcpus, 64.0 GiB memory",
+                "Standard_D32ds_v4 - 32 vcpus, 128.0 GiB memory",
+                "Standard_D48ds_v4 - 48 vcpus, 192.0 GiB memory",
+                "Standard_D64ds_v4 - 64 vcpus, 256.0 GiB memory",
+                "Standard_D15_v2 - 20 vcpus, 140.0 GiB memory",
+                "Standard_DS15_v2 - 20 vcpus, 140.0 GiB memory",
+                "Standard_F2s_v2 - 2 vcpus, 4.0 GiB memory",
+                "Standard_F4s_v2 - 4 vcpus, 8.0 GiB memory",
+                "Standard_F8s_v2 - 8 vcpus, 16.0 GiB memory",
+                "Standard_F16s_v2 - 16 vcpus, 32.0 GiB memory",
+                "Standard_F32s_v2 - 32 vcpus, 64.0 GiB memory",
+                "Standard_F48s_v2 - 48 vcpus, 96.0 GiB memory",
+                "Standard_F64s_v2 - 64 vcpus, 128.0 GiB memory",
+                "Standard_F72s_v2 - 72 vcpus, 144.0 GiB memory"
+			],
+            "metadata": {
+                "description": "Select Agent VM size"
+            }
+		},
+		"Deployment Id": {
+            "type": "securestring",
+            "defaultValue": "[utcNow('yy-MM-dd-HH-mm-ss-fff')]"
+        }
+	},
+	"variables": {
+		"adminUsername": "azureUser",
+		"adminPassword": "azureUser123)",
+		"licensingName": "loadcore-licensing",
+		"sessionId": "[concat('-', parameters('Deployment Id'))]",
+        
+        "tagName": "deployment_name",
+
+        "identityName": "[concat(parameters('Mw Name'), '-identity')]",
+        "scriptNameGetVhds": "[concat('get-vhds-', parameters('Deployment Id'))]",
+        "roleAssignmentId": "[guid(parameters('Deployment Id'))]",
+        "roles": {
+            "Owner": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')]",
+            "Contributor": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
+            "Reader": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]"
+        },
+
+        "storageAccountName": "loadcorevhds",
+        "containerName": "loadcore-releases",
+        "vhdMwPrefix": "LoadCore-MDW",
+        "vhdLicensingPrefix": "licensing",
+		"imageMwName": "[concat(parameters('Mw Name'), '-image-mw')]",
+		"imageLicensingName": "[concat(parameters('Mw Name'), '-image-licensing')]",
+
+		"mw-networkSecurityGroupName": "[concat(parameters('Mw Name'), '-nsg')]",
+		"mw-nicName": "[concat(parameters('Mw Name'), '-nic')]",
+		"mw-vnetName": "[concat(parameters('Mw Name'), '-vnet')]",
+		"addressPrefix": "10.0.0.0/16",
+		
+		"subnet1Name": "subnet1",
+		"subnet1Id": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('mw-vnetName')), '/subnets/', variables('subnet1Name'))]",
+		"subnet1Prefix": "10.0.1.0/24",
+		"subnet1PrivateAddress": "10.0.1.5",
+
+		"subnet2Name": "subnet2",
+        "subnet2Prefix": "10.0.2.0/24",
+		
+		"publicIPAddressName": "[concat(parameters('Mw Name'), '-ip')]",
+		"publicIPAddressType": "Static"
+	},
+	"resources": [
+        {
+            "comments": "User Identity used for deployment scripts.",
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+            "name": "[variables('identityName')]",
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "apiVersion": "2018-11-30",
+            "location": "[resourceGroup().location]"
+        },
+        {
+            "comments": "Contributor role is assigned to user identity.",
+            "type": "Microsoft.Authorization/roleAssignments",
+            "apiVersion": "2018-09-01-preview",
+            "name": "[variables('roleAssignmentId')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]"
+            ],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "properties": {
+                "roleDefinitionId": "[variables('roles').Contributor]",
+                "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), '2018-11-30').principalId]",
+                "scope": "[resourceGroup().id]",
+                "principalType": "ServicePrincipal"
+            }
+        },
+        {
+            "comments": "Lists blobs in a given container. Filters the results to return only blobs whose name begin with vhdMwPrefix or vhdLicensingPrefix.",
+            "type": "Microsoft.Resources/deploymentScripts",
+            "apiVersion": "2019-10-01-preview",
+            "name": "[variables('scriptNameGetVhds')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Authorization/roleAssignments', variables('roleAssignmentId'))]"
+            ],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "location": "[resourceGroup().location]",
+            "kind": "AzureCLI",
+            "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentities": {
+                   "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]": {}
+                }
+            },
+            "properties": {
+                "AzCliVersion": "2.0.80",
+                "timeout": "PT30M",
+                "scriptContent": "[concat('mwresult=$(az storage blob list --account-name \"', variables('storageAccountName'), '\" --container-name \"', variables('containerName'), '\" --prefix ', variables('vhdMwPrefix'), ' --account-key \"Azure account key to be completed\" --connection-string=\"DefaultEndpointsProtocol=https;AccountName=loadcorevhds;AccountKey=Account Key to be completed;EndpointSuffix=core.windows.net\" | jq ''sort_by(.properties.lastModified) | reverse''); licresult=$(az storage blob list --account-name ', variables('storageAccountName'), ' --container-name ', variables('containerName'), ' --prefix ', variables('vhdLicensingPrefix'), ' --account-key Account key to be completed --connection-string=\"DefaultEndpointsProtocol=https;AccountName=loadcorevhds;AccountKey=Account key to be completed;EndpointSuffix=core.windows.net\" | jq ''sort_by(.properties.lastModified) | reverse''); myres=$(echo -n {\"mwresult\": && ([ -z \"$mwresult\" ] && echo \"None\" || echo $mwresult | jq -jc ''map({name: .name})'') && echo -n ,\"licresult\": && ([ -z \"$licresult\" ] && echo \"None\" || echo $licresult | jq -jc ''map({name: .name})'') && echo \\}); echo $myres > $AZ_SCRIPTS_OUTPUT_PATH')]",
+                "cleanupPreference": "OnSuccess",
+                "retentionInterval": "P1D"
+            }
+        },
+
+		{
+			"comments": "Default Network Security Group for mw and agents",
+			"type": "Microsoft.Network/networkSecurityGroups",
+			"apiVersion": "2019-08-01",
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+			"name": "[variables('mw-networkSecurityGroupName')]",
+			"location": "[resourceGroup().location]",
+			"properties": {
+				"securityRules": [
+					{
+						"name": "SSH",
+						"properties": {
+							"priority": 300,
+							"access": "Allow",
+							"direction": "Inbound",
+							"protocol": "Tcp",
+							"sourceAddressPrefix": "*",
+							"sourcePortRange": "*",
+							"destinationAddressPrefix": "*",
+							"destinationPortRange": "22"
+						}
+					},
+					{
+						"name": "HTTP",
+						"properties": {
+							"priority": 320,
+							"access": "Allow",
+							"direction": "Inbound",
+							"protocol": "Tcp",
+							"sourceAddressPrefix": "*",
+							"sourcePortRange": "*",
+							"destinationAddressPrefix": "*",
+							"destinationPortRange": "80"
+						}
+					},
+					{
+						"name": "HTTPS",
+						"properties": {
+							"priority": 340,
+							"access": "Allow",
+							"direction": "Inbound",
+							"protocol": "Tcp",
+							"sourceAddressPrefix": "*",
+							"sourcePortRange": "*",
+							"destinationAddressPrefix": "*",
+							"destinationPortRange": "443"
+						}
+					},
+					{
+						"name": "Port_8080",
+						"properties": {
+							"priority": 350,
+							"access": "Allow",
+							"direction": "Inbound",
+							"protocol": "*",
+							"sourceAddressPrefix": "*",
+							"sourcePortRange": "*",
+							"destinationAddressPrefix": "*",
+							"destinationPortRange": "7443"
+						}
+					}
+				]
+			}
+		},
+		{
+            "comments": "Default Virtual Network for mw and agents",
+			"type": "Microsoft.Network/virtualNetworks",
+			"apiVersion": "2015-06-15",
+			"location": "[resourceGroup().location]",
+			"name": "[variables('mw-vnetName')]",
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkSecurityGroups', variables('mw-networkSecurityGroupName'))]"
+			],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+			"properties": {
+				"addressSpace": {
+					"addressPrefixes": [
+						"[variables('addressPrefix')]"
+					]
+				},
+				"subnets": [
+					{
+						"name": "[variables('subnet1Name')]",
+						"properties": {
+							"addressPrefix": "[variables('subnet1Prefix')]",
+							"networkSecurityGroup": {
+								"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('mw-networkSecurityGroupName'))]"
+							}
+						}
+					},
+					{
+						"name": "[variables('subnet2Name')]",
+						"properties": {
+							"addressPrefix": "[variables('subnet2Prefix')]",
+							"networkSecurityGroup": {
+								"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('mw-networkSecurityGroupName'))]"
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+            "comments": "Public IP address for mw virtual machine",
+			"type": "Microsoft.Network/publicIPAddresses",
+			"apiVersion": "2015-06-15",
+			"location": "[resourceGroup().location]",
+			"name": "[variables('publicIPAddressName')]",
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+			"properties": {
+				"dnsSettings": {
+					"domainNameLabel": "[concat('domainmw-', parameters('Deployment Id'))]"
+				},
+				"idleTimeoutInMinutes": 30,
+				"publicIPAllocationMethod": "[variables('publicIPAddressType')]"
+			}
+		},
+		{
+            "comments": "Mw Network Interface in subnet1",
+			"type": "Microsoft.Network/networkInterfaces",
+			"apiVersion": "2015-06-15",
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/virtualNetworks', variables('mw-vnetName'))]",
+				"[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
+			],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+			"location": "[resourceGroup().location]",
+			"name": "[variables('mw-nicName')]",
+			"properties": {
+				"ipConfigurations": [
+					{
+						"name": "ipconfig1",
+						"properties": {
+							"privateIPAddress": "[variables('subnet1PrivateAddress')]",
+							"privateIPAllocationMethod": "Static",
+							"PublicIpAddress": {
+								"Id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
+							},
+							"subnet": {
+								"id": "[variables('subnet1Id')]"
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+            "comments": "The base operating system for the mw vm",
+            "type": "Microsoft.Compute/images",
+            "apiVersion": "2019-07-01",
+            "name": "[variables('imageMwName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deploymentScripts', variables('scriptNameGetVhds'))]"
+            ],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "properties": {
+                "storageProfile": {
+                    "osDisk": {
+                        "osType": "Linux",
+                        "osState": "Generalized",
+                        "diskSizeGB": 256,
+                        "blobUri": "[concat('https://', variables('storageAccountName'), '.blob.core.windows.net/', variables('containerName'), '/', reference(variables('scriptNameGetVhds')).outputs.mwresult[0].name)]",
+                        "caching": "ReadWrite",
+                        "storageAccountType": "Standard_LRS"
+                    },
+                    "dataDisks": [],
+                    "zoneResilient": false
+                },
+                "hyperVGeneration": "V1"
+            }
+        },
+		{
+            "comments": "MW virtual machine",
+			"type": "Microsoft.Compute/virtualMachines",
+			"apiVersion": "2016-04-30-preview",
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkInterfaces/', variables('mw-nicName'))]",
+				"[resourceId('Microsoft.Compute/images/', variables('imageMwName'))]"
+			],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+			"location": "[resourceGroup().location]",
+			"name": "[parameters('Mw Name')]",
+			"properties": {
+				"hardwareProfile": {
+					"vmSize": "[split(parameters('Mw Size'), ' -')[0]]"
+				},
+				"networkProfile": {
+					"networkInterfaces": [
+						{
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('mw-nicName'))]",
+							"properties": {
+								"primary": true
+							}
+						}
+					]
+				},
+				"osProfile": {
+					"computerName": "[parameters('Mw Name')]",
+					"adminUsername": "[variables('adminUsername')]",
+					"adminPassword": "[variables('adminPassword')]"
+				},
+				"storageProfile": {
+					"osDisk": {
+						"createOption": "fromImage",
+						"managedDisk": {
+							"storageAccountType": "[parameters('Mw Os Disk Type')]"
+						}
+					},
+					"imageReference": {
+						"id": "[resourceId('Microsoft.Compute/images', variables('imageMwName'))]"
+					}
+				}
+			}
+		},
+		{
+            "comments": "Creates used directories. Waits until the script install.sh is configured. Runs the script.",
+			"type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('Mw Name'),'/LinuxCustomScriptExtension')]",
+			"apiVersion": "2019-07-01",
+			"location": "[resourceGroup().location]",
+			"dependsOn": [
+				"[resourceId('Microsoft.Compute/virtualMachines/', parameters('Mw Name'))]",
+                "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('licensingName'), variables('sessionId'), '-ip'))]"
+			],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+			"properties": {
+				"publisher": "Microsoft.Azure.Extensions",
+				"type": "CustomScript",
+				"typeHandlerVersion": "2.0",
+				"autoUpgradeMinorVersion": true,
+				"settings": {
+					"fileUris": [],
+					"commandToExecute": "[concat('mkdir -p /data')]"
+				}
+			}
+		},
+
+		{
+            "comments": "Public IP address for licensing virtual machine",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2015-06-15",
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "location": "[resourceGroup().location]",
+            "name": "[concat(variables('licensingName'), variables('sessionId'), '-ip')]",
+            "properties": {
+                "dnsSettings": {
+                    "domainNameLabel": "[concat('domainlicensing-', parameters('Deployment Id'))]"
+                },
+                "idleTimeoutInMinutes": 30,
+                "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
+            }
+        },
+		{
+            "comments": "Licensing Network Interface in same subnet as mw virtual machine",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2015-06-15",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('licensingName'), variables('sessionId'), '-ip'))]",
+				"[resourceId('Microsoft.Network/virtualNetworks', variables('mw-vnetName'))]"
+            ],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "location": "[resourceGroup().location]",
+            "name": "[concat(variables('licensingName'), variables('sessionId'), '-nic')]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "PublicIpAddress": {
+                                "Id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('licensingName'), variables('sessionId'), '-ip'))]"
+                            },
+                            "subnet": {
+                                "id": "[variables('subnet1Id')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+		{
+            "comments": "The base operating system for the licensing vm",
+            "type": "Microsoft.Compute/images",
+            "apiVersion": "2019-07-01",
+            "name": "[variables('imageLicensingName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deploymentScripts', variables('scriptNameGetVhds'))]"
+            ],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "properties": {
+                "storageProfile": {
+                    "osDisk": {
+                        "osType": "Linux",
+                        "osState": "Generalized",
+                        "diskSizeGB": 128,
+                        "blobUri": "[concat('https://', variables('storageAccountName'), '.blob.core.windows.net/', variables('containerName'), '/', reference(variables('scriptNameGetVhds')).outputs.licresult[0].name)]",
+                        "caching": "ReadWrite",
+                        "storageAccountType": "Standard_LRS"
+                    },
+                    "dataDisks": [],
+                    "zoneResilient": false
+                },
+                "hyperVGeneration": "V1"
+            }
+        },
+		{
+            "comments": "Licensing virtual machine",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2016-04-30-preview",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('licensingName'), variables('sessionId'), '-nic'))]",
+				"[resourceId('Microsoft.Compute/images/', variables('imageLicensingName'))]"
+            ],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+            "location": "[resourceGroup().location]",
+            "name": "[concat(variables('licensingName'), variables('sessionId'), '-vm')]",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[split(parameters('Mw Size'), ' -')[0]]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('licensingName'), variables('sessionId'), '-nic'))]",
+                            "properties": {
+                                "primary": true
+                            }
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[concat(variables('licensingName'), variables('sessionId'), '-vm')]",
+                    "adminUsername": "[variables('adminUsername')]",
+                    "adminPassword": "[variables('adminPassword')]"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "name": "[concat(variables('licensingName'), variables('sessionId'))]",
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('Mw Os Disk Type')]"
+                        }
+                    },
+                    "imageReference": {
+                        "id": "[resourceId('Microsoft.Compute/images', variables('imageLicensingName'))]"
+                    }
+                }
+            }
+        },
+
+        {
+            "comments": "Creates agents",
+			"condition": "[not(equals(parameters('Number Of Agents'), 0))]",
+			"type": "Microsoft.Resources/deployments",
+			"name": "[concat(parameters('Mw Name'), '-agentsDeploy')]",
+			"apiVersion": "2019-10-01",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('Mw Name'),'/extensions/LinuxCustomScriptExtension')]"
+            ],
+            "tags": {
+                "[variables('tagName')]": "[parameters('Mw Name')]"
+            },
+			"properties": {
+				"mode": "Incremental",
+                "parameters": {
+                    "Number Of Agents": {
+                        "value": "[parameters('Number Of Agents')]"
+                    },
+                    "Agent Name Prefix": {
+                        "value": "[parameters('Agent Name Prefix')]"
+                    },
+                    "Os Disk Type": {
+                        "value": "[parameters('Agent Os Disk Type')]"
+                    },
+                    "Size": {
+                        "value": "[parameters('Agent Size')]"
+                    },
+					"Mw Name": {
+						"value": "[parameters('Mw Name')]"
+					},
+					"Deployment Id": {
+						"value": "[parameters('Deployment Id')]"
+					}
+                },
+				"expressionEvaluationOptions": {
+					"scope": "inner"
+				},
+				"template":
+				{
+				    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+				    "contentVersion": "1.0.0.0",
+				    "metadata": {
+				        "comments": "This template was developed for deployment of agents"
+				    },
+				    "parameters": {
+				        "Number Of Agents": {
+				            "type": "int",
+				            "defaultValue": 2,
+				            "metadata": {
+				                "description": "Choose how many agents will be deployed"
+				            }
+				        },
+				        "Agent Name Prefix": {
+				            "type": "string",
+				            "defaultValue": "loadcore-agent",
+				            "metadata": {
+				                "description": "Choose the prefix of agent VM name"
+				            }
+				        },
+				        "Os Disk Type": {
+				            "type": "string",
+				            "defaultValue": "Premium_LRS",
+							"allowedValues": [
+								"Standard_LRS", "Premium_LRS", "StandardSSD_LRS", "UltraSSD_LRS"
+							],
+				            "metadata": {
+				                "description": "The disk type for the agent virtual machine"
+				            }
+				        },
+				        "Size": {
+				            "type": "string",
+				            "defaultValue": "Standard_F4s - 4 vcpus, 8.0 GiB memory",
+				            "allowedValues": [
+				                "Standard_B1ls - 1 vcpus, 0.5 GiB memory",
+				                "Standard_B1ms - 1 vcpus, 2.0 GiB memory",
+				                "Standard_B1s - 1 vcpus, 1.0 GiB memory",
+				                "Standard_B2ms - 2 vcpus, 8.0 GiB memory",
+				                "Standard_B2s - 2 vcpus, 4.0 GiB memory",
+				                "Standard_B4ms - 4 vcpus, 16.0 GiB memory",
+				                "Standard_B8ms - 8 vcpus, 32.0 GiB memory",
+				                "Standard_B12ms - 12 vcpus, 48.0 GiB memory",
+				                "Standard_B16ms - 16 vcpus, 64.0 GiB memory",
+				                "Standard_B20ms - 20 vcpus, 80.0 GiB memory",
+				                "Standard_D1_v2 - 1 vcpus, 3.5 GiB memory",
+				                "Standard_D2_v2 - 2 vcpus, 7.0 GiB memory",
+				                "Standard_D3_v2 - 4 vcpus, 14.0 GiB memory",
+				                "Standard_D4_v2 - 8 vcpus, 28.0 GiB memory",
+				                "Standard_D5_v2 - 16 vcpus, 56.0 GiB memory",
+				                "Standard_D11_v2 - 2 vcpus, 14.0 GiB memory",
+				                "Standard_D12_v2 - 4 vcpus, 28.0 GiB memory",
+				                "Standard_D13_v2 - 8 vcpus, 56.0 GiB memory",
+				                "Standard_D14_v2 - 16 vcpus, 112.0 GiB memory",
+				                "Standard_D2_v2_Promo - 2 vcpus, 7.0 GiB memory",
+				                "Standard_D3_v2_Promo - 4 vcpus, 14.0 GiB memory",
+				                "Standard_D4_v2_Promo - 8 vcpus, 28.0 GiB memory",
+				                "Standard_D5_v2_Promo - 16 vcpus, 56.0 GiB memory",
+				                "Standard_D11_v2_Promo - 2 vcpus, 14.0 GiB memory",
+				                "Standard_D12_v2_Promo - 4 vcpus, 28.0 GiB memory",
+				                "Standard_D13_v2_Promo - 8 vcpus, 56.0 GiB memory",
+				                "Standard_D14_v2_Promo - 16 vcpus, 112.0 GiB memory",
+				                "Standard_F1 - 1 vcpus, 2.0 GiB memory",
+				                "Standard_F2 - 2 vcpus, 4.0 GiB memory",
+				                "Standard_F4 - 4 vcpus, 8.0 GiB memory",
+				                "Standard_F8 - 8 vcpus, 16.0 GiB memory",
+				                "Standard_F16 - 16 vcpus, 32.0 GiB memory",
+				                "Standard_DS1_v2 - 1 vcpus, 3.5 GiB memory",
+				                "Standard_DS2_v2 - 2 vcpus, 7.0 GiB memory",
+				                "Standard_DS3_v2 - 4 vcpus, 14.0 GiB memory",
+				                "Standard_DS4_v2 - 8 vcpus, 28.0 GiB memory",
+				                "Standard_DS5_v2 - 16 vcpus, 56.0 GiB memory",
+				                "Standard_DS11-1_v2 - 2 vcpus, 14.0 GiB memory",
+				                "Standard_DS11_v2 - 2 vcpus, 14.0 GiB memory",
+				                "Standard_DS12-1_v2 - 4 vcpus, 28.0 GiB memory",
+				                "Standard_DS12-2_v2 - 4 vcpus, 28.0 GiB memory",
+				                "Standard_DS12_v2 - 4 vcpus, 28.0 GiB memory",
+				                "Standard_DS13-2_v2 - 8 vcpus, 56.0 GiB memory",
+				                "Standard_DS13-4_v2 - 8 vcpus, 56.0 GiB memory",
+				                "Standard_DS13_v2 - 8 vcpus, 56.0 GiB memory",
+				                "Standard_DS14-4_v2 - 16 vcpus, 112.0 GiB memory",
+				                "Standard_DS14-8_v2 - 16 vcpus, 112.0 GiB memory",
+				                "Standard_DS14_v2 - 16 vcpus, 112.0 GiB memory",
+				                "Standard_DS2_v2_Promo - 2 vcpus, 7.0 GiB memory",
+				                "Standard_DS3_v2_Promo - 4 vcpus, 14.0 GiB memory",
+				                "Standard_DS4_v2_Promo - 8 vcpus, 28.0 GiB memory",
+				                "Standard_DS5_v2_Promo - 16 vcpus, 56.0 GiB memory",
+				                "Standard_DS11_v2_Promo - 2 vcpus, 14.0 GiB memory",
+				                "Standard_DS12_v2_Promo - 4 vcpus, 28.0 GiB memory",
+				                "Standard_DS13_v2_Promo - 8 vcpus, 56.0 GiB memory",
+				                "Standard_DS14_v2_Promo - 16 vcpus, 112.0 GiB memory",
+				                "Standard_F1s - 1 vcpus, 2.0 GiB memory",
+				                "Standard_F2s - 2 vcpus, 4.0 GiB memory",
+				                "Standard_F4s - 4 vcpus, 8.0 GiB memory",
+				                "Standard_F8s - 8 vcpus, 16.0 GiB memory",
+				                "Standard_F16s - 16 vcpus, 32.0 GiB memory",
+				                "Standard_A1_v2 - 1 vcpus, 2.0 GiB memory",
+				                "Standard_A2m_v2 - 2 vcpus, 16.0 GiB memory",
+				                "Standard_A2_v2 - 2 vcpus, 4.0 GiB memory",
+				                "Standard_A4m_v2 - 4 vcpus, 32.0 GiB memory",
+				                "Standard_A4_v2 - 4 vcpus, 8.0 GiB memory",
+				                "Standard_A8m_v2 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_A8_v2 - 8 vcpus, 16.0 GiB memory",
+				                "Standard_D2_v3 - 2 vcpus, 8.0 GiB memory",
+				                "Standard_D4_v3 - 4 vcpus, 16.0 GiB memory",
+				                "Standard_D8_v3 - 8 vcpus, 32.0 GiB memory",
+				                "Standard_D16_v3 - 16 vcpus, 64.0 GiB memory",
+				                "Standard_D32_v3 - 32 vcpus, 128.0 GiB memory",
+				                "Standard_D48_v3 - 48 vcpus, 192.0 GiB memory",
+				                "Standard_D64_v3 - 64 vcpus, 256.0 GiB memory",
+				                "Standard_D2s_v3 - 2 vcpus, 8.0 GiB memory",
+				                "Standard_D4s_v3 - 4 vcpus, 16.0 GiB memory",
+				                "Standard_D8s_v3 - 8 vcpus, 32.0 GiB memory",
+				                "Standard_D16s_v3 - 16 vcpus, 64.0 GiB memory",
+				                "Standard_D32s_v3 - 32 vcpus, 128.0 GiB memory",
+				                "Standard_D48s_v3 - 48 vcpus, 192.0 GiB memory",
+				                "Standard_D64s_v3 - 64 vcpus, 256.0 GiB memory",
+				                "Standard_E2_v3 - 2 vcpus, 16.0 GiB memory",
+				                "Standard_E4_v3 - 4 vcpus, 32.0 GiB memory",
+				                "Standard_E8_v3 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E16_v3 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E20_v3 - 20 vcpus, 160.0 GiB memory",
+				                "Standard_E32_v3 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E48_v3 - 48 vcpus, 384.0 GiB memory",
+				                "Standard_E64_v3 - 64 vcpus, 432.0 GiB memory",
+				                "Standard_E2s_v3 - 2 vcpus, 16.0 GiB memory",
+				                "Standard_E4-2s_v3 - 4 vcpus, 32.0 GiB memory",
+				                "Standard_E4s_v3 - 4 vcpus, 32.0 GiB memory",
+				                "Standard_E8-2s_v3 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E8-4s_v3 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E8s_v3 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E16-4s_v3 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E16-8s_v3 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E16s_v3 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E20s_v3 - 20 vcpus, 160.0 GiB memory",
+				                "Standard_E32-8s_v3 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E32-16s_v3 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E32s_v3 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E48s_v3 - 48 vcpus, 384.0 GiB memory",
+				                "Standard_E64-16s_v3 - 64 vcpus, 432.0 GiB memory",
+				                "Standard_E64-32s_v3 - 64 vcpus, 432.0 GiB memory",
+				                "Standard_E64s_v3 - 64 vcpus, 432.0 GiB memory",
+				                "Standard_E64i_v3 - 64 vcpus, 432.0 GiB memory",
+				                "Standard_E64is_v3 - 64 vcpus, 432.0 GiB memory",
+				                "Standard_M8-2ms - 8 vcpus, 218.75 GiB memory",
+				                "Standard_M8-4ms - 8 vcpus, 218.75 GiB memory",
+				                "Standard_M8ms - 8 vcpus, 218.75 GiB memory",
+				                "Standard_M16-4ms - 16 vcpus, 437.5 GiB memory",
+				                "Standard_M16-8ms - 16 vcpus, 437.5 GiB memory",
+				                "Standard_M16ms - 16 vcpus, 437.5 GiB memory",
+				                "Standard_M32-8ms - 32 vcpus, 875.0 GiB memory",
+				                "Standard_M32-16ms - 32 vcpus, 875.0 GiB memory",
+				                "Standard_M32ls - 32 vcpus, 256.0 GiB memory",
+				                "Standard_M32ms - 32 vcpus, 875.0 GiB memory",
+				                "Standard_M32ts - 32 vcpus, 192.0 GiB memory",
+				                "Standard_M64-16ms - 64 vcpus, 1750.0 GiB memory",
+				                "Standard_M64-32ms - 64 vcpus, 1750.0 GiB memory",
+				                "Standard_M64ls - 64 vcpus, 512.0 GiB memory",
+				                "Standard_M64ms - 64 vcpus, 1750.0 GiB memory",
+				                "Standard_M64s - 64 vcpus, 1000.0 GiB memory",
+				                "Standard_M128-32ms - 128 vcpus, 3800.0 GiB memory",
+				                "Standard_M128-64ms - 128 vcpus, 3800.0 GiB memory",
+				                "Standard_M128ms - 128 vcpus, 3800.0 GiB memory",
+				                "Standard_M128s - 128 vcpus, 2000.0 GiB memory",
+				                "Standard_M64 - 64 vcpus, 1000.0 GiB memory",
+				                "Standard_M64m - 64 vcpus, 1750.0 GiB memory",
+				                "Standard_M128 - 128 vcpus, 2000.0 GiB memory",
+				                "Standard_M128m - 128 vcpus, 3800.0 GiB memory",
+				                "Standard_E2d_v4 - 2 vcpus, 16.0 GiB memory",
+				                "Standard_E4d_v4 - 4 vcpus, 32.0 GiB memory",
+				                "Standard_E8d_v4 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E16d_v4 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E20d_v4 - 20 vcpus, 160.0 GiB memory",
+				                "Standard_E32d_v4 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E48d_v4 - 48 vcpus, 384.0 GiB memory",
+				                "Standard_E64d_v4 - 64 vcpus, 504.0 GiB memory",
+				                "Standard_E2ds_v4 - 2 vcpus, 16.0 GiB memory",
+				                "Standard_E4-2ds_v4 - 4 vcpus, 32.0 GiB memory",
+				                "Standard_E4ds_v4 - 4 vcpus, 32.0 GiB memory",
+				                "Standard_E8-2ds_v4 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E8-4ds_v4 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E8ds_v4 - 8 vcpus, 64.0 GiB memory",
+				                "Standard_E16-4ds_v4 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E16-8ds_v4 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E16ds_v4 - 16 vcpus, 128.0 GiB memory",
+				                "Standard_E20ds_v4 - 20 vcpus, 160.0 GiB memory",
+				                "Standard_E32-8ds_v4 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E32-16ds_v4 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E32ds_v4 - 32 vcpus, 256.0 GiB memory",
+				                "Standard_E48ds_v4 - 48 vcpus, 384.0 GiB memory",
+				                "Standard_E64-16ds_v4 - 64 vcpus, 504.0 GiB memory",
+				                "Standard_E64-32ds_v4 - 64 vcpus, 504.0 GiB memory",
+				                "Standard_E64ds_v4 - 64 vcpus, 504.0 GiB memory",
+				                "Standard_D2d_v4 - 2 vcpus, 8.0 GiB memory",
+				                "Standard_D4d_v4 - 4 vcpus, 16.0 GiB memory",
+				                "Standard_D8d_v4 - 8 vcpus, 32.0 GiB memory",
+				                "Standard_D16d_v4 - 16 vcpus, 64.0 GiB memory",
+				                "Standard_D32d_v4 - 32 vcpus, 128.0 GiB memory",
+				                "Standard_D48d_v4 - 48 vcpus, 192.0 GiB memory",
+				                "Standard_D64d_v4 - 64 vcpus, 256.0 GiB memory",
+				                "Standard_D2ds_v4 - 2 vcpus, 8.0 GiB memory",
+				                "Standard_D4ds_v4 - 4 vcpus, 16.0 GiB memory",
+				                "Standard_D8ds_v4 - 8 vcpus, 32.0 GiB memory",
+				                "Standard_D16ds_v4 - 16 vcpus, 64.0 GiB memory",
+				                "Standard_D32ds_v4 - 32 vcpus, 128.0 GiB memory",
+				                "Standard_D48ds_v4 - 48 vcpus, 192.0 GiB memory",
+				                "Standard_D64ds_v4 - 64 vcpus, 256.0 GiB memory",
+				                "Standard_D15_v2 - 20 vcpus, 140.0 GiB memory",
+				                "Standard_DS15_v2 - 20 vcpus, 140.0 GiB memory",
+				                "Standard_F2s_v2 - 2 vcpus, 4.0 GiB memory",
+				                "Standard_F4s_v2 - 4 vcpus, 8.0 GiB memory",
+				                "Standard_F8s_v2 - 8 vcpus, 16.0 GiB memory",
+				                "Standard_F16s_v2 - 16 vcpus, 32.0 GiB memory",
+				                "Standard_F32s_v2 - 32 vcpus, 64.0 GiB memory",
+				                "Standard_F48s_v2 - 48 vcpus, 96.0 GiB memory",
+				                "Standard_F64s_v2 - 64 vcpus, 128.0 GiB memory",
+				                "Standard_F72s_v2 - 72 vcpus, 144.0 GiB memory"
+				            ],
+				            "metadata": {
+				                "description": "Select a VM size"
+				            }
+				        },
+				        "Mw Name": {
+				            "type": "string",
+				            "defaultValue": "loadcore-mw",
+				            "metadata": {
+				                "description": "The name of MW virtual machine"
+				            }
+				        },
+				        "Deployment Id": {
+				            "type": "securestring",
+				            "defaultValue": "[utcNow('yy-MM-dd-HH-mm-ss-fff')]"
+				        }
+				    },
+				    "variables": {
+				        "adminUsername": "azureUser",
+						"adminPassword": "azureUser123)",
+				
+				        "identityName": "[concat(parameters('Mw Name'), '-identity')]",
+				        "scriptNameGetVhd": "[concat('get-vhd-', parameters('Deployment Id'))]",
+				        "scriptNameDeleteImages": "[concat('delete-images-', parameters('Deployment Id'))]",
+				
+				        "tagName": "deployment_name",
+				
+				        "storageAccountName": "loadcorevhds",
+				        "containerName": "loadcore-releases",
+				        "vhdAgentPrefix": "LoadCore-Agent",
+				        "imageAgentName": "[concat(parameters('Mw Name'), '-image-agent')]",
+				
+				        "vnetName": "[concat(parameters('Mw Name'), '-vnet')]",
+				        "sessionId": "[concat('-', parameters('Deployment Id'))]",
+				        
+				        "publicIPAddressType": "Static"
+				    },
+				    "resources": [
+				        {
+				            "type": "Microsoft.Resources/deploymentScripts",
+				            "apiVersion": "2019-10-01-preview",
+				            "name": "[variables('scriptNameDeleteImages')]",
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "location": "[resourceGroup().location]",
+				            "kind": "AzurePowerShell",
+				            "identity": {
+				                "type": "UserAssigned",
+				                "userAssignedIdentities": {
+				                   "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]": {}
+				                }
+				            },
+				            "properties": {
+				                "forceUpdateTag": "[parameters('Deployment Id')]",
+				                "azPowerShellVersion": "3.0",
+				                "scriptContent": "[concat('Remove-AzResource -ResourceId ', resourceId('Microsoft.Compute/images', variables('imageAgentName')),' -Force;')]",
+				                "timeout": "PT30M",
+				                "cleanupPreference": "OnSuccess",
+				                "retentionInterval": "P1D"
+				            }
+				        },
+				
+				        {
+				            "comments": "Lists blobs in a given container. Filters the results to return only blobs whose name begin with vhdAgentPrefix.",
+				            "type": "Microsoft.Resources/deploymentScripts",
+				            "apiVersion": "2019-10-01-preview",
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "name": "[variables('scriptNameGetVhd')]",
+				            "location": "[resourceGroup().location]",
+				            "kind": "AzureCLI",
+				            "identity": {
+				                "type": "UserAssigned",
+				                "userAssignedIdentities": {
+				                   "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]": {}
+				                }
+				            },
+				            "properties": {
+				                "AzCliVersion": "2.0.80",
+				                "timeout": "PT30M",
+				                "scriptContent": "[concat('result=$(az storage blob list --account-name ', variables('storageAccountName'), ' --container-name ', variables('containerName'), ' --prefix ', variables('vhdAgentPrefix'), '  --account-key \"DfScJLq41uGTZg2j82KIVpHDwiPuVldcVe23e4YoMuapAj+nMKrSls9hjfVy9bL8cYeb/epQld32StVjYjEP+Q==\" --connection-string=\"DefaultEndpointsProtocol=https;AccountName=loadcorevhds;AccountKey=Account key to be completed;EndpointSuffix=core.windows.net\" | jq ''sort_by(.properties.lastModified) | reverse''); echo $result | jq -c ''{result: map({name: .name})}'' > $AZ_SCRIPTS_OUTPUT_PATH')]",
+				                "cleanupPreference": "OnSuccess",
+				                "retentionInterval": "P1D"
+				            }
+				        },
+				
+				        {
+				            "comments": "Public IP addresses for virtual machines(one for each virtual machine)",
+				            "type": "Microsoft.Network/publicIPAddresses",
+				            "apiVersion": "2015-06-15",
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "location": "[resourceGroup().location]",
+				            "name": "[concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-ip')]",
+				            "copy": {
+				                "name": "Public ip address copy",
+				                "count": "[parameters('Number Of Agents')]",
+				                "mode": "Parallel"
+				            },
+				            "properties": {
+				                "dnsSettings": {
+				                    "domainNameLabel": "[concat('domainagent-', copyIndex(1), parameters('Deployment Id'))]"
+				                },
+				                "idleTimeoutInMinutes": 30,
+				                "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
+				            }
+				        },
+				        {
+				            "comments": "Network Interfaces in the same subnet as mw virtual machine(one for each agent virtual machine)",
+				            "type": "Microsoft.Network/networkInterfaces",
+				            "apiVersion": "2015-06-15",
+				            "dependsOn": [
+				                "[resourceId('Microsoft.Network/publicIPAddresses', concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-ip'))]"
+				            ],
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "location": "[resourceGroup().location]",
+				            "name": "[concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-nic1')]",
+				            "copy": {
+				                "name": "Nic1 copy",
+				                "count": "[parameters('Number Of Agents')]",
+				                "mode": "Parallel"
+				            },
+				            "properties": {
+				                "ipConfigurations": [
+				                    {
+				                        "name": "ipconfig1",
+				                        "properties": {
+				                            "privateIPAllocationMethod": "Dynamic",
+				                            "PublicIpAddress": {
+				                                "Id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-ip'))]"
+				                            },
+				                            "subnet": {
+				                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks', variables('vnetName')), '2019-12-01', 'Full').properties.subnets[0].id]"
+				                            }
+				                        }
+				                    }
+				                ]
+				            }
+				        },
+				        {
+				            "comments": "Network Interfaces in another subnet compared to the mw virtual machine(one for each agent virtual machine)",
+				            "type": "Microsoft.Network/networkInterfaces",
+				            "apiVersion": "2015-06-15",
+				            "dependsOn": [
+				                "[resourceId('Microsoft.Network/publicIPAddresses', concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-ip'))]"
+				            ],
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "location": "[resourceGroup().location]",
+				            "name": "[concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-nic2')]",
+				            "copy": {
+				                "name": "Nic2 copy",
+				                "count": "[parameters('Number Of Agents')]",
+				                "mode": "Parallel"
+				            },
+				            "properties": {
+				                "ipConfigurations": [
+				                    {
+				                        "name": "ipconfig1",
+				                        "properties": {
+				                            "privateIPAllocationMethod": "Dynamic",
+				                            "subnet": {
+				                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks', variables('vnetName')), '2019-12-01', 'Full').properties.subnets[1].id]"
+				                            }
+				                        }
+				                    }
+				                ],
+                                "emptystring":[
+                                    {
+                                        "name": "emptystring_for_agentsh",
+                                        "properties": {
+                                            "value": ""
+                                        }
+                                    }
+                                ]
+				            }
+				        },
+				        {
+				            "comments": "The base operating system for the agent vm",
+				            "type": "Microsoft.Compute/images",
+				            "apiVersion": "2019-07-01",
+				            "name": "[variables('imageAgentName')]",
+				            "location": "[resourceGroup().location]",
+				            "dependsOn": [
+				                "[resourceId('Microsoft.Resources/deploymentScripts', variables('scriptNameDeleteImages'))]",
+				                "[resourceId('Microsoft.Resources/deploymentScripts', variables('scriptNameGetVhd'))]"
+				            ],
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "properties": {
+				                "storageProfile": {
+				                    "osDisk": {
+				                        "osType": "Linux",
+				                        "osState": "Generalized",
+				                        "diskSizeGB": 16,
+				                        "blobUri": "[concat('https://', variables('storageAccountName'), '.blob.core.windows.net/', variables('containerName'), '/', reference(variables('scriptNameGetVhd')).outputs.result[0].name)]",
+				                        "caching": "ReadWrite",
+                                        "storageAccountType": "Standard_LRS"
+				                    },
+				                    "dataDisks": [],
+				                    "zoneResilient": false
+				                },
+				                "hyperVGeneration": "V1"
+				            }
+				        },
+				        {
+				            "comments": "Agent virtual machines",
+				            "type": "Microsoft.Compute/virtualMachines",
+				            "apiVersion": "2016-04-30-preview",
+				            "dependsOn": [
+				                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-nic1'))]",
+				                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-nic2'))]",
+				                "[resourceId('Microsoft.Compute/images', variables('imageAgentName'))]"
+				            ],
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "location": "[resourceGroup().location]",
+				            "name": "[concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'))]",
+				            "copy": {
+				                "name": "Agent VM copy",
+				                "count": "[parameters('Number Of Agents')]",
+				                "mode": "Parallel"
+				            },
+				            "properties": {
+				                "hardwareProfile": {
+				                    "vmSize": "[split(parameters('Size'), ' -')[0]]"
+				                },
+				                "networkProfile": {
+				                    "networkInterfaces": [
+				                        {
+				                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-nic1'))]",
+				                            "properties": {
+				                                "primary": true
+				                            }
+				                        },
+				                        {
+				                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '-nic2'))]",
+				                            "properties": {
+				                                "primary": false
+				                            }
+				                        }
+				                    ]
+				                },
+				                "osProfile": {
+				                    "computerName": "[concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'))]",
+				                    "adminUsername": "[variables('adminUsername')]",
+				                    "adminPassword": "[variables('adminPassword')]"
+				                },
+				                "storageProfile": {
+				                    "osDisk": {
+				                        "name": "[concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'))]",
+				                        "createOption": "fromImage",
+				                        "managedDisk": {
+				                            "storageAccountType": "[parameters('Os Disk Type')]"
+				                        }
+				                    },
+				                    "imageReference": {
+				                        "id": "[resourceId('Microsoft.Compute/images', variables('imageAgentName'))]"
+				                    }
+				                }
+				            }
+				        },
+				        {
+							"comments": "Sets up the network interface. Runs the script.",
+							"type": "Microsoft.Compute/virtualMachines/extensions",
+							"apiVersion": "2019-07-01",
+							"location": "[resourceGroup().location]",
+							"dependsOn": [
+								"[concat('Microsoft.Compute/virtualMachines/', parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'))]"
+							],
+				            "tags": {
+				                "[variables('tagName')]": "[parameters('Mw Name')]"
+				            },
+				            "name": "[concat(parameters('Agent Name Prefix'), copyIndex(1), variables('sessionId'), '/LinuxCustomScriptExtension')]",
+				            "copy": {
+				                "name": "Extension copy",
+				                "count": "[parameters('Number Of Agents')]",
+				                "mode": "Parallel"
+				            },
+							"properties": {
+								"publisher": "Microsoft.Azure.Extensions",
+								"type": "CustomScript",
+								"typeHandlerVersion": "2.0",
+								"autoUpgradeMinorVersion": true,
+								"settings": {
+									"fileUris": [],
+									"commandToExecute": "[concat('ip link set dev eth1 up && /home/ixia/agent-setup.sh ', reference(resourceId('Microsoft.Network/networkInterfaces', concat(parameters('Mw Name'), '-nic')), '2019-12-01', 'Full').properties.ipConfigurations[0].properties.privateIPAddress, ' eth0', ' eth1',' y')]"
+				                }
+							}
+						}
+				    ],
+				    "outputs": {
+				    }
+				}
+			}
+		}
+	],
+	"outputs": {
+	}
+}

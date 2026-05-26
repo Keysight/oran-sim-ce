@@ -1,0 +1,11 @@
+parameters:
+
+    LoadCore_Agent_Name:            LC_agent1
+    LoadCore_Agent_Image_Name:      LoadCore254
+    LoadCore_Agent_Flavor:          LoadCoreFlavor
+
+    Internal_Management_Network:    Internal
+
+    Test_Network:                   LC Test Network
+    Test_Sub_Network:               "20.0.0.0/16"
+
