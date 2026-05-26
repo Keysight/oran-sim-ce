@@ -1,0 +1,174 @@
+<html><head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <style type="text/css">
+  body {
+    padding: 20px;
+    font-family: Helvetica;
+  }
+
+  .row {
+    margin: 10px;
+  }
+
+  pre {
+    margin-left: 20px;
+  }
+  </style>
+  <title>LoadCore Agent Resource Requirements Calculator</title>
+</head>
+<body>
+  <div>
+    <h1>LoadCore Agent Resource Requirements Calculator</h1>
+    <div class="row">Network interface type is
+    <select id="nic-type">
+        <option value="mellanox">Mellanox</option>
+        <option value="intel">Intel</option>
+        <option value="vmware">VMware</option>
+        <option value="other">Other</option>
+    </select>
+    </div>
+    <div class="row">Core count is
+      <input id="core-count" type="number" value="18" min="1" max="128">
+    </div>
+    <div class="row">Jumbo-frame enabled
+      <input id="jumboframe-enabled" name="jumboframe-enabled" type="checkbox">
+    </div>
+    <div class="row">IPsec enabled
+      <input id="ipsec-enabled" name="ipsec-enabled" type="checkbox">
+    </div>
+    <div class="row">For running
+      <input id="ue-count-in" type="number" value="500000" min="1" max="10000000"> UEs, you need at least
+      <b><span id="mem-size-out">18234</span></b> MB of RAM and
+      <b><span id="ue-hugepages-out">5211</span></b> huge pages
+    </div>
+    <pre id="details">Non-UE huge memory     2,222,177,089 bytes
+      - initial memory pool  268,435,456 bytes
+      - network device data  219,200 bytes
+      - tx network buffers   338,488,781 bytes
+      - rx network buffers   1,507,755,879 bytes
+      - kni network buffers  90,762,701 bytes
+      - extra huge memory    16,515,072 bytes
+
+      UE huge memory         8,704,000,000 bytes
+      - huge memory per UE   17,408 bytes
+
+      Non-UE system memory   6,555,697,152 bytes
+      - IP hash tables       3,221,225,472 bytes
+      - port groups          2,147,483,648 bytes
+      - extra system memory  1,186,988,032 bytes
+
+      UE system memory       563,500,000 bytes
+      - system memory per UE 1,127 bytes
+    </pre>
+    <div class="row">With
+      <input id="mem-size-in" type="number" value="16384" min="1024" max="65535">MB of RAM, you can run a maximum of
+      <b><span id="ue-count-out">395373</span></b> UEs
+      <span id="mem-hugepages-out">using <b><span>4342</span></b> huge pages</span>
+    </div>
+    <div class="row" id="hugepages-warning" style="display: none;">
+      <font color="red">WARNING: Additional steps are required to configure more than 8192 huge pages.</font>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var txRingSize = { "mellanox": 4096, "intel": 4096, "vmware": 4096, "other": 4096 };
+    var rxRingSize = { "mellanox": 32768, "intel": 4096, "vmware": 4096, "other": 32768 };
+    var rxMultiplier = { "mellanox": 1, "intel": 1, "vmware": 2, "other": 1 };
+    var extraCoreMem = { "mellanox": 6815744, "intel": 200704, "vmware": 917504, "other": 6715744 };
+
+    function update() {
+        nicType = $("#nic-type").val();
+        coreCount = $("#core-count").val();
+        jumboframeEnabled = $("#jumboframe-enabled").prop("checked");
+        ipsecEnabled = $("#ipsec-enabled").prop("checked");
+        ueCountIn = $("#ue-count-in").val();
+
+        systemMemoryForOthers = 1024 * 1024 * 1024;
+
+        // Huge pages
+
+        ixrtePool0 = (256 * 1024 * 1024);
+        ethDevData = 219200;
+        txBufferSize = jumboframeEnabled ? 9754 : 2176;
+        rxBufferSize = jumboframeEnabled ? 9664 : 2432;
+        txPool = Math.ceil(1581312 + coreCount * 2 * txBufferSize * txRingSize[nicType]);
+        rxPool = Math.ceil(1581312 + coreCount * 2 * rxBufferSize * rxRingSize[nicType] * rxMultiplier[nicType]);
+        kniPool = Math.ceil(1581312 + coreCount * 2 * 2304 * 1024);
+        ipsecHugeMem = ipsecEnabled ? (coreCount * 64 * 1024 * 1024) : 0;
+        extraHugeMem = coreCount * extraCoreMem[nicType];
+        staticHugeMem = ixrtePool0 + ethDevData + txPool + rxPool + kniPool + ipsecHugeMem + extraHugeMem;
+        staticHugeMem *= 1.05; // 5% extra for safety
+        hugeMemPerUE = 8 * 1024 + coreCount * 512;
+        totalHugeMem = staticHugeMem + hugeMemPerUE * ueCountIn;
+        ueHugepagesOut = Math.ceil(totalHugeMem / 2 / 1024 / 1024);
+        $("#ue-hugepages-out").text(ueHugepagesOut);
+
+        // System memory
+
+        htableSize = (8 * 1024 * 1024) * 64 /* bin size */ * 2 /* v4+v6 */ * 3 /* TCP+UDP+SCTP */;
+        portGroups = (64 * 1024 * 1024) * 2 /* v4+v6 */ * 8 /* protocols */ * 2 /* pools */;
+        extraSysMem = (10 + (coreCount - 1) * 48 + 306) * 1024 * 1024;
+        staticSysMem = htableSize + portGroups + extraSysMem;
+        sysMemPerUE = Math.ceil(1024 * 1.1);
+        totalSysMem = staticSysMem + sysMemPerUE * ueCountIn;
+
+        // Total memory required
+
+        totalMem = totalHugeMem + totalSysMem + systemMemoryForOthers;
+
+        $("#mem-size-out").text(Math.ceil(totalMem / 1024 / 1024));
+
+        details = $("#details")
+        details.text("")
+        details.append("Non-UE huge memory     " + staticHugeMem.toLocaleString() + " bytes\n");
+        details.append("- initial memory pool  " + ixrtePool0.toLocaleString() + " bytes\n");
+        details.append("- network device data  " + ethDevData.toLocaleString() + " bytes\n");
+        details.append("- tx network buffers   " + txPool.toLocaleString() + " bytes\n");
+        details.append("- rx network buffers   " + rxPool.toLocaleString() + " bytes\n");
+        details.append("- kni network buffers  " + kniPool.toLocaleString() + " bytes\n");
+        details.append("- IPsec buffers        " + ipsecHugeMem.toLocaleString() + " bytes\n");
+        details.append("- extra huge memory    " + extraHugeMem.toLocaleString() + " bytes\n");
+        details.append("\n");
+        details.append("UE huge memory         " + (hugeMemPerUE * ueCountIn).toLocaleString() + " bytes\n");
+        details.append("- huge memory per UE   " + hugeMemPerUE.toLocaleString() + " bytes\n");
+        details.append("\n");
+        details.append("Non-UE system memory   " + staticSysMem.toLocaleString() + " bytes\n");
+        details.append("- IP hash tables       " + htableSize.toLocaleString() + " bytes\n");
+        details.append("- port groups          " + portGroups.toLocaleString() + " bytes\n");
+        details.append("- extra system memory  " + extraSysMem.toLocaleString() + " bytes\n");
+        details.append("\n");
+        details.append("UE system memory       " + (sysMemPerUE * ueCountIn).toLocaleString() + " bytes\n");
+        details.append("- system memory per UE " + sysMemPerUE.toLocaleString() + " bytes\n");
+
+        // UE estimation
+
+        memSizeIn = $("#mem-size-in").val() * 1024 * 1024;
+        memLeftForUEs = memSizeIn - staticHugeMem - staticSysMem - systemMemoryForOthers;
+        ueCountOut = memLeftForUEs / (hugeMemPerUE + sysMemPerUE);
+        memHugepagesOut = Math.ceil((staticHugeMem + ueCountOut * hugeMemPerUE) / 2 / 1024 / 1024);
+
+        if (ueCountOut <= 0) {
+            ueCountOut = 0;
+            $("#mem-hugepages-out").hide();
+        } else {
+            $("#mem-hugepages-out").show();
+        }
+
+        $("#ue-count-out").text(Math.floor(ueCountOut));
+        $("#mem-hugepages-out span").text(memHugepagesOut);
+
+        if (ueHugepagesOut > 8192 || memHugepagesOut > 8192) {
+            $("#hugepages-warning").show();
+        } else {
+            $("#hugepages-warning").hide();
+        }
+    }
+
+    $(document).ready(update);
+    $("#nic-type").change(update);
+    $("#core-count").change(update);
+    $("#jumboframe-enabled").change(update);
+    $("#ipsec-enabled").change(update);
+    $("#ue-count-in").change(update);
+    $("#mem-size-in").change(update);
+  </script>
+</body></html>

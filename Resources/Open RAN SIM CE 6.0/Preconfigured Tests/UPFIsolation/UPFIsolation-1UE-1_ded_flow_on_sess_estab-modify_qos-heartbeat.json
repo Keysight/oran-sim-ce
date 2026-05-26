@@ -1,0 +1,1116 @@
+{
+	"id": "wireless-4206",
+	"displayName": "1UE-1_ded_flow_on_sess_estab-modify_qos-heartbeat",
+	"lastModified": 1648028753,
+	"lastAccessed": 1608110171,
+	"tags": {
+		"category": "UPF Isolation"
+	},
+	"type": "wireless",
+	"ownerId": "68d50bbf-1c39-4ad0-a1cb-c957710b2794",
+	"owner": "admin@example.org",
+	"readonly": false,
+	"configUrl": "http://wireless-data-model.keysight-wap.svc.cluster.local./api/v2/configs/wireless-4206",
+	"configData": {
+		"Config": null,
+		"ConfigType": "UPF Isolation",
+		"Created": 1648028754,
+		"IRATConfig": null,
+		"LastAccessed": 1648028754,
+		"LicenseType": "",
+		"Name": "1UE-1_ded_flow_on_sess_estab-modify_qos-heartbeat",
+		"OwnerID": "68d50bbf-1c39-4ad0-a1cb-c957710b2794",
+		"RICConfig": null,
+		"SBAConfig": null,
+		"UpfIsolationConfig": {
+			"globalSettings": {
+				"advancedStats": {
+					"automatedPollingInterval": true,
+					"controlplane": false,
+					"customCaptureSizeForIxStack": 500000,
+					"customPollingInterval": 3,
+					"enableLoCapture": false,
+					"overwriteCaptureSizeForIxStack": true,
+					"userplane": "none"
+				},
+				"dnsResolver": {
+					"cacheTimeout": 30000,
+					"nameServers": []
+				},
+				"flows": [
+					{
+						"activatePredefinedRules": [],
+						"applicationID": "",
+						"enableGbr": true,
+						"enableMbr": true,
+						"gbr": {
+							"downlink": 1000,
+							"uplink": 2000
+						},
+						"id": "1",
+						"isDefault": true,
+						"mbr": {
+							"downlink": 1000,
+							"uplink": 2000
+						},
+						"qfi": 5,
+						"reporting": {
+							"volumeQuota": {
+								"downlink": 0,
+								"total": 0,
+								"uplink": 0
+							},
+							"volumeThreshold": {
+								"downlink": 0,
+								"total": 0,
+								"uplink": 0
+							}
+						},
+						"sdf": "permit out ip from any to $ueip$"
+					},
+					{
+						"activatePredefinedRules": [],
+						"applicationID": "",
+						"enableGbr": true,
+						"enableMbr": true,
+						"gbr": {
+							"downlink": 1000,
+							"uplink": 2000
+						},
+						"id": "2",
+						"isDefault": false,
+						"mbr": {
+							"downlink": 1000,
+							"uplink": 2000
+						},
+						"qfi": 6,
+						"reporting": {
+							"volumeQuota": {
+								"downlink": 0,
+								"total": 0,
+								"uplink": 0
+							},
+							"volumeThreshold": {
+								"downlink": 9500,
+								"total": 19000,
+								"uplink": 9500
+							}
+						},
+						"sdf": "permit out ip from any to $ueip$"
+					}
+				],
+				"gtpuSourcePort": {
+					"count": 1,
+					"start": 2152
+				},
+				"impairments": [
+					{
+						"customScript": {
+							"FileValue": {
+								"fileName": "",
+								"payload": ""
+							},
+							"IsDeprecated": false,
+							"IsModified": false,
+							"Readonly": false,
+							"Value": "",
+							"id": ""
+						},
+						"id": "1",
+						"name": "profile-1",
+						"type": "custom"
+					}
+				],
+				"logLevel": "info",
+				"techSpecVersion": "r15-v2019-09",
+				"trafficSettings": {
+					"enableRTP": true,
+					"reservedCores": 1,
+					"trafficCtrlPort": 44556
+				}
+			},
+			"name": "Sanity_test_UPF_Isolation",
+			"networkSettings": {
+				"agentsInfos": [
+					{
+						"agentId": "4c0b5680-cc7c-400e-8cb9-271183a91d1a",
+						"id": "",
+						"impairmentId": "-1",
+						"interfacesSettings": [
+							{
+								"capture": false,
+								"interfaceMac": "",
+								"interfaceName": "ens192",
+								"networkStack": "",
+								"sriov": false
+							}
+						]
+					},
+					{
+						"agentId": "fb701628-b33f-47e4-8095-2d75ed4f3d53",
+						"id": "",
+						"impairmentId": "-1",
+						"interfacesSettings": [
+							{
+								"capture": false,
+								"interfaceMac": "",
+								"interfaceName": "ens192",
+								"networkStack": "",
+								"sriov": false
+							}
+						]
+					}
+				]
+			},
+			"nodes": {
+				"dn": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"n6": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.0.6.10",
+										"localIPAddressIncrement": "0.0.0.1",
+										"macIncrement": "000000000001",
+										"macStart": "0061BB000001",
+										"mss": 1460,
+										"mtu": 1500,
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										}
+									}
+								}
+							},
+							"ueRoutes": [
+								{
+									"gw": "0.0.0.0",
+									"id": "1",
+									"ueRangeId": "1",
+									"upfRangeId": "1"
+								}
+							],
+							"userPlane": {
+								"objectives": {
+									"generatorType": "statelessUDP",
+									"tigerObjective": [
+										{
+											"data": {
+												"flows": [
+													{
+														"clientTxCount": 8,
+														"dataCustomParameters": [],
+														"flowId": "1",
+														"id": "1",
+														"pageSize": 2000000,
+														"port": 80,
+														"serverTxCount": 8,
+														"type": "http-get"
+													}
+												],
+												"objectiveType": "throughput",
+												"throughput": 1000
+											},
+											"delay": 0,
+											"dnsserver": {
+												"flows": [
+													{
+														"dnsCustomParameters": [],
+														"flowId": "1",
+														"id": "1",
+														"port": 53,
+														"type": "dns-server",
+														"zones": []
+													}
+												],
+												"objectiveType": "simulated_users"
+											},
+											"id": "1",
+											"mss": 1416,
+											"ottserver": {
+												"flows": [
+													{
+														"flowId": "1",
+														"id": "1",
+														"ottCustomParameters": [],
+														"port": 80,
+														"serverName": "OTT-SERVER-1",
+														"streams": [
+															{
+																"enable": true,
+																"id": "1",
+																"protocol": "hls",
+																"qualityLevelsList": [
+																	{
+																		"bitrate": 1000,
+																		"fps": 30,
+																		"id": "1",
+																		"resolution": "1920x1080"
+																	}
+																],
+																"segmentDuration": 5,
+																"streamDuration": 60,
+																"streamName": "Stream-1",
+																"type": "synthetic",
+																"url": "/playlist.m3u8"
+															}
+														],
+														"transport": "http",
+														"type": "ott-server"
+													}
+												],
+												"objectiveType": "simulated_users"
+											},
+											"type": "data",
+											"voice": {
+												"objectiveType": "simulated_users",
+												"simulatedUsers": {
+													"audioSettings": {
+														"codecs": [
+															{
+																"bitrate": "23.85kbps",
+																"id": "1",
+																"name": "AMR-WB",
+																"packetTime": "20",
+																"payloadFormat": "bandwidth-efficient",
+																"payloadType": 98
+															}
+														],
+														"customSdpObject": {
+															"customSDP": "",
+															"enable": false,
+															"template": "sdpTemplateNone"
+														},
+														"duration": 30000,
+														"flowId": "",
+														"jbInitialDelay": 80
+													},
+													"enableDnsQueryPerConnection": false,
+													"iterations": 0,
+													"rtpSettings": {
+														"enableOWD": false,
+														"enableRTCP": false,
+														"enableSRTP": false,
+														"localPort": 10000,
+														"localPortIncrement": 2
+													},
+													"sipSettings": {
+														"authentication": {
+															"k": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+															"kIncrement": "0",
+															"op": "112233445566778899AABBCCDDEEFF00",
+															"opOrOPc": "op",
+															"opc": "112233445566778899AABBCCDDEEFF00",
+															"opcIncrement": "0",
+															"password": "",
+															"type": "proxy-defined",
+															"useUeRangeSecurity": false,
+															"username": "22604000000042@keysight"
+														},
+														"callType": "basic-call",
+														"customHeaders": [],
+														"customParameters": [],
+														"domainName": "keysight.com",
+														"dstIP": "20.0.6.10",
+														"dstIPIncrement": "0.0.0.0",
+														"dstPhoneIncrement": 1,
+														"dstPhoneURI": "11100000",
+														"dstPort": 5060,
+														"imsi": "11100000",
+														"imsiPhoneIncrement": 1,
+														"localPort": 5060,
+														"srcPhoneIncrement": 1,
+														"srcPhoneURI": "44400000",
+														"transportProtocol": "tcp",
+														"useUeRangeIdentification": true
+													},
+													"type": "voip"
+												}
+											}
+										}
+									],
+									"trafficFlows": [
+										{
+											"delay": 0,
+											"direction": "downlink",
+											"dstPort": 5432,
+											"dstPortCount": 1,
+											"fallbackToDefaultFlow": false,
+											"flowId": "2",
+											"id": "2",
+											"ipAddress": "20.0.60.10",
+											"payloadSize": 128,
+											"rate": 4,
+											"srcPort": 2345,
+											"ueRangeId": "1"
+										}
+									]
+								}
+							}
+						}
+					],
+					"settings": {
+						"mappedAgents": [
+							{
+								"agentId": "fb701628-b33f-47e4-8095-2d75ed4f3d53",
+								"id": "",
+								"interfaceMappings": [
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:47:ea:50",
+										"nodeInterface": "n6"
+									}
+								]
+							}
+						]
+					}
+				},
+				"ran": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"n3-ran": {
+									"connectivitySettings": {
+										"erAddress": "",
+										"erPrefix": 24,
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.0.3.10",
+										"macIncrement": "000000000001",
+										"macStart": "0031BB000001",
+										"mss": 1460,
+										"mtu": 1500,
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										}
+									}
+								},
+								"passthrough": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"ipPrefix": 16,
+										"localIPAddress": "20.0.4.10",
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									}
+								}
+							},
+							"nodeSettings": {
+								"name": "NG-RAN-1"
+							}
+						}
+					],
+					"settings": {
+						"device": "none"
+					}
+				},
+				"smf": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "100000",
+							"interfaces": {
+								"n4-smf": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.100.40.100",
+										"macIncrement": "000000000001",
+										"macStart": "0031CC000001",
+										"peerIds": [
+											"1"
+										],
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0
+										}
+									},
+									"enableN4uInterface": false,
+									"heartbeatInterval": 4,
+									"includeChooseID": false,
+									"includeIeUEIPAddressInAccessPDI": false,
+									"sessionDeletionRateForUPFTriggeredRelease": 100,
+									"slaacSDF": {
+										"access": "permit out 58 from any to assigned",
+										"cpFunction": "permit out 58 from any to assigned"
+									},
+									"useRemoteFTeidAllocation": true,
+									"waitForAssociationSetup": 0
+								}
+							},
+							"nodeSettings": {
+								"name": "SMF-1"
+							},
+							"uplinkPaths": []
+						}
+					],
+					"settings": {
+						"enable": true,
+						"mappedAgents": [
+							{
+								"agentId": "4c0b5680-cc7c-400e-8cb9-271183a91d1a",
+								"id": "",
+								"interfaceMappings": [
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:c3:c2:ba",
+										"nodeInterface": "n4-smf"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:c3:c2:ba",
+										"nodeInterface": "n3-ran"
+									},
+									{
+										"agentInterface": "none",
+										"agentInterfaceMac": "none",
+										"nodeInterface": "passthroughDevice"
+									}
+								]
+							}
+						]
+					}
+				},
+				"ue": {
+					"ranges": [
+						{
+							"controlPlane": {
+								"primaryObjective": {
+									"activeSubscribers": {
+										"delay": 0,
+										"flowIdsToActivate": [
+											"1",
+											"2"
+										],
+										"maxOutstanding": 100,
+										"rampUpRate": 5,
+										"sustain": 30,
+										"type": "activeSubscribers"
+									},
+									"subscribersPerSecond": {
+										"delay": 0,
+										"flowIdsToActivate": [
+											"1"
+										],
+										"holdTime": 1,
+										"maxOutstanding": 100,
+										"rate": 1,
+										"sustain": 1,
+										"type": "subscribersPerSecond"
+									},
+									"type": "activeSubscribers"
+								},
+								"secondaryObjectives": {
+									"createDeleteQoSFlow": {
+										"createDeleteQoSFlowList": [
+											{
+												"delay": 0,
+												"flowIds": [
+													"1"
+												],
+												"id": "1",
+												"interval": 1,
+												"maxOutstanding": 100,
+												"onlyOnce": false,
+												"rate": 1,
+												"type": "createDeleteQoSFlow"
+											}
+										],
+										"enable": false
+									},
+									"enterExitIdle": {
+										"delay": 0,
+										"enable": false,
+										"interval": 1,
+										"maxOutstanding": 100,
+										"onlyOnce": false,
+										"rate": 1,
+										"type": "enterExitIdle"
+									},
+									"handover": {
+										"delay": 0,
+										"enable": false,
+										"maxOutstanding": 100,
+										"onlyOnce": false,
+										"rate": 1,
+										"type": "handover",
+										"visitedNodes": []
+									},
+									"modifyQoSFlows": {
+										"enable": true,
+										"modifyQoSFlowList": [
+											{
+												"delay": 2,
+												"enable": false,
+												"id": "1",
+												"maxOutstanding": 100,
+												"onlyOnce": true,
+												"rate": 1,
+												"updatePDRList": [
+													{
+														"activatePredefinedRules": [],
+														"deactivatePredefinedRules": [],
+														"id": "1",
+														"pdrId": {
+															"direction": "uplink",
+															"flowId": "1"
+														},
+														"precedence": 3
+													}
+												],
+												"updateQoSList": [],
+												"updateURRList": [
+													{
+														"flowId": "1",
+														"id": "1",
+														"reporting": {
+															"volumeQuota": {
+																"downlink": 0,
+																"total": 0,
+																"uplink": 0
+															},
+															"volumeThreshold": {
+																"downlink": 0,
+																"total": 0,
+																"uplink": 0
+															}
+														}
+													}
+												]
+											},
+											{
+												"delay": 3,
+												"enable": false,
+												"id": "2",
+												"maxOutstanding": 100,
+												"onlyOnce": true,
+												"rate": 1,
+												"type": "modifyQoSFlows",
+												"updatePDRList": [],
+												"updateQoSList": [
+													{
+														"flowId": "2",
+														"gateStatus": {
+															"downlink": "open",
+															"uplink": "open"
+														},
+														"id": "1",
+														"mbr": {
+															"dynamicQoSRates": {
+																"downlinkDynamicBitrate": {
+																	"action": "increase",
+																	"step": 2
+																},
+																"uplinkDynamicBitrate": {
+																	"action": "increase",
+																	"step": 1
+																}
+															},
+															"mbrType": "qRates",
+															"qoSRates": {
+																"downlink": 1,
+																"uplink": 1
+															}
+														}
+													}
+												],
+												"updateURRList": [
+													{
+														"flowId": "1",
+														"id": "1",
+														"reporting": {
+															"volumeQuota": {
+																"downlink": 0,
+																"total": 0,
+																"uplink": 0
+															},
+															"volumeThreshold": {
+																"downlink": 0,
+																"total": 0,
+																"uplink": 0
+															}
+														}
+													}
+												]
+											}
+										]
+									},
+									"paging": {
+										"delay": 1,
+										"enable": false,
+										"maxOutstanding": 100,
+										"onlyOnce": false,
+										"rate": 1,
+										"trafficControl": {
+											"remote": "20.0.30.10",
+											"suspendTrafficInterval": 1
+										},
+										"type": "enterIdle"
+									}
+								}
+							},
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"identification": {
+								"imeisv": {
+									"increment": "1",
+									"type": "string",
+									"value": "8670000000000001"
+								},
+								"includeImeisv": false,
+								"includeImsi": false,
+								"includeMsisdn": false,
+								"mcc": "226",
+								"mnc": "04",
+								"msin": {
+									"increment": "1",
+									"type": "string",
+									"value": "000000001"
+								},
+								"msisdn": {
+									"increment": "1",
+									"type": "string",
+									"value": "10000000000"
+								},
+								"ueIp": {
+									"increment": "1",
+									"type": "ip",
+									"value": "172.16.0.1"
+								},
+								"ueIpPrefix": 32
+							},
+							"settings": {
+								"accessNetworkInstance": "n3-nw",
+								"activatePredefinedRules": [],
+								"barSettings": {
+									"delayBeforeUpdateBAR": 0,
+									"downlinkDataNotificationDelay": 0,
+									"suggestedBufferingPacketsCount": 0
+								},
+								"bidirectionalSDFFilters": false,
+								"coreNetworkInstance": "dnn.keysight.com",
+								"dnn": "",
+								"enablePassthrough": false,
+								"enableSLAAC": false,
+								"n4uNetworkInstance": "n4-nw",
+								"networkInstanceFormat": "string",
+								"parentRAN": "1",
+								"parentSMF": "100000",
+								"qos": {
+									"ambr": {
+										"downlink": 1000,
+										"uplink": 2000
+									},
+									"flows": [
+										"1",
+										"2"
+									],
+									"useDetective": false,
+									"useEnforcement": false
+								},
+								"uplinkPathID": "-1"
+							},
+							"userPlane": {
+								"generatorType": "statelessUDP",
+								"tigerObjective": [
+									{
+										"address": "22.22.22.22",
+										"data": {
+											"flows": [
+												{
+													"clientTxCount": 8,
+													"dataCustomParameters": [],
+													"enableDnsQueryPerConnection": false,
+													"flowId": "1",
+													"host": "20.0.6.10",
+													"id": "1",
+													"iterations": 0,
+													"maxTransactions": true,
+													"pageSize": 2000000,
+													"percentage": 20,
+													"port": 80,
+													"serverTxCount": 8,
+													"type": "http-get",
+													"url": "loadcore.keysight.com"
+												}
+											],
+											"objectiveType": "throughput",
+											"simulatedUsers": 1,
+											"throughput": 1000
+										},
+										"delay": 0,
+										"dnsclient": {
+											"flows": [
+												{
+													"dnnId": "1",
+													"dnsCustomParameters": [],
+													"dnsServerIP": "20.0.6.10",
+													"flowId": "1",
+													"hostname": "media.keysight.com",
+													"id": "1",
+													"iterations": 0,
+													"numberOfDNSServers": 1,
+													"port": 53,
+													"queryType": "A",
+													"type": "dns-client"
+												}
+											],
+											"objectiveType": "simulated_users",
+											"transactionsRate": 10
+										},
+										"id": "1",
+										"mss": 1416,
+										"ott": {
+											"flows": [
+												{
+													"dnnId": "1",
+													"enableDnsQueryPerConnection": false,
+													"flowId": "1",
+													"host": "20.0.6.10",
+													"id": "1",
+													"iterations": 0,
+													"jbInitialDelay": 20,
+													"jbMaxSize": 20,
+													"maxTransactions": true,
+													"mos": "disabled",
+													"ottCustomParameters": [],
+													"percentage": 100,
+													"playDuration": 60,
+													"playUntilEnd": false,
+													"port": 80,
+													"protocol": "hls",
+													"qualityControl": {
+														"numberOfSegments": 3,
+														"shiftActions": [
+															{
+																"id": "1",
+																"numberOfLevels": 1,
+																"playDuration": 60,
+																"playUntilEnd": false,
+																"type": "changeToHigher"
+															}
+														],
+														"type": "highest"
+													},
+													"qualityMetrics": false,
+													"timeShiftForLive": 0,
+													"transport": "http",
+													"type": "ott-client",
+													"url": "/playlist.m3u8"
+												}
+											],
+											"objectiveType": "simulated_users",
+											"throughput": 10000
+										},
+										"type": "data",
+										"voice": {
+											"objectiveType": "simulated_users",
+											"simulatedUsers": {
+												"audioSettings": {
+													"codecs": [
+														{
+															"bitrate": "23.85kbps",
+															"id": "1",
+															"name": "AMR-WB",
+															"packetTime": "20",
+															"payloadFormat": "bandwidth-efficient",
+															"payloadType": 98
+														}
+													],
+													"customSdpObject": {
+														"customSDP": "",
+														"enable": false,
+														"template": "sdpTemplateNone"
+													},
+													"duration": 30000,
+													"flowId": "",
+													"jbInitialDelay": 80
+												},
+												"enableDnsQueryPerConnection": false,
+												"iterations": 0,
+												"rtpSettings": {
+													"enableOWD": false,
+													"enableRTCP": false,
+													"enableSRTP": false,
+													"localPort": 10000,
+													"localPortIncrement": 0
+												},
+												"sipSettings": {
+													"authentication": {
+														"k": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+														"kIncrement": "0",
+														"op": "112233445566778899AABBCCDDEEFF00",
+														"opOrOPc": "op",
+														"opc": "112233445566778899AABBCCDDEEFF00",
+														"opcIncrement": "0",
+														"password": "",
+														"type": "proxy-defined",
+														"useUeRangeSecurity": false,
+														"username": "22604000000042@keysight"
+													},
+													"callType": "basic-call",
+													"customHeaders": [],
+													"customParameters": [],
+													"domainName": "keysight.com",
+													"dstIP": "22.22.22.22",
+													"dstIPIncrement": "0.0.0.0",
+													"dstPhoneIncrement": 1,
+													"dstPhoneURI": "44400000",
+													"dstPort": 5060,
+													"imsi": "11100000",
+													"imsiPhoneIncrement": 1,
+													"localPort": 5060,
+													"srcPhoneIncrement": 1,
+													"srcPhoneURI": "11100000",
+													"transportProtocol": "tcp",
+													"useUeRangeIdentification": false
+												},
+												"type": "voip"
+											}
+										}
+									}
+								],
+								"trafficFlows": [
+									{
+										"delay": 0,
+										"direction": "uplink",
+										"dstPort": 4321,
+										"dstPortCount": 1,
+										"fallbackToDefaultFlow": false,
+										"flowId": "2",
+										"id": "1",
+										"ipAddress": "20.0.60.10",
+										"payloadSize": 128,
+										"rate": 6,
+										"srcPort": 1234
+									}
+								]
+							}
+						}
+					]
+				},
+				"upf": {
+					"ranges": [
+						{
+							"count": 1,
+							"enable": true,
+							"id": "1",
+							"interfaces": {
+								"n3": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.0.30.10",
+										"macIncrement": "000000000001",
+										"macStart": "0031AA000001",
+										"mss": 1460,
+										"mtu": 1500,
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										}
+									},
+									"networkInstanceFormat": "string",
+									"networkInstanceList": [
+										"n3-nw"
+									]
+								},
+								"n4": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.100.40.10",
+										"macIncrement": "000000000001",
+										"macStart": "0041AA000001",
+										"mss": 1460,
+										"mtu": 1500,
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										}
+									},
+									"heartbeatInterval": 4,
+									"peerSmfId": "-1",
+									"sendAssociationUpdateBeforeNodeStop": false,
+									"supportsFTeidAllocation": true
+								},
+								"n4u": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.100.70.10",
+										"macIncrement": "000000000001",
+										"macStart": "0071AA000001",
+										"mss": 1460,
+										"mtu": 1500,
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										}
+									},
+									"enabled": false,
+									"networkInstanceFormat": "string",
+									"networkInstanceList": [
+										"n4-nw"
+									]
+								},
+								"n6": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.0.60.10",
+										"macIncrement": "000000000001",
+										"macStart": "0099FF000001",
+										"mss": 1460,
+										"mtu": 1500,
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										}
+									}
+								},
+								"n9": {
+									"connectivitySettings": {
+										"firstVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										},
+										"gwIncrement": "0.0.0.0",
+										"gwStart": "0.0.0.0",
+										"ipPrefix": 16,
+										"localIPAddress": "20.0.90.10",
+										"macIncrement": "000000000001",
+										"macStart": "0091AA000001",
+										"mss": 1460,
+										"mtu": 1500,
+										"secondVLAN": {
+											"enable": false,
+											"idStart": 0,
+											"tpid": "h8100"
+										}
+									},
+									"enabled": false,
+									"networkInstanceFormat": "string",
+									"networkInstanceList": [
+										"n9-nw"
+									]
+								}
+							},
+							"isDut": false,
+							"nodeSettings": {
+								"name": "UPF-1"
+							}
+						}
+					],
+					"settings": {
+						"device": "",
+						"enable": true,
+						"mappedAgents": [
+							{
+								"agentId": "fb701628-b33f-47e4-8095-2d75ed4f3d53",
+								"id": "",
+								"interfaceMappings": [
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:47:ea:50",
+										"nodeInterface": "n3"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:47:ea:50",
+										"nodeInterface": "n4"
+									},
+									{
+										"agentInterface": "none",
+										"agentInterfaceMac": "none",
+										"nodeInterface": "n6"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:47:ea:50",
+										"nodeInterface": "n9"
+									},
+									{
+										"agentInterface": "ens192",
+										"agentInterfaceMac": "00:0c:29:47:ea:50",
+										"nodeInterface": "n4u"
+									}
+								]
+							}
+						]
+					}
+				}
+			},
+			"version": "2.3.0-3272-252"
+		},
+		"id": "wireless-4206",
+		"owner": "admin@example.org"
+	},
+	"application": "",
+	"encodedFiles": false,
+	"linkedResources": null
+}
