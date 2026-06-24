@@ -2,7 +2,7 @@
 
 The template deploys:
 - One LoadCore in the specified management network
-- Two LoadCore Agents with three interfaces each. The first interface will be used for mananagament and the rest of the interfaces will be used for testing
+- Two LoadCore Agents with three interfaces each. The first interface will be used for management and the rest of the interfaces will be used for testing
 
 The folder contains three files:
 

@@ -3,7 +3,7 @@
 The template deploys:
 - The AWS infrastructure: vpc, subnets, internet gateway, security groups.
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
 
 The folder contains three files:
 **main.tf** contains the main set of configuration
@@ -19,7 +19,7 @@ In order to modify the default values, you should modify the **terraform.tfvars*
 | aws_secret_key  | Requires input | The AWS secret key must be obtained using following specification https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html. |
 | stack_name | Requires input |The AWS stack name. |
 | ssh_key | Requires input | Specify an existing AWS SSH key name. |
-| allowed_cidr | ["0.0.0.0/0"] |List of ip allowed to access the deployed machines. Default value will provide access to everyone from the internet. |
+| allowed_cidr | ["0.0.0.0/0"] |List of IPs allowed to access the deployed machines. Default value will provide access to everyone from the internet. |
 | region            | us-east-1   | The AWS region for deployment. |
 | availability_zone      | us-east-1a       | The AWS availability zone for deployment. |
 | vpc_cidr      | "20.0.0.0/16"      | The VPC CIDR. |

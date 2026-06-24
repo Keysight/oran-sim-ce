@@ -1,7 +1,7 @@
 ### One LoadCore MDW and two LoadCore Agents
 
 The template deploys:
-- Multiple LoadCore Agents with three interfaces each. The first interface will be used for mananagament and the rest of the interfaces will be used for testing
+- Multiple LoadCore Agents with three interfaces each. The first interface will be used for management and the rest of the interfaces will be used for testing
 
 The folder contains three files:
 

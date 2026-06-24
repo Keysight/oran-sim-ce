@@ -2,8 +2,8 @@
 
 The template deploys:
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
-- One LoadCode License Server in the management subnet
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
+- One LoadCore License Server in the management subnet
 
 The AWS infrastructure should already exist in order to use this terraform template.
 
@@ -42,7 +42,7 @@ Other variables that can be modified in **variables.tf** file.
 ## Destruction
 
 When destroying the infrastructure, the License Server will be also deleted along with the activated licenses.
-The user should first de-activate the licenses before destroying the infrastructure. This will prevent the licenses to remain activated on a deleted instance.
+The user should first de-activate the licenses before destroying the infrastructure. This will prevent the licenses from remaining activated on a deleted instance.
 
 The **terraform destroy** command will destroy the previous deployed infrastructure.
 
