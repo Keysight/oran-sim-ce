@@ -2,10 +2,10 @@
 
 The template deploys:
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
-- One LoadCode License Server in the management subnet
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
+- One LoadCore License Server in the management subnet
 
-When deleting the stack, the License Server will be skipped and the user should first de-activate the licenses before manually terminating the instance. This will prevent the licenses to remain activated on a deleted instance.
+When deleting the stack, the License Server will be skipped and the user should first de-activate the licenses before manually terminating the instance. This will prevent the licenses from remaining activated on a deleted instance.
 
 The following table lists the parameters for this deployment.
 

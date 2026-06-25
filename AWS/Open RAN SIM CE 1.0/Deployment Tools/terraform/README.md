@@ -21,20 +21,20 @@ The  **terraform apply**  command executes the actions proposed in a terraform t
 Folder Name: loadcore_two_agents_and_license_server
 The template deploys:
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
-- One LoadCode License Server in the management subnet
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
+- One LoadCore License Server in the management subnet
 
 ### LoadCore, two LoadCore Agents and the AWS infrastructure
 Folder Name: loadcore_and_two_agents_full_setup
 The template deploys:
 - The AWS infrastructure: vpc, subnets, internet gateway, security groups.
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
 
 ### LoadCore, two LoadCore Agents, the License Server and the AWS infrastructure
 Folder Name: loadcore_two_agents_and_license_server_full_setup
 The template deploys:
 - The AWS infrastructure: vpc, subnets, internet gateway, security groups.
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
-- One LoadCode License Server in the management subnet
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
+- One LoadCore License Server in the management subnet

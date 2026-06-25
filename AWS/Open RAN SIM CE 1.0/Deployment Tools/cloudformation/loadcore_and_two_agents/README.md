@@ -2,7 +2,7 @@
 
 The template deploys:
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
 
 The following table lists the parameters for this deployment.
 

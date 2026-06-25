@@ -2,14 +2,14 @@
 
 The template deploys:
 - One LoadCore in the management subnet
-- Two LoadCore Agents with two interfaces each. The first interface will be used for mananagament and the second interface will be used for testing
+- Two LoadCore Agents with two interfaces each. The first interface will be used for management and the second interface will be used for testing
 - It will create a new test subnet which will be used as test subnet for the two LoadCore Agents. Ten private IPs will be automatically added on test interface on each Agent to be used in tests.
 
 Subnet CIDR: 20.0.0.0/16
 Agent1 Private IP Addresses: "20.0.4.12, 20.0.4.13, 20.0.4.14, 20.0.4.15, 20.0.4.16, 20.0.4.17, 20.0.4.18, 20.0.4.19, 20.0.4.20, 20.0.4.21"
 Agent2 Private IP Addresses: "20.0.5.12, 20.0.5.13, 20.0.5.14, 20.0.5.15, 20.0.5.16, 20.0.5.17, 20.0.5.18, 20.0.5.19, 20.0.5.20, 20.0.5.21"
 
-When deleting the stack, the License Server will be skipped and the user should first de-activate the licenses before manually terminating the instance. This will prevent the licenses to remain activated on a deleted instance.
+When deleting the stack, the License Server will be skipped and the user should first de-activate the licenses before manually terminating the instance. This will prevent the licenses from remaining activated on a deleted instance.
 
 The following table lists the parameters for this deployment.
 

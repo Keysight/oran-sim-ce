@@ -3,7 +3,7 @@
 ## Prerequisites
 The prerequisites are:
 - Latest version of Terraform installed. https://learn.hashicorp.com/tutorials/terraform/install-cli
-- Authenticate to Azure platform usign Azure CLI tool. https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli
+- Authenticate to Azure platform using Azure CLI tool. https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli
 
 ## How to use:
 
@@ -21,7 +21,7 @@ The  **terraform apply**  command executes the actions proposed in a terraform t
 
 The template deploys Virtual Machine using **VHD files**:
 - One LoadCore MDW
-- Two LoadCore Agents with three interfaces each. The first interface will be used for mananagament and the rest of the interfaces will be used for testing
+- Two LoadCore Agents with three interfaces each. The first interface will be used for management and the rest of the interfaces will be used for testing
 Each test interface will get 8 private IPs.
 
 The folder contains three files:
@@ -40,7 +40,7 @@ In order to modify the default values, you should modify the **terraform.tfvars*
 | ----------------------- | ----------------- | ----- |
 | prefix | Requires input |The Azure stack name. |
 | ssh_key_name | Requires input | Specify an existing Azure SSH key name. |
-| allowed_cidr | ["0.0.0.0/0"] |List of ip allowed to access the deployed machines. Default value will provide access to everyone from the internet. |
+| allowed_cidr | ["0.0.0.0/0"] |List of IPs allowed to access the deployed machines. Default value will provide access to everyone from the internet. |
 | location            | "eastus"   | The Azure region for deployment. |
 | loadcore_mdw_blob_uri     | Requires input   | The full blob uri where the vhd exists |
 | loadcore_agent_blob_uri     | Requires input   | The full blob uri where the vhd exists |
